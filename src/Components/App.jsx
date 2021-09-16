@@ -1,12 +1,16 @@
+
+import GlobalStyle from "../style/GlobalStyle";
+import Modal from "./common/modal/Modal";
 import Button from "./common/button/Button";
+
 
 const App = () => {
   return (
     <>
- <div>app</div>
-      <Button classBtn='edit' />
-</>
-  )     
+      <GlobalStyle />
+      <div>app</div>
+    </>
+  );
 };
 
 export default App;
