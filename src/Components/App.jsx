@@ -1,13 +1,13 @@
+
 import GlobalStyle from "../style/GlobalStyle";
 import Modal from "./common/modal/Modal";
+import Button from "./common/button/Button";
+
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Modal>
-        <h1>Это модалка</h1>
-      </Modal>
       <div>app</div>
     </>
   );
