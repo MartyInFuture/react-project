@@ -1,8 +1,5 @@
-
 import GlobalStyle from "../style/GlobalStyle";
-import Modal from "./common/modal/Modal";
-import Button from "./common/button/Button";
-
+// import Button from "./common/button/Button";
 
 const App = () => {
   return (
