@@ -4,7 +4,7 @@ import Header from './header/Header';
 
 import ContentContainer from "./common/containers/contentContainer/ContentContainer";
 import MainContainer from "./common/containers/mainContainer/Container";
-import Tasks from '../pages/Tasks'
+import Tasks from '../pages/tasks/Tasks'
 import GlobalStyle from "../style/GlobalStyle";
 import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
 
@@ -21,7 +21,7 @@ const App = () => {
       <MainContainer>
 
         <WrapperContainer>
-          
+          <Tasks />
         </WrapperContainer>
 
       </MainContainer>
