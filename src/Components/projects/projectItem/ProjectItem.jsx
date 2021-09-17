@@ -11,7 +11,7 @@ const ProjectItem = ({ project }) => {
           <p className="projectTextDescription">{project.description}</p>
         </div>
         <div className="projectButtonWrapper">
-          <Button classBtn="delete" icon="delete" />
+          <Button classBtn="deleteProject" icon="delete" />
         </div>
       </Link>
     </ProjectItemStyled>
