@@ -1,12 +1,25 @@
+
 import Button from './common/button/Button';
 import Header from './header/Header';
+import ContentContainer from "./common/containers/contentContainer/ContentContainer";
+import MainContainer from "./common/containers/mainContainer/Container";
+
+import GlobalStyle from "../style/GlobalStyle";
+
 
 const App = () => {
   return (
     <>
-      <Header />
-      <Button icon="edit" classBtn="edit" />
-      <Button classBtn="add" />
+
+      
+
+    <GlobalStyle />
+    <Header />
+      <MainContainer>
+        <WrapperContainer>
+        </WrapperContainer>
+      </MainContainer>
+      
     </>
   );
 };
