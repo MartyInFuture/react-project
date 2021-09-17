@@ -37,6 +37,9 @@ img {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
 
 body {
   margin: 0;
