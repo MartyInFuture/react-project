@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 html {
@@ -37,6 +37,9 @@ img {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
 
 body {
   margin: 0;
@@ -44,6 +47,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  border-color: #e5e5e5;
+  background-color: #e5e5e5;
 }
 `;

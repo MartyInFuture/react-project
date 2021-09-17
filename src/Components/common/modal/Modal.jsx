@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Overlay } from "./ModalStyled";
+import React, { useEffect } from 'react';
+import { Overlay } from './ModalStyled';
 
 //для работы модалки необходимо передать 3 пропса,
 // в первом передаем метод который будет переключать в стейте флаг
@@ -7,19 +7,19 @@ import { Overlay } from "./ModalStyled";
 // третьим передаем имя формы
 //
 
-const Modal = ({ closeModal, children, nameForm = "Name form" }) => {
+const Modal = ({ closeModal, children, nameForm = 'Name form' }) => {
   useEffect(() => {
-    window.addEventListener("keydown", handleEscape);
-    const body = document.querySelector("body");
-    body.style.overflow = "hidden";
+    window.addEventListener('keydown', handleEscape);
+    const body = document.querySelector('body');
+    body.style.overflow = 'hidden';
     return () => {
-      window.removeEventListener("keydown", handleEscape);
-      const body = document.querySelector("body");
-      body.style.overflow = "auto";
+      window.removeEventListener('keydown', handleEscape);
+      const body = document.querySelector('body');
+      body.style.overflow = 'auto';
     };
   });
 
-  const handleEscape = (e) => e.code === "Escape" && closeModal();
+  const handleEscape = (e) => e.code === 'Escape' && closeModal();
 
   const onOverlayClick = ({ target, currentTarget }) => {
     target === currentTarget && closeModal();

@@ -1,3 +1,4 @@
+
 import React, { Suspense } from "react";
 import Button from "./common/button/Button";
 import Header from "./header/Header";
@@ -9,12 +10,21 @@ import GlobalStyle from "../style/GlobalStyle";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 
+import Projects from '../pages/projects/Projects';
+
+import Tasks from '../pages/Tasks'
+
+
+
+
+
 const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
       <MainContainer>
+      <WrapperContainer>
         <Switch>
           <Route path="/register" exact>
             <Register />
@@ -23,6 +33,8 @@ const App = () => {
             <Login />
           </Route>
         </Switch>
+         <Projects />
+     </WrapperContainer>
       </MainContainer>
     </>
   );
