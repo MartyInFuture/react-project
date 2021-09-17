@@ -1,9 +1,9 @@
 import { ButtonSubmitWrapper } from "./SubmitButtonStyled";
 
-const SubmitButton = ({ onHandleSubmit, classBtn = 'register', nameBtn ='Зареєструватися'}) => {
+const SubmitButton = ({ onHandleSubmit, nameBtn ='Зареєструватися'}) => {
     return (
         <ButtonSubmitWrapper> 
-            <button type='submit'  className={`${classBtn} btnSubCommon`}> {nameBtn }                 
+            <button type='submit'  className= 'btnSubCommon'> {nameBtn }                 
              </button>
         </ButtonSubmitWrapper>
     );
