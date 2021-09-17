@@ -1,12 +1,14 @@
-import Button from "./common/button/Button";
+import Button from './common/button/Button';
+import Header from './header/Header';
 
 const App = () => {
   return (
     <>
- <div>app</div>
-      <Button classBtn='edit' />
-</>
-  )     
+      <Header />
+      <Button icon="edit" classBtn="edit" />
+      <Button classBtn="add" />
+    </>
+  );
 };
 
 export default App;
