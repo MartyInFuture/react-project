@@ -1,4 +1,7 @@
 
+import Button from './common/button/Button';
+import Header from './header/Header';
+
 import ContentContainer from "./common/containers/contentContainer/ContentContainer";
 import MainContainer from "./common/containers/mainContainer/Container";
 
@@ -10,8 +13,11 @@ import WrapperContainer from "./common/containers/WrapperContainer/WrapperContai
 const App = () => {
   return (
     <>
+
+      
+
     <GlobalStyle />
-      <div>app</div>
+    <Header />
       <MainContainer>
         <WrapperContainer>
           
