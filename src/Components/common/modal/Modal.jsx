@@ -5,6 +5,7 @@ import { Overlay } from './ModalStyled';
 // в первом передаем метод который будет переключать в стейте флаг
 // вторым пропсом передаем компонент формы с кнопкой сабмит
 // третьим передаем имя формы
+//
 
 const Modal = ({ closeModal, children, nameForm = 'Name form' }) => {
   useEffect(() => {
