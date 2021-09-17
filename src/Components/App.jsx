@@ -4,15 +4,23 @@ import WrapperContainer from './common/containers/WrapperContainer/WrapperContai
 import GlobalStyle from '../style/GlobalStyle';
 import Projects from '../pages/projects/Projects';
 
+import Tasks from '../pages/Tasks'
+
+
+
+
 const App = () => {
   return (
     <>
       <GlobalStyle />
       <Header />
       <MainContainer>
+
         <WrapperContainer>
           <Projects />
+
         </WrapperContainer>
+
       </MainContainer>
     </>
   );
