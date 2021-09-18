@@ -6,7 +6,7 @@ import Title from '../../Components/common/title/Title';
 import Counter from '../../Components/tasks/Counter/Counter'
 import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer'
 import { TasksStyled } from './TasksStyled'
-
+import 'material-icons/iconfont/material-icons.css';
 
 const Tasks = () => {
 
@@ -246,22 +246,59 @@ const Tasks = () => {
                 <div>
                     {/* <Link>Показати спринти</Link> */}
                 </div>
-                <Counter data={data} />
-                <div>
+                <div className="counterSearchContainer">
+                    <Counter data={data} />
                     <div className="inputBox">
-                        <input type="text" onChange={filterChange} className="inputSearch"/>
+                        <span class="material-icons iconSearch">search</span>
+                        <span class="material-icons iconSearchTablet">search</span>
+                        
+                            <input type="text" onChange={filterChange} className="inputSearch"/>
                     </div>
+                </div>
+                
+                
+                <div>
+                    
                     <div>
                         <div className="TaskWrapper">
-                            <Title title={data.title} />
-                            <div className="btnEditTitle">
-                                <Button icon='edit' classBtn='editDelete'/>
-                            </div>  
+                            <div className="SprintTitleBtnEditWrapper">
+                                <div className="TaskTitleWrapper">
+                                    <Title title={data.title} /> 
+                                </div>
+                                <div className="btnEditTitle">
+                                    <Button icon='edit' classBtn='editDelete' />
+                                    
+                                </div>
+                            </div>
+                            
+                                <div className="btnAddTitle ">
+                                    <Button /> 
+                                </div>
+                            <div className="btnAddTitleTablet ">
+                                    <div className="btnEdit">
+                                        <Button />
+                                    </div>
+                                    <p className="AddTaskParagraph">Створити задачу</p>
+                                </div>
+                              
                         </div>
+                        <div className="discrbtionHoursContainer">
+                            <p className="discrbtionHours">Заплановано годин</p>
+                            <p className="discrbtionHours">Витрачено год / день</p>
+                            <p className="discrbtionHours">Витрачено годин</p>
+                        </div>
+                        <div className="discrbtionHoursContainerDesktop">
+                            <p className="discrbtionHours">Задача</p>
+                            <p className="discrbtionHours">Заплановано годин</p>
+                            <p className="discrbtionHours">Витрачено год / день</p>
+                            <p className="discrbtionHours">Витрачено годин</p>
+                            <div className="SearchDesktop">
+                                <span class="material-icons iconSearchDesktop">search</span>
+                                <input type="text" onChange={filterChange} className="inputSearchDesktop"/>
+                            </div>
+                        </div>
+                        <div className="discrbtionHoursContainerAfter"></div>
                         <div className="btnEditTitleAfter"></div>
-                        <div className="btnAddTitle">
-                            <Button /> 
-                        </div>
                         <div className="btnAddchartTitle">
                             <Button icon='addchart' />
                         </div>

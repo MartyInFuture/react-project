@@ -1,7 +1,9 @@
 import TaskListItem from '../TaskListItem/TaskListItem'
 import { useState, useEffect } from "react";
+import { Tasklist } from './TaskListStyled';
 
-const TaskList = () => {
+
+const TaskList = () => {    
 
     
 
@@ -218,13 +220,13 @@ const TaskList = () => {
     
     
     return (
-            <div>
+            <Tasklist>
                     {/* filterText === "" && */}
                     { data.tasks.map(item => (
                         <TaskListItem task={item}/>
                     ))
                 }
-            </div>
+            </Tasklist>
                 
     
             );
