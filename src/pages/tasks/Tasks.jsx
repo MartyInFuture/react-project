@@ -1,7 +1,15 @@
-import TaskListItem from '../taskListItem/TaskListItem';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../Components/common/button/Button';
+import TaskList from '../../Components/tasks/taskList/taskList';
+import Title from '../../Components/common/title/Title';
+import Counter from '../../Components/tasks/Counter/Counter';
+import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
+import { TasksStyled } from './TasksStyled';
 
-const TaskList = () => {
+const Tasks = () => {
+  const [filterText, setfilterText] = useState('');
+
   const data = {
     title: 'Sprint 1',
     startDate: '2020-12-30',
@@ -209,14 +217,56 @@ const TaskList = () => {
     __v: 0,
   };
 
+  const modalOpen = () => {
+    console.log('modalOpen()');
+  };
+
+  const correctTitleTask = () => {
+    console.log('correctTitleTask()');
+  };
+
+  const diagrammOpenFn = () => {
+    console.log('diagrammOpenFn()');
+  };
+
+  const filterChange = (e) => {
+    const text = e.target.value;
+    setfilterText(text);
+  };
+
   return (
-    <div>
-      {/* filterText === "" && */}
-      {data.tasks.map((item) => (
-        <TaskListItem task={item} />
-      ))}
-    </div>
+    <ContentContainer>
+      <TasksStyled>
+        <div>{/* <Link>Показати спринти</Link> */}</div>
+        <Counter data={data} />
+        <div>
+          <div className="inputBox">
+            <input
+              type="text"
+              onChange={filterChange}
+              className="inputSearch"
+            />
+          </div>
+          <div>
+            <div className="TaskWrapper">
+              <Title title={data.title} />
+              <div className="btnEditTitle">
+                <Button icon="edit" classBtn="editDelete" />
+              </div>
+            </div>
+            <div className="btnEditTitleAfter"></div>
+            <div className="btnAddTitle">
+              <Button />
+            </div>
+            <div className="btnAddchartTitle">
+              <Button icon="addchart" />
+            </div>
+          </div>
+          <TaskList />
+        </div>
+      </TasksStyled>
+    </ContentContainer>
   );
 };
 
-export default TaskList;
+export default Tasks;
