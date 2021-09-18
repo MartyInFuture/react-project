@@ -3,7 +3,6 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
 html {
   box-sizing: border-box;
-  
 }
 
 *,
@@ -38,6 +37,9 @@ img {
   list-style: none;
 }
 
+button {
+  cursor: pointer;
+}
 
 body {
   margin: 0;
@@ -73,6 +75,6 @@ background-color: #e7e76c;
   background-color: #cd5886;
 }
 .white{
-  background-color: #fff;
+  background-color: #e5e5e5;
 }
 `;
