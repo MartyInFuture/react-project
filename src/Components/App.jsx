@@ -6,13 +6,15 @@ import { Route, Switch } from "react-router";
 import ContentContainer from "./common/containers/contentContainer/ContentContainer";
 import MainContainer from "./common/containers/mainContainer/Container";
 
+import Tasks from '../pages/tasks/Tasks'
+
 import GlobalStyle from "../style/GlobalStyle";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 
 import Projects from '../pages/projects/Projects';
 
-import Tasks from '../pages/Tasks'
+
 
 
 
