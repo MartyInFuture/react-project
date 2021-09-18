@@ -12,9 +12,7 @@ export const List = styled.ul`
   }
 
   .item {
-    display: flex;
     margin-bottom: 32px;
-    align-items: center;
   }
   .logo {
     min-width: 36px;
@@ -23,5 +21,23 @@ export const List = styled.ul`
     margin-right: 15px;
 
     border-radius: 5px;
+  }
+  .nav_link {
+    display: flex;
+    align-items: center;
+
+    font-family: Montserrat;
+
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: #181c27;
+  }
+  .nav_link__active {
+    font-weight: bold;
+  }
+  .title {
+    font-weight: inherit;
   }
 `;

@@ -42,14 +42,18 @@ const NavList = ({ title, lists, path }) => {
     <List>
       {list.map((item) => (
         <li key={item.title} className="item">
-          {/* <NavLink className={nav_link} activeClassName={nav_link__active} to={{ pathname: `/${path}/${item._id}` }}> */}
-          <div
-            className={`logo ${
-              title === "спринти" ? "white" : randomBackgroud(colors)
-            }`}
-          ></div>
-          <h3>{item.title}</h3>
-          {/* </NavLink> */}
+          <NavLink
+            className="nav_link"
+            activeClassName="nav_link__active"
+            to={{ pathname: `/${path}/${item._id}` }}
+          >
+            <div
+              className={`logo ${
+                title === "спринти" ? "white" : randomBackgroud(colors)
+              }`}
+            ></div>
+            <h3 className="title">{item.title}</h3>
+          </NavLink>
         </li>
       ))}
     </List>
