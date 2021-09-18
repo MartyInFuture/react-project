@@ -14,6 +14,8 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/auth-slice";
 import { error } from "./error/error-reducer";
 
+import projects from '../redux/projects/projects-reducer';
+
 const authPersistConfig = {
   key: "auth",
   storage,
@@ -24,6 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     error,
+    projects,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
