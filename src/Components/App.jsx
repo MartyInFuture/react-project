@@ -33,10 +33,10 @@ const App = () => {
             <WrapperContainer>
               <Switch>
                 <Suspense fallback={''}>
-                  <PublicRoute path="/register" exact>
+                  <PublicRoute path="/register" exact restricted>
                     <Register />
                   </PublicRoute>
-                  <PublicRoute path="/login" exact>
+                  <PublicRoute path="/login" exact restricted>
                     <Login />
                   </PublicRoute>
                   <PrivateRoute path="/" exact>

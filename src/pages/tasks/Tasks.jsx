@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../Components/common/button/Button';
-import TaskList from '../../Components/tasks/taskList/taskList';
+import TaskList from '../../Components/tasks/taskList/TaskList';
 import Title from '../../Components/common/title/Title';
 import Counter from '../../Components/tasks/Counter/Counter';
 import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
