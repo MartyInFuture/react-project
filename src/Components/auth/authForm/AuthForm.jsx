@@ -3,7 +3,6 @@ import { AuthFormStyled } from "./AuthFormStyled";
 import { authOperations } from "../../../redux/auth";
 import { useDispatch } from "react-redux";
 import SubmitButton from "../../common/submitButton/SubmitButton";
-import Button from "../../../Components/common/button/Button";
 
 const initialState = {
   email: "",
@@ -28,26 +27,22 @@ const AuthForm = ({ repeatPassword = true }) => {
     if (repeatPassword) {
       if (user.repeatPassword === user.password) {
         dispatch(authOperations.register({ email, password }));
-        console.log(
-          `Пароли совпадают и отправляем запрос на бек`,
-          user.email,
-          user.password
-        );
+        setUser({
+          email: "",
+          password: "",
+          repeatPassword: "",
+        });
       } else {
         console.log(`Пароли не совпадают повторить ввод`);
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
-      console.log(
-        `Это вход и отправляем запрос на бек`,
-        user.email,
-        user.password
-      );
+      setUser({
+        email: "",
+        password: "",
+        repeatPassword: "",
+      });
     }
-  };
-
-  const onHandleLogOut = () => {
-    dispatch(authOperations.logOut());
   };
 
   return (
@@ -81,14 +76,9 @@ const AuthForm = ({ repeatPassword = true }) => {
           required
         />
       )}
-      {/* <button type="submit">SignIn</button> */}
-      {/* <SubmitButton nameBtn={!repeatPassword && `Увійти`} /> */}
       <SubmitButton
         nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`}
       />
-      <button type="button" onClick={onHandleLogOut}>
-        LogOut
-      </button>
     </AuthFormStyled>
   );
 };
