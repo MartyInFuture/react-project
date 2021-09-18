@@ -14,8 +14,6 @@ import Login from "../pages/Login";
 import Projects from '../pages/projects/Projects';
 
 
-import Tasks from "../pages/Tasks";
-
 const App = () => {
   return (
     <>
