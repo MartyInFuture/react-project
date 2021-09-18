@@ -3,8 +3,17 @@ import styled from 'styled-components';
 export const ProjectItemStyled = styled.li`
   position: relative;
   overflow: hidden;
-  margin-bottom: 30px;
-  margin-right: 30px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+  @media (min-width: 1280px) {
+    margin-bottom: 30px;
+    margin-right: 30px;
+  }
   :hover,
   :focus {
     box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
@@ -13,12 +22,22 @@ export const ProjectItemStyled = styled.li`
     text-decoration: none;
     color: white;
     display: block;
-    width: 270px;
-    height: 270px;
-    padding: 30px;
+    width: 135px;
+    height: 135px;
+    padding: 10px;
     background-color: skyblue;
     border-radius: 5px;
     cursor: pointer;
+    @media (min-width: 768px) {
+      width: 216px;
+      height: 216px;
+      padding: 20px;
+    }
+    @media (min-width: 1280px) {
+      width: 270px;
+      height: 270px;
+      padding: 30px;
+    }
   }
   .projectTitle {
     font-size: 26px;
