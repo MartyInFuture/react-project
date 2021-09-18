@@ -4,19 +4,25 @@ import Header from "./header/Header";
 import { Route, Switch } from "react-router";
 import ContentContainer from "./common/containers/contentContainer/ContentContainer";
 import MainContainer from "./common/containers/mainContainer/Container";
-import WrapperContainer from "../Components/common/containers/WrapperContainer/WrapperContainer";
 import GlobalStyle from "../style/GlobalStyle";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
-
 import Projects from "../pages/projects/Projects";
+import NavContainer from "./common/containers/navContainer/NavContainer";
+import Tasks from '../pages/tasks/Tasks'
 
-import Tasks from "../pages/Tasks";
+import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
+import NavMenu from "./navMenu/NavMenu";
+
+
 
 const App = () => {
   return (
     <>
       <GlobalStyle />
+
+      <div>app</div>
+
       <Header />
       <MainContainer>
         <WrapperContainer>
@@ -28,7 +34,6 @@ const App = () => {
               <Login />
             </Route>
           </Switch>
-          {/* <Projects /> */}
         </WrapperContainer>
       </MainContainer>
     </>
