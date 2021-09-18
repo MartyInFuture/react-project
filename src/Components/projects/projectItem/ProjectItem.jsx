@@ -1,6 +1,7 @@
 import { ProjectItemStyled } from './ProjectItemStyled';
 import Button from '../../common/button/Button';
 import { Link } from 'react-router-dom';
+import buttonIcons from '../../../configs/buttonIcons.json';
 
 const ProjectItem = ({ project }) => {
   return (
@@ -11,7 +12,7 @@ const ProjectItem = ({ project }) => {
           <p className="projectTextDescription">{project.description}</p>
         </div>
         <div className="projectButtonWrapper">
-          <Button classBtn="deleteProject" icon="delete" />
+          <Button classBtn="deleteProject" icon={buttonIcons.delete} />
         </div>
       </Link>
     </ProjectItemStyled>
