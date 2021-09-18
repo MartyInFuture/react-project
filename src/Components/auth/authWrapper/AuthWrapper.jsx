@@ -1,17 +1,18 @@
-import { AuthWrapperStyled } from './AuthWrapperStyled';
-import Title from '../../common/title/Title';
-import { Link } from 'react-router-dom';
+import { AuthWrapperStyled } from "./AuthWrapperStyled";
+import Title from "../../common/title/Title";
+import { Link } from "react-router-dom";
 
-const authWrapper = ({
-  title,
-  redirectMessage = 'Маєте акаунт?',
-  redirectLinkMessage = 'Увійти',
-  redirectTo = '/login',
+const AuthWrapper = ({
+  title = "Реєстрація",
+  redirectMessage = "Маєте акаунт?",
+  redirectLinkMessage = "Увійти",
+  redirectTo = "/login",
+  children,
 }) => {
   return (
     <AuthWrapperStyled>
       <Title title={title} />
-
+      {children}
       <p>
         {redirectMessage} <Link to={redirectTo}>{redirectLinkMessage}</Link>
       </p>
@@ -19,4 +20,4 @@ const authWrapper = ({
   );
 };
 
-export default authWrapper;
+export default AuthWrapper;

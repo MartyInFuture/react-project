@@ -1,18 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistRebucer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import authReducer from "./auth/auth-slice";
+import { error } from "./error/error-reducer";
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
-  whitelist: ['accessToken', 'refreshToken'],
+  whitelist: ["accessToken", "refreshToken"],
 };
 
 export const store = configureStore({
   reducer: {
-    auth: persistRebucer(authPersistConfig, 'authReducer'),
+    auth: persistReducer(authPersistConfig, authReducer),
+    error,
   },
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: process.env.NODE_ENV === "development",
 });
 
 export const persistor = persistStore(store);
