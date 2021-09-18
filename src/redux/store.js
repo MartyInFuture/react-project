@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistRebucer } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+
+import projects from '../redux/projects/projects-reducer';
 
 const authPersistConfig = {
   key: 'auth',
@@ -10,7 +12,8 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistRebucer(authPersistConfig, 'authReducer'),
+    auth: persistReducer(authPersistConfig, 'authReducer'),
+    projects,
   },
   devTools: process.env.NODE_ENV === 'development',
 });
