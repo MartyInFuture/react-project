@@ -1,5 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/auth-slice";
 import { error } from "./error/error-reducer";
@@ -15,6 +25,12 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     error,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(thunk),
   devTools: process.env.NODE_ENV === "development",
 });
 

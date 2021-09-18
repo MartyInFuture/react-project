@@ -76,5 +76,6 @@ background-color: #e7e76c;
 }
 .white{
   background-color: #e5e5e5;
+  /* overflow-x: hidden; */
 }
 `;

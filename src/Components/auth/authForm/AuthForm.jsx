@@ -2,6 +2,8 @@ import { useState } from "react";
 import { AuthFormStyled } from "./AuthFormStyled";
 import { authOperations } from "../../../redux/auth";
 import { useDispatch } from "react-redux";
+import SubmitButton from "../../common/submitButton/SubmitButton";
+import Button from "../../../Components/common/button/Button";
 
 const initialState = {
   email: "",
@@ -51,6 +53,7 @@ const AuthForm = ({ repeatPassword = true }) => {
   return (
     <AuthFormStyled onSubmit={onHandleSubmit}>
       <input
+        className="inputForm"
         type="email"
         placeholder="E-mail"
         name="email"
@@ -59,6 +62,7 @@ const AuthForm = ({ repeatPassword = true }) => {
         required
       />
       <input
+        className="inputForm"
         type="password"
         placeholder="Пароль"
         name="password"
@@ -68,15 +72,20 @@ const AuthForm = ({ repeatPassword = true }) => {
       />
       {repeatPassword && (
         <input
+          className="inputForm"
           type="password"
-          placeholder="Повторити пароль"
+          placeholder="Повторіть пароль"
           name="repeatPassword"
           onChange={handleChangeInput}
           value={user.repeatPassword}
           required
         />
       )}
-      <button type="submit">SignIn</button>
+      {/* <button type="submit">SignIn</button> */}
+      {/* <SubmitButton nameBtn={!repeatPassword && `Увійти`} /> */}
+      <SubmitButton
+        nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`}
+      />
       <button type="button" onClick={onHandleLogOut}>
         LogOut
       </button>

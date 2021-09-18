@@ -13,7 +13,7 @@ const AuthWrapper = ({
     <AuthWrapperStyled>
       <Title title={title} />
       {children}
-      <p>
+      <p className="underLink">
         {redirectMessage} <Link to={redirectTo}>{redirectLinkMessage}</Link>
       </p>
     </AuthWrapperStyled>
