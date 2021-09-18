@@ -1,41 +1,59 @@
-import React, { Suspense } from "react";
-import Button from "./common/button/Button";
-import Header from "./header/Header";
-import { Route, Switch } from "react-router";
-import ContentContainer from "./common/containers/contentContainer/ContentContainer";
-import MainContainer from "./common/containers/mainContainer/Container";
-import GlobalStyle from "../style/GlobalStyle";
-import Register from "../pages/register/Register";
-import Login from "../pages/login/Login";
-import Projects from "../pages/projects/Projects";
-import NavContainer from "./common/containers/navContainer/NavContainer";
-import Tasks from '../pages/tasks/Tasks'
+import React, { lazy, Suspense, useEffect } from 'react';
+import { Switch } from 'react-router';
+import { authSelectors, authOperations } from '../redux/auth';
+import { useSelector, useDispatch } from 'react-redux';
 
-import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
-import NavMenu from "./navMenu/NavMenu";
-
-
+import PrivateRoute from './routers/PrivateRoute';
+import PublicRoute from './routers/PublickRoute';
+import Header from './header/Header';
+import MainContainer from './common/containers/mainContainer/Container';
+import GlobalStyle from '../style/GlobalStyle';
+import WrapperContainer from './common/containers/WrapperContainer/WrapperContainer';
 
 const App = () => {
+  const Register = lazy(() => import('../pages/register/Register'));
+  const Login = lazy(() => import('../pages/login/Login'));
+  const Projects = lazy(() => import('../pages/projects/Projects'));
+  // const Sprints = lazy(() => import('../pages/sprints/Sprints'));
+  const Tasks = lazy(() => import('../pages/tasks/Tasks'));
+  const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <>
       <GlobalStyle />
-
-      <div>app</div>
-
-      <Header />
-      <MainContainer>
-        <WrapperContainer>
-          <Switch>
-            <Route path="/register" exact>
-              <Register />
-            </Route>
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-          </Switch>
-        </WrapperContainer>
-      </MainContainer>
+      {isFetchingUser || (
+        <>
+          <Header />
+          <MainContainer>
+            <WrapperContainer>
+              <Switch>
+                <Suspense fallback={''}>
+                  <PublicRoute path="/register" exact>
+                    <Register />
+                  </PublicRoute>
+                  <PublicRoute path="/login" exact>
+                    <Login />
+                  </PublicRoute>
+                  <PrivateRoute path="/" exact>
+                    <Projects />
+                  </PrivateRoute>
+                  {/* <PrivateRoute path="/project/:id" exact>
+              <Sprints />
+            </PrivateRoute> */}
+                  <PrivateRoute path="/sprint/:id" exact>
+                    <Tasks />
+                  </PrivateRoute>
+                </Suspense>
+              </Switch>
+            </WrapperContainer>
+          </MainContainer>
+        </>
+      )}
     </>
   );
 };
