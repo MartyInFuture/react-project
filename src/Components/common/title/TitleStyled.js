@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TitleStyled = styled.h2`
-  font-size: 36px;
+  font-size: 26px;
+  line-height: 1.2;
   font-weight: 500;
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.04em;
+  color: #181c27;
 `;
