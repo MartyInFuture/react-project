@@ -76,6 +76,10 @@ export const TaskListItemWrapper = styled.div`
             right: 10px;
     }
 
+    .TaskDescriptionDesktop {
+        display: none;
+    }
+
     /* ============================================= Tablet ================================================================= */
     @media screen and (min-width: 768px) {
         width: 216px;
@@ -113,5 +117,39 @@ export const TaskListItemWrapper = styled.div`
     @media screen and (min-width: 1280px) {
         margin: 0px;
         width:100%;
+        flex-direction: row;
+        :nth-child(2n+1) {
+            margin-right: 0px;
+        }
+        margin-bottom: 10px;
+        /* margin-right: 0px; */
+        /* background-color: black; */
+
     }
+
+    .TaskDescriptionTablet {
+        display: none;
+    }
+
+    .TaskDescriptionDesktop {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .TitleWrapper {
+        margin-right: 30px;
+    }
+
+    .describtionHourNumber {
+        width: 100px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .TitleWrapper {
+        width: 170px;
+    }
+
+
 `;

@@ -231,6 +231,10 @@ export const TasksStyled = styled.div`
 
         }
 
+        .discrbtionHours {
+            width: 100px;
+        }
+
         /* .inputSearchDesktop:active,
                             :hover,
                             :focus
