@@ -6,7 +6,11 @@ import MembersForm from './MembersForm';
 
 
 const CreateMembers = () => {
-  
+  const members = useSelector(getMembersFromState);
+
+
+const CreateMembers = () => {
+
   return (
     <Modal>
       <MembersForm />  
