@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const HeaderStyled = styled.div`
   padding: 15px 20px;
   border: 1px solid rgba(24, 28, 39, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   @media (min-width: 768px) {
     padding: 20px 40px;
   }

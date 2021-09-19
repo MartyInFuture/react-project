@@ -1,8 +1,10 @@
-// import Button from '../Components/common/button/Button';
 import Button from '../../common/button/Button'
 import {TaskListItemWrapper} from './TaskListItemStyled'
 
-const TaskListItem = ({task}) => {
+const TaskListItem = ({ task }) => {
+  const deleteTask = () => {
+    console.log('deleteTask()');
+  };
 
     const deleteTask = () => {
         console.log("deleteTask()");
@@ -45,4 +47,3 @@ const TaskListItem = ({task}) => {
 }
 
 export default TaskListItem;
-

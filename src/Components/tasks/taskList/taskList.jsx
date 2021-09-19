@@ -5,7 +5,15 @@ import { Tasklist } from './TaskListStyled';
 
 const TaskList = () => {    
 
-    
+  return (
+    <div>
+      {/* filterText === "" && */}
+      {data.tasks.map((item) => (
+        <TaskListItem task={item} />
+      ))}
+    </div>
+  );
+};
 
     const data = {
 

@@ -9,25 +9,18 @@ export const ButtonSubmitWrapper = styled.div`
     text-align: center;
     color: white;
     font-size: 18px;
-line-height: 22px;
-}
-.register{
-    width: 260px;
-height: 44px;
-
+    line-height: 22px;
+    height: 44px;
+    padding-left: 44px;
+    padding-right: 44px
 }
 
-.loginDone {
-width: 154px;
-height: 44px;
 
-}
-
-.cancel {
+/* .cancel {
     background-color: white;
     color: rgba(24, 28, 39, 0.6);;
     text-decoration-line: underline;
     box-shadow: none;
     
-}
+} */
 `

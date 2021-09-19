@@ -1,31 +1,61 @@
+import React, { lazy, Suspense, useEffect } from 'react';
+import { Switch } from 'react-router';
+import { authSelectors, authOperations } from '../redux/auth';
+import { useSelector, useDispatch } from 'react-redux';
 
-import Button from './common/button/Button';
+import PrivateRoute from './routers/PrivateRoute';
+import PublicRoute from './routers/PublickRoute';
 import Header from './header/Header';
-
-import ContentContainer from "./common/containers/contentContainer/ContentContainer";
-import MainContainer from "./common/containers/mainContainer/Container";
-import Tasks from '../pages/tasks/Tasks'
-import GlobalStyle from "../style/GlobalStyle";
-import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
-
-
+import MainContainer from './common/containers/mainContainer/Container';
+import GlobalStyle from '../style/GlobalStyle';
+import WrapperContainer from './common/containers/WrapperContainer/WrapperContainer';
+// import ProjectsPage from '../pages/Projectspage/ProjectsPage';
 
 const App = () => {
+  const Register = lazy(() => import('../pages/register/Register'));
+  const Login = lazy(() => import('../pages/login/Login'));
+  const Projects = lazy(() => import('../pages/projects/Projects'));
+  // const Sprints = lazy(() => import('../pages/sprints/Sprints'));
+  const Tasks = lazy(() => import('../pages/tasks/Tasks'));
+  const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <>
-
-      
-
-    <GlobalStyle />
-    <Header />
-      <MainContainer>
-
-        <WrapperContainer>
-          <Tasks />
-        </WrapperContainer>
-
-      </MainContainer>
-      
+      <GlobalStyle />
+      {isFetchingUser || (
+        <>
+          <Header />
+          <MainContainer>
+            <WrapperContainer>
+              <Switch>
+                <Suspense fallback={''}>
+                  <PublicRoute path="/register" exact restricted>
+                    <Register />
+                  </PublicRoute>
+                  <PublicRoute path="/login" exact restricted>
+                    <Login />
+                  </PublicRoute>
+                  <PrivateRoute path="/" exact>
+                    {/* <Projects /> */}
+                    <Tasks />
+                  </PrivateRoute>
+                  {/* <PrivateRoute path="/project/:id" exact>
+              <Sprints />
+            </PrivateRoute> */}
+                  <PrivateRoute path="/sprint/:id" exact>
+                    <Tasks />
+                  </PrivateRoute>
+                </Suspense>
+              </Switch>
+            </WrapperContainer>
+          </MainContainer>
+        </>
+      )}
     </>
   );
 };
