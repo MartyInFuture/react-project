@@ -41,7 +41,8 @@ const App = () => {
                     <Login />
                   </PublicRoute>
                   <PrivateRoute path="/" exact>
-                    <Projects />
+                    {/* <Projects /> */}
+                    <Tasks />
                   </PrivateRoute>
                   {/* <PrivateRoute path="/project/:id" exact>
               <Sprints />

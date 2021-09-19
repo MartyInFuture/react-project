@@ -6,6 +6,8 @@ import Title from '../../Components/common/title/Title';
 import Counter from '../../Components/tasks/Counter/Counter';
 import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 import { TasksStyled } from './TasksStyled';
+import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
+import NavMenu from '../../Components/navMenu/NavMenu';
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState('');
@@ -235,37 +237,42 @@ const Tasks = () => {
   };
 
   return (
-    <ContentContainer>
-      <TasksStyled>
-        <div>{/* <Link>Показати спринти</Link> */}</div>
-        <Counter data={data} />
-        <div>
-          <div className="inputBox">
-            <input
-              type="text"
-              onChange={filterChange}
-              className="inputSearch"
-            />
-          </div>
+    <>
+      <NavContainer>
+        <NavMenu />
+      </NavContainer>
+      <ContentContainer>
+        <TasksStyled>
+          <div>{/* <Link>Показати спринти</Link> */}</div>
+          <Counter data={data} />
           <div>
-            <div className="TaskWrapper">
-              <Title title={data.title} />
-              <div className="btnEditTitle">
-                <Button icon="edit" classBtn="editDelete" />
+            <div className="inputBox">
+              <input
+                type="text"
+                onChange={filterChange}
+                className="inputSearch"
+              />
+            </div>
+            <div>
+              <div className="TaskWrapper">
+                <Title title={data.title} />
+                <div className="btnEditTitle">
+                  <Button icon="edit" classBtn="editDelete" />
+                </div>
+              </div>
+              <div className="btnEditTitleAfter"></div>
+              <div className="btnAddTitle">
+                <Button />
+              </div>
+              <div className="btnAddchartTitle">
+                <Button icon="addchart" />
               </div>
             </div>
-            <div className="btnEditTitleAfter"></div>
-            <div className="btnAddTitle">
-              <Button />
-            </div>
-            <div className="btnAddchartTitle">
-              <Button icon="addchart" />
-            </div>
+            <TaskList />
           </div>
-          <TaskList />
-        </div>
-      </TasksStyled>
-    </ContentContainer>
+        </TasksStyled>
+      </ContentContainer>
+    </>
   );
 };
 
