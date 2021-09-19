@@ -9,6 +9,7 @@ import { TasksStyled } from './TasksStyled';
 import 'material-icons/iconfont/material-icons.css';
 import NavMenu from '../../Components/navMenu/NavMenu';
 import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
+
 const Tasks = () => {
   const [filterText, setfilterText] = useState('');
 
@@ -243,6 +244,7 @@ const Tasks = () => {
       </NavContainer>
       <ContentContainer>
         <TasksStyled>
+           
           <div>
             {/* <div>
                 <Link>Показати спринти</Link>
