@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { addMember } from '../../../redux/addMembers/addMembers-operations';
+import { existingMembers } from '../../../redux/addMembers/addMembers-selectors';
 import SubmitButton from '../../common/submitButton/SubmitButton';
+import MembersList from './MembersList';
 
 const MembersForm = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +11,8 @@ const MembersForm = () => {
   const handleChange = (e) => {
     setEmail(e.currentTarget.value);
   };
+
+   const members = useSelector(existingMembers);
 
   const dispatch = useDispatch();
 
@@ -25,13 +29,17 @@ const MembersForm = () => {
         <input
           type="email"
           name="email"
-          value={email}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          value={email}       
           placeholder="Введіть email"
           required
           onChange={handleChange}
         />
       </label>
+      {members?.length ? (
+        <MembersList />
+      ) : (
+        <p>Ви ще не додали жодного користувача</p>
+      )}
       <SubmitButton nameBtn="Готово" />
     </form>
   );

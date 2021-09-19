@@ -9,6 +9,7 @@ import Header from './header/Header';
 import MainContainer from './common/containers/mainContainer/Container';
 import GlobalStyle from '../style/GlobalStyle';
 import WrapperContainer from './common/containers/WrapperContainer/WrapperContainer';
+// import ProjectsPage from '../pages/Projectspage/ProjectsPage';
 
 const App = () => {
   const Register = lazy(() => import('../pages/register/Register'));
@@ -40,7 +41,8 @@ const App = () => {
                     <Login />
                   </PublicRoute>
                   <PrivateRoute path="/" exact>
-                    <Projects />
+                    {/* <Projects /> */}
+                    <Tasks />
                   </PrivateRoute>
                   <PrivateRoute path="/project/:id" exact>
                     <Sprints />

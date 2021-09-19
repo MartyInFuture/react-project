@@ -12,5 +12,8 @@ export const ProjectsStyled = styled.div`
   }
   .buttonMessage {
     margin-left: 20px;
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 `;

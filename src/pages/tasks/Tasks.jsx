@@ -1,3 +1,4 @@
+
 // import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 // import Button from '../../Components/common/button/Button';
@@ -6,6 +7,19 @@
 // import Counter from '../../Components/tasks/Counter/Counter';
 // import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 // import { TasksStyled } from './TasksStyled';
+
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../Components/common/button/Button';
+import TaskList from '../../Components/tasks/taskList/TaskList';
+import Title from '../../Components/common/title/Title';
+import Counter from '../../Components/tasks/Counter/Counter';
+import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
+import { TasksStyled } from './TasksStyled';
+import 'material-icons/iconfont/material-icons.css';
+import NavMenu from '../../Components/navMenu/NavMenu';
+import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
+
 
 // const Tasks = () => {
 //   const [filterText, setfilterText] = useState('');
@@ -234,6 +248,7 @@
 //     setfilterText(text);
 //   };
 
+
 //   return (
 //     <ContentContainer>
 //       <TasksStyled>
@@ -268,5 +283,96 @@
 //     </ContentContainer>
 //   );
 // };
+
+  return (
+    <>
+      <NavContainer>
+        <NavMenu />
+      </NavContainer>
+      <ContentContainer>
+        <TasksStyled>
+           
+          <div>
+            {/* <div>
+                <Link>Показати спринти</Link>
+              </div> */}
+            <div className="counterSearchContainer">
+              <Counter data={data} />
+              <div className="inputBox">
+                <span className="material-icons iconSearch">search</span>
+                <span className="material-icons iconSearchTablet">search</span>
+
+                <input
+                  type="text"
+                  onChange={filterChange}
+                  className="inputSearch"
+                />
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <div className="TaskWrapper">
+                  <div className="SprintTitleBtnEditWrapper">
+                    <div className="TaskTitleWrapper">
+                      <Title title={data.title} />
+                    </div>
+                    <div className="btnEditTitle">
+                      <Button icon="edit" classBtn="editDelete" />
+                    </div>
+                  </div>
+                  <div className="btnAddTitle ">
+                    <Button />
+                  </div>
+                  <div className="btnAddTitleTablet ">
+                    <div className="btnEdit">
+                      <Button />
+                    </div>
+                    <p className="AddTaskParagraph">Створити задачу</p>
+                  </div>
+                </div>
+                <div className="discrbtionHoursContainer">
+                  <p className="discrbtionHours">Заплановано годин</p>
+                  <p className="discrbtionHours">Витрачено год / день</p>
+                  <p className="discrbtionHours">Витрачено годин</p>
+                </div>
+                <div className="discrbtionHoursContainerDesktop">
+                  <p className="discrbtionHours">Задача</p>
+                  <p className="discrbtionHours">Заплановано годин</p>
+                  <p className="discrbtionHours">Витрачено год / день</p>
+                  <p className="discrbtionHours">Витрачено годин</p>
+                  <div className="SearchDesktop">
+                    <span className="material-icons iconSearchDesktop">
+                      search
+                    </span>
+                    <input
+                      type="text"
+                      onChange={filterChange}
+                      className="inputSearchDesktop"
+                    />
+                  </div>
+                </div>
+                <div className="discrbtionHoursContainerAfter"></div>
+                <div className="btnEditTitleAfter"></div>
+                <div className="btnAddchartTitle">
+                  <Button icon="addchart" />
+                </div>
+              </div>
+              <TaskList />
+            </div>
+          </div>
+          <div className="btnEditTitleAfter"></div>
+          <div className="btnAddTitle">
+            <Button />
+          </div>
+          <div className="btnAddchartTitle">
+            <Button icon="addchart" />
+          </div>
+        </TasksStyled>
+      </ContentContainer>
+    </>
+  );
+};
+
 
 // export default Tasks;
