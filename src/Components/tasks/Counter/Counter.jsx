@@ -35,7 +35,7 @@ const Counter = ({ data }) => {
             <CounterWrapper>
                 <div className="CounterInterfaceWrapper">
                     <button type="button" onClick={decrement} className='buttonCounter buttonCounterLeft'>&#60;</button>
-                        <p><span className="counterDay">{counter}</span> <span className="counterDate">/ 7</span></p>
+                        <p className="counterNumberContainer"><span className="counterDay">{counter}</span> <span className="counterDate">/ 7</span></p>
                     <button type="button" onClick={increment} className='buttonCounter buttonCounterRight'>&gt;</button>
                 </div>
                 

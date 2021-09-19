@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import Button from '../../Components/common/button/Button';
 import TaskList from '../../Components/tasks/taskList/TaskList';
 import Title from '../../Components/common/title/Title';
-import Counter from '../../Components/tasks/Counter/Counter';
-import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
-import { TasksStyled } from './TasksStyled';
-import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
-import NavMenu from '../../Components/navMenu/NavMenu';
+import Counter from '../../Components/tasks/Counter/Counter'
+import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer'
+import { TasksStyled } from './TasksStyled'
+import 'material-icons/iconfont/material-icons.css';
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState('');
@@ -236,28 +235,77 @@ const Tasks = () => {
     setfilterText(text);
   };
 
-  return (
-    <>
-      <NavContainer>
-        <NavMenu />
-      </NavContainer>
-      <ContentContainer>
-        <TasksStyled>
-          <div>{/* <Link>Показати спринти</Link> */}</div>
-          <Counter data={data} />
-          <div>
-            <div className="inputBox">
-              <input
-                type="text"
-                onChange={filterChange}
-                className="inputSearch"
-              />
-            </div>
-            <div>
-              <div className="TaskWrapper">
-                <Title title={data.title} />
-                <div className="btnEditTitle">
-                  <Button icon="edit" classBtn="editDelete" />
+    const filterChange = e => {
+        const text = e.target.value;
+        setfilterText(text);
+    }
+    
+    return (
+        <ContentContainer>
+            <TasksStyled>
+                <div>
+                    {/* <Link>Показати спринти</Link> */}
+                </div>
+                <div className="counterSearchContainer">
+                    <Counter data={data} />
+                    <div className="inputBox">
+                        <span class="material-icons iconSearch">search</span>
+                        <span class="material-icons iconSearchTablet">search</span>
+                        
+                            <input type="text" onChange={filterChange} className="inputSearch"/>
+                    </div>
+                </div>
+                
+                
+                <div>
+                    
+                    <div>
+                        <div className="TaskWrapper">
+                            <div className="SprintTitleBtnEditWrapper">
+                                <div className="TaskTitleWrapper">
+                                    <Title title={data.title} /> 
+                                </div>
+                                <div className="btnEditTitle">
+                                    <Button icon='edit' classBtn='editDelete' />
+                                    
+                                </div>
+                            </div>
+                            
+                                <div className="btnAddTitle ">
+                                    <Button /> 
+                                </div>
+                            <div className="btnAddTitleTablet ">
+                                    <div className="btnEdit">
+                                        <Button />
+                                    </div>
+                                    <p className="AddTaskParagraph">Створити задачу</p>
+                                </div>
+                              
+                        </div>
+                        <div className="discrbtionHoursContainer">
+                            <p className="discrbtionHours">Заплановано годин</p>
+                            <p className="discrbtionHours">Витрачено год / день</p>
+                            <p className="discrbtionHours">Витрачено годин</p>
+                        </div>
+                        <div className="discrbtionHoursContainerDesktop">
+                            <p className="discrbtionHours">Задача</p>
+                            <p className="discrbtionHours">Заплановано годин</p>
+                            <p className="discrbtionHours">Витрачено год / день</p>
+                            <p className="discrbtionHours">Витрачено годин</p>
+                            <div className="SearchDesktop">
+                                <span class="material-icons iconSearchDesktop">search</span>
+                                <input type="text" onChange={filterChange} className="inputSearchDesktop"/>
+                            </div>
+                        </div>
+                        <div className="discrbtionHoursContainerAfter"></div>
+                        <div className="btnEditTitleAfter"></div>
+                        <div className="btnAddchartTitle">
+                            <Button icon='addchart' />
+                        </div>
+                        
+                    </div>
+                    <TaskList /> 
+
                 </div>
               </div>
               <div className="btnEditTitleAfter"></div>
