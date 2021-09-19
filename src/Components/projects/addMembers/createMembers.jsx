@@ -5,7 +5,7 @@ import Modal from '../../common/modal/Modal';
 import MembersForm from './MembersForm';
 import MembersList from './MembersList';
 
-const createMembers = () => {
+const CreateMembers = () => {
   const members = useSelector(getMembersFromState);
   return (
     <Modal>
@@ -19,4 +19,4 @@ const createMembers = () => {
   );
 };
 
-export default createMembers;
+export default CreateMembers;
