@@ -1,6 +1,7 @@
-import TaskListItem from "../TaskListItem/TaskListItem";
-import { useState, useEffect } from "react";
-import { Tasklist } from "./TaskListStyled";
+import TaskListItem from "../taskListItem/TaskListItem"
+import { useState, useEffect } from "react"
+import { Tasklist } from "./TaskListStyled"
+
 
 const TaskList = () => {
   const data = {
@@ -208,7 +209,7 @@ const TaskList = () => {
     projectId: "507f1f77bcf86cd799439026",
     _id: "507f1f77bcf86cd799439013",
     __v: 0,
-  };
+  }
 
   return (
     <Tasklist>
@@ -220,4 +221,5 @@ const TaskList = () => {
   );
 };
 
-export default TaskList;
+
+export default TaskList

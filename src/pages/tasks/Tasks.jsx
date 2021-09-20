@@ -9,9 +9,9 @@ import { TasksStyled } from "./TasksStyled";
 import "material-icons/iconfont/material-icons.css";
 import NavMenu from "../../Components/navMenu/NavMenu";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
-
   const data = {
     title: "Sprint 1",
     startDate: "2020-12-30",
@@ -217,7 +217,7 @@ const Tasks = () => {
     projectId: "507f1f77bcf86cd799439012",
     _id: "507f1f77bcf86cd799439013",
     __v: 0,
-  };
+  }
 
   const modalOpen = () => {
     console.log("modalOpen()");
@@ -232,9 +232,9 @@ const Tasks = () => {
   };
 
   const filterChange = (e) => {
-    const text = e.target.value;
-    setfilterText(text);
-  };
+    const text = e.target.value
+    setfilterText(text)
+  }
 
   return (
     <>
@@ -251,11 +251,7 @@ const Tasks = () => {
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
 
-                <input
-                  type="text"
-                  onChange={filterChange}
-                  className="inputSearch"
-                />
+                <input type="text" onChange={filterChange} className="inputSearch" />
               </div>
             </div>
 
@@ -273,6 +269,7 @@ const Tasks = () => {
                 <div className="btnAddTitle ">
                   <Button />
                 </div>
+
                 <div className="btnAddTitleTablet ">
                   <div className="btnEdit">
                     <Button />
@@ -333,7 +330,7 @@ const Tasks = () => {
         </ContentContainer>
       </TasksStyled>
     </>
-  );
-};
+  )
+}
 
-export default Tasks;
+export default Tasks
