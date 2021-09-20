@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
-import { CounterWrapper } from './CounterStyled';
+import { useState, useEffect } from "react";
+import { CounterWrapper } from "./CounterStyled";
+import moment from "moment";
 
 const Counter = ({ data }) => {
+  //   console.log(moment().format("L"));
   const [counter, setcounter] = useState(1);
   const [day, setDay] = useState(0);
   const [month, setMonth] = useState(0);
@@ -38,7 +40,7 @@ const Counter = ({ data }) => {
           &#60;
         </button>
         <p className="counterNumberContainer">
-          <span className="counterDay">{counter}</span>{' '}
+          <span className="counterDay">{counter}</span>{" "}
           <span className="counterDate">/ 7</span>
         </p>
         <button

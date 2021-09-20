@@ -1,16 +1,18 @@
-import Button from '../../common/button/Button';
-import { TaskListItemWrapper } from './TaskListItemStyled';
+import Button from "../../common/button/Button";
+import { TaskListItemWrapper } from "./TaskListItemStyled";
 
 const TaskListItem = ({ task }) => {
   const deleteTask = () => {
-    console.log('deleteTask()');
+    console.log("deleteTask()");
   };
 
   return (
     <TaskListItemWrapper>
       <div className="TitleWrapper">
+        {/* <div> */}
         <h3 className="TaskTitle">{task.title}</h3>
         <div className="TaskTitleAfter"></div>
+        {/* </div> */}
       </div>
       <div className="TaskDescriptionTablet">
         <p className="describtion">

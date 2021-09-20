@@ -12,6 +12,6 @@ const Button = ({ onHandleClick, icon = 'add', classBtn = 'add' }) => {
         <span className="material-icons-outlined icon">{icon}</span>
       </button>
     </ButtonWrapper>
-  );
-};
-export default Button;
+  )
+}
+export default Button
