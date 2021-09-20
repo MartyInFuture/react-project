@@ -1,19 +1,10 @@
-import { useSelector } from 'react-redux';
-import { existingMembers } from '../../../redux/addMembers/addMembers-selectors';
-
-import Modal from '../../common/modal/Modal';
-import MembersForm from './MembersForm';
-
+import Modal from "../../common/modal/Modal";
+import MembersForm from "./MembersForm";
 
 const CreateMembers = () => {
-  const members = useSelector(getMembersFromState);
-
-
-const CreateMembers = () => {
-
   return (
-    <Modal>
-      <MembersForm />  
+    <Modal nameForm="Додати людей">
+      <MembersForm />
     </Modal>
   );
 };

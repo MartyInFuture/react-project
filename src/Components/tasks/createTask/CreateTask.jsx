@@ -1,12 +1,12 @@
-import Modal from "../../common/modal/Modal";
-import TaskForm from "./TaskForm";
+import Modal from "../../common/modal/Modal"
+import TaskForm from "./TaskForm"
 
-const CreateTask = () => {
-    return (
-        <Modal>
-            <TaskForm/>
-        </Modal>
-    );
+const CreateTask = ({ closeModal, setCloseModal }) => {
+  return (
+    <Modal nameForm="Створення задачі" closeModal={closeModal} setCloseModal={setCloseModal}>
+      <TaskForm />
+    </Modal>
+  )
 }
 
-export default CreateTask;
+export default CreateTask

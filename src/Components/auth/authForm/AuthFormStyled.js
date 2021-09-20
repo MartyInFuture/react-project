@@ -16,6 +16,7 @@ export const AuthFormStyled = styled.form`
     background-color: transparent;
     padding: 10px;
     font-size: 16px;
+    z-index: 300;
 
     :active,
     :hover,
