@@ -2,6 +2,7 @@ import TaskListItem from "../taskListItem/TaskListItem"
 import { useState, useEffect } from "react"
 import { Tasklist } from "./TaskListStyled"
 
+
 const TaskList = () => {
   const data = {
     title: "Sprint 1",
@@ -211,13 +212,14 @@ const TaskList = () => {
   }
 
   return (
-    <div>
+    <Tasklist>
       {/* filterText === "" && */}
       {data.tasks.map((item) => (
         <TaskListItem key={item._id} task={item} />
       ))}
-    </div>
-  )
-}
+    </Tasklist>
+  );
+};
+
 
 export default TaskList
