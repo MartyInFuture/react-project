@@ -23,7 +23,7 @@ export const SprintStyled = styled.div`
 /* пррп */
 
   article {
-    background: #E5E5E5;
+
     /* width: 100%; */
     /* height: 100%; */
     @media screen and (max-width: 414px) {
@@ -290,4 +290,4 @@ export const SprintStyled = styled.div`
   }
 /* } */
 /* dfdfdfd */
-`
+`;
