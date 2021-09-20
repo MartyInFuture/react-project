@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 
 import SubmitButton from "../../common/submitButton/SubmitButton"
+import { WrapperForm } from "./AddProjectModalStyled"
 
 const AddProjectModal = () => {
   const [title, setTitle] = useState("")
@@ -25,26 +26,36 @@ const AddProjectModal = () => {
   }
 
   return (
-    <form onSubmit={onHandleSubmit}>
-      <h2>Створення проекту</h2>
-      <label>
-        <h3>Назва проекту</h3>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          placeholder="Назва проекту"
-          required
-          onChange={handleChangeTitle}
-        />
-      </label>
+    <WrapperForm>
+      <form className="form" onSubmit={onHandleSubmit}>
+        <label>
+          <input
+            className="input"
+            type="text"
+            name="title"
+            value={title}
+            placeholder="Назва проекту"
+            required
+            onChange={handleChangeTitle}
+          />
+        </label>
 
-      <label>
-        <h3>Опис</h3>
-        <input type="text" name="description" value={description} required onChange={handleDescription} />
-      </label>
-      <SubmitButton nameBtn="Готово" />
-    </form>
+        <label>
+          <h3 className="inputTitle">Опис</h3>
+          <input
+            type="text"
+            className="input"
+            name="description"
+            value={description}
+            required
+            onChange={handleDescription}
+          />
+        </label>
+        <div className="submitWrapper">
+          <SubmitButton nameBtn="Готово" />
+        </div>
+      </form>
+    </WrapperForm>
   )
 }
 
