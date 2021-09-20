@@ -3,7 +3,7 @@ import AddProjectModal from "./AddProjectModal"
 
 const CreateProject = () => {
   return (
-    <Modal>
+    <Modal nameForm="Створення проекту">
       <AddProjectModal />
     </Modal>
   )
