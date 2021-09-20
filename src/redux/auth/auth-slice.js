@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import projectOperations from "../projects/newProject/newProjects-operations";
+import projectOperations from "../newProject/newProjects-operations";
 import authOperations from "./auth-operations";
 
 const initialState = {
@@ -14,6 +15,9 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    projectRejected: () => initialState,
+  },
   extraReducers: {
     [authOperations.register.fulfilled](state, action) {},
 
@@ -33,8 +37,8 @@ const authSlice = createSlice({
       state.sid = null;
     },
 
-    // [projectOperations.getProjects.fulfilled](state, action) {
-    //   state.isLoggedIn = true;
+    // [projectOperations.getProjects.rejected](state, action) {
+    //   state.isLoggedIn = false;
     // },
     // [authOperations.fetchNewToken.pending](state) {
     //   state.isFetchingCurrentUser = true;
@@ -50,4 +54,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { projectRejected } = authSlice.actions;
 export default authSlice.reducer;
