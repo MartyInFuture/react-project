@@ -1,9 +1,9 @@
 import Modal from "../../common/modal/Modal"
 import TaskForm from "./TaskForm"
 
-const CreateTask = () => {
+const CreateTask = ({ closeModal, setCloseModal }) => {
   return (
-    <Modal nameForm="Створення задачі">
+    <Modal nameForm="Створення задачі" closeModal={closeModal} setCloseModal={setCloseModal}>
       <TaskForm />
     </Modal>
   )
