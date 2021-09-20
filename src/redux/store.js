@@ -13,7 +13,7 @@ import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/auth-slice";
 import { error } from "./error/error-reducer";
-import projects from "./projects/newProject/newProjects-slice";
+import projects from "../redux/projects/projects-slice";
 
 const authPersistConfig = {
   key: "auth",

@@ -58,7 +58,7 @@ const AuthForm = ({ repeatPassword = true }) => {
       />
       <input
         className="inputForm"
-        type="password"
+        type="text"
         placeholder="Пароль"
         name="password"
         onChange={handleChangeInput}
