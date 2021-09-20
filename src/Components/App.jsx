@@ -1,27 +1,33 @@
-import React, { lazy, Suspense, useEffect } from 'react';
-import { Switch } from 'react-router';
-import { authSelectors, authOperations } from '../redux/auth';
-import { useSelector, useDispatch } from 'react-redux';
-
-import PrivateRoute from './routers/PrivateRoute';
-import PublicRoute from './routers/PublickRoute';
-import Header from './header/Header';
-import MainContainer from './common/containers/mainContainer/Container';
-import GlobalStyle from '../style/GlobalStyle';
-import WrapperContainer from './common/containers/WrapperContainer/WrapperContainer';
+import React, { lazy, Suspense, useEffect } from "react";
+import { Switch } from "react-router";
+import { authSelectors, authOperations } from "../redux/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { token } from "../redux/auth/auth-operations";
+import PrivateRoute from "./routers/PrivateRoute";
+import PublicRoute from "./routers/PublickRoute";
+import Header from "./header/Header";
+import MainContainer from "./common/containers/mainContainer/Container";
+import GlobalStyle from "../style/GlobalStyle";
+import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
+import operations from "../redux/auth/auth-operations";
+import projectOperations from "../redux/projects/newProject/newProjects-operations";
 
 const App = () => {
-  const Register = lazy(() => import('../pages/register/Register'));
-  const Login = lazy(() => import('../pages/login/Login'));
-  const Projects = lazy(() => import('../pages/projects/Projects'));
+  // const isAuth = useSelector(authSelectors.getAccessToken);
+  const Register = lazy(() => import("../pages/register/Register"));
+  const Login = lazy(() => import("../pages/login/Login"));
+  const Projects = lazy(() => import("../pages/projects/Projects"));
   // const Sprints = lazy(() => import('../pages/sprints/Sprints'));
-  const Tasks = lazy(() => import('../pages/tasks/Tasks'));
+  const Tasks = lazy(() => import("../pages/tasks/Tasks"));
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   token.set(isAuth);
+  //   isAuth && dispatch(projectOperations.getProjects());
+  // }, [dispatch]);
+  console.log(`app`, authOperations);
 
   return (
     <>
@@ -32,7 +38,7 @@ const App = () => {
           <MainContainer>
             <WrapperContainer>
               <Switch>
-                <Suspense fallback={''}>
+                <Suspense fallback={""}>
                   <PublicRoute path="/register" exact restricted>
                     <Register />
                   </PublicRoute>
