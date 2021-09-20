@@ -3,13 +3,9 @@ import Button from "../../Components/common/button/Button";
 import { ProjectsStyled } from "./ProjectsStyled";
 import ProjectsList from "../../Components/projects/projectsList/ProjectsList";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getProjects,
-//   postProject,
-// } from "../../redux/projects/newProject/newProjects-operations";
 import { useState, useEffect } from "react";
 
-import projectSelectors from "../../redux/newProject/newProjects-selectors";
+import projectSelectors from "../../redux/projects/projects-selectors";
 import { token } from "../../redux/auth/auth-operations";
 import { authSelectors } from "../../redux/auth";
 import CreateProject from "../../Components/projects/createProject/CreateProject";

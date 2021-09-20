@@ -9,9 +9,6 @@ import Header from "./header/Header";
 import MainContainer from "./common/containers/mainContainer/Container";
 import GlobalStyle from "../style/GlobalStyle";
 import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
-import { projectOperations } from "../redux/newProject";
-
-console.log(`projectOperations`, projectOperations);
 
 const App = () => {
   const isAuth = useSelector(authSelectors.getAccessToken);

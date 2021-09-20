@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { resetErrorAction } from "../error/error-action";
 import { setErrorStatus } from "../../helpers/function";
 import { projectRejected } from "../auth/auth-slice";
-// import { fetchNewToken } from "../auth/auth-operations";
 
 const postProject = createAsyncThunk(
   "postProject/project",
