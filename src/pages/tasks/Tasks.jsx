@@ -8,6 +8,7 @@
 // import { TasksStyled } from './TasksStyled';
 import Chart from "../../Components/chart/Chart"
 
+
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Button from "../../Components/common/button/Button"
@@ -21,6 +22,7 @@ import NavMenu from "../../Components/navMenu/NavMenu"
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer"
 import CreateProject from "../../Components/projects/createProject/CreateProject"
 import CreateTask from "../../Components/tasks/createTask/CreateTask"
+
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState("")
@@ -271,7 +273,6 @@ const Tasks = () => {
               </div>
             </div>
 
-            {/* <div> */}
             <div>
               <div className="TaskWrapper">
                 <div className="SprintTitleBtnEditWrapper">
@@ -282,13 +283,16 @@ const Tasks = () => {
                     <Button icon="edit" classBtn="editDelete" />
                   </div>
                 </div>
-                <div className="btnAddTitle ">
+                <div className="btnCreateTask ">
                   <Button />
                 </div>
 
-                <div className="btnAddTitleTablet ">
-                  <div className="btnEdit openModalTask">
+
+                <div className="btnCreateTaskTablet ">
+                  {/* Копка для создания спринта Планшет */}
+                  <div className="btnCreateSprintTitle openModalTask btnEdit">
                     <Button onHandleClick={() => setCloseModalTask(true)} />
+
                   </div>
                   <p className="AddTaskParagraph">Створити задачу</p>
                 </div>
@@ -310,53 +314,22 @@ const Tasks = () => {
               </div>
               <div className="discrbtionHoursContainerAfter"></div>
               <div className="btnEditTitleAfter"></div>
-              <div className="btnAddchartTitle">
-                <Button icon="addchart" />
-              </div>
-              <div className="btnAddchartTitleTablet">
-                <Button icon="addchart" />
+
+              <div>
+                {/* Кнопки для мобилки */}
+                <div className="btnAddchartTitle">
+                  <Button icon="addchart" onHandleClick={() => setOpen(true)} />
+                </div>
+                <div className="btnAddchartTitleTablet">
+                  <Button icon="addchart" onHandleClick={() => setOpen(true)} />
+                </div>
               </div>
             </div>
-            {/* </ContentContainer> */}
           </div>
-
-          {/* <div className="btnEditTitleAfter"></div>
-          <div className="btnAddTitle">
-            <Button onHandleClick={() => setOpen(true)} />
-          </div>
-          <div className="btnAddchartTitle">
-            <Button icon="addchart" onHandleClick={() => setOpen(true)} />
-          </div>
-        </TasksStyled>
-      </ContentContainer>
-      <Chart open={open} setOpen={() => setOpen(false)} /> */}
-
-          {/* <ContentContainer> */}
-          {/* <div>
-                <Link>Показати спринти</Link>
-              </div> */}
         </div>
         <ContentContainer>
           <div className="TaskListMaimContainner">
             <TaskList />
-
-            {/* </div> */}
-            <div className="btnEditTitleAfter"></div>
-            <div className="btnAddTitle">
-              <Button
-                onHandleClick={() => {
-                  setOpen(true)
-                }}
-              />
-            </div>
-            <div className="btnAddchartTitle">
-              <Button
-                icon="addchart"
-                onHandleClick={() => {
-                  setOpen(true)
-                }}
-              />
-            </div>
           </div>
         </ContentContainer>
       </TasksStyled>
