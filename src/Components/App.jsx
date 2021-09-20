@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense, useEffect } from "react";
 import { Switch } from "react-router";
 import { authSelectors, authOperations } from "../redux/auth";
@@ -18,7 +17,7 @@ const App = () => {
   const Register = lazy(() => import("../pages/register/Register"));
   const Login = lazy(() => import("../pages/login/Login"));
   const Projects = lazy(() => import("../pages/projects/Projects"));
-  // const Sprints = lazy(() => import('../pages/sprints/Sprints'));
+  const Sprints = lazy(() => import("../pages/Sprint"));
   const Tasks = lazy(() => import("../pages/tasks/Tasks"));
 
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
