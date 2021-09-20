@@ -1,10 +1,10 @@
 import Modal from "../../common/modal/Modal";
-import AddSprintForm from "../addSprintForm/AddSprintForm";
+import CreateSprintForm from "../createSprintForm/CreateSprintForm";
 
 const CreateSprint = () => {
   return (
     <Modal nameForm="Створення спринта">
-      <AddSprintForm />
+      <CreateSprintForm />
     </Modal>
   );
 };

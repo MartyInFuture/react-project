@@ -10,7 +10,7 @@ import NavContainer from "../../Components/common/containers/navContainer/NavCon
 import NavMenu from "../../Components/navMenu/NavMenu";
 
 import { useDispatch } from "react-redux";
-import CreateSprint from "../../Components/sprints/addSprint/CreateSprint";
+import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");

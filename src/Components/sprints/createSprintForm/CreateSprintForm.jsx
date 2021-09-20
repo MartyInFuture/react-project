@@ -4,9 +4,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addSprint } from "../../../redux/sprints/sprints-operations";
 import SubmitButton from "../../common/submitButton/SubmitButton";
-import { WrapperForm } from "./AddSprintFormStyled";
+import { WrapperForm } from "./CreateSprintFormStyled";
 
-const AddSprintForm = () => {
+const CreateSprintForm = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [isActivelastDate, setIsActiveLastDate] = useState(true);
@@ -93,4 +93,4 @@ const AddSprintForm = () => {
   );
 };
 
-export default AddSprintForm;
+export default CreateSprintForm;
