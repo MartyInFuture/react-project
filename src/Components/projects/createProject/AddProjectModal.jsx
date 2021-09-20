@@ -1,55 +1,54 @@
 import React, { useState } from "react"
 import { useDispatch } from "react-redux"
-import { addTask } from "../../../redux/task/task-operations"
 
 import SubmitButton from "../../common/submitButton/SubmitButton"
-import { WrapperForm } from "./TaskFormStyled"
+import { WrapperForm } from "./AddProjectModalStyled"
 
-const TaskForm = () => {
+const AddProjectModal = () => {
   const [title, setTitle] = useState("")
-  const [hoursPlanned, setHoursPlanned] = useState("")
+  const [description, setDescription] = useState("")
 
   const handleChangeTitle = (e) => {
     setTitle(e.currentTarget.value)
   }
 
-  const handleHoursPlanned = (e) => {
-    setHoursPlanned(e.currentTarget.value)
+  const handleDescription = (e) => {
+    setDescription(e.currentTarget.value)
   }
 
   const dispatch = useDispatch()
 
   const onHandleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addTask({ title, hoursPlanned }, title))
+    // dispatch(addProject({ title, description }, title))
     setTitle("")
-    setHoursPlanned("")
+    setDescription("")
   }
 
   return (
     <WrapperForm>
-      <form onSubmit={onHandleSubmit}>
+      <form className="form" onSubmit={onHandleSubmit}>
         <label>
           <input
             className="input"
             type="text"
             name="title"
             value={title}
-            placeholder="Назва задачі"
+            placeholder="Назва проекту"
             required
             onChange={handleChangeTitle}
           />
         </label>
 
         <label>
+          <h3 className="inputTitle">Опис</h3>
           <input
+            type="text"
             className="input"
-            type="number"
-            name="hoursPlanned"
-            value={hoursPlanned}
-            placeholder="Заплановано годин"
+            name="description"
+            value={description}
             required
-            onChange={handleHoursPlanned}
+            onChange={handleDescription}
           />
         </label>
         <div className="submitWrapper">
@@ -60,4 +59,4 @@ const TaskForm = () => {
   )
 }
 
-export default TaskForm
+export default AddProjectModal

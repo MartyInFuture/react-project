@@ -1,73 +1,176 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TaskListItemWrapper = styled.div`
-    width: 280px;
-    background: #FFFFFF;
-    box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
-    border-radius: 5px;
-    padding: 20px;
+  width: 280px;
+  background: #ffffff;
+  box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  border-radius: 5px;
+  padding: 20px;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 10px;
+  position: relative;
+
+  .TaskTitle {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #181c27;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .describtion {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
 
-    margin-bottom: 10px;
-    position: relative;
+  .describtionLastChild {
+    margin-bottom: 30px;
+  }
 
-    .TaskTitle {
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 22px;
-        color: #181C27;
-        letter-spacing: 0.04em;
-        margin-bottom: 8px;
-    }
-
-    .TaskTitleAfter {
-        width: 240px;
-        margin-bottom: 20px;
-        border: 1px solid rgba(24, 28, 39, 0.2);
-
-    }
-
-    .describtion {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .describtionLastChild {
-        margin-bottom: 30px;
-    }
-
-    /* .describtion:last-child {
+  /* .describtion:last-child {
         background: #000;
     } */
 
-    /* .describtion:last-child {
+  /* .describtion:last-child {
         width: 100%;
         display: flex;
         justify-content: space-between;
          margin-bottom: 50px;
     } */
 
+  .describtionHour {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .describtionHourNumber {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .describtionNumber {
+    display: flex;
+    justify-content: end;
+    font-size: 14px;
+    line-height: 1.12;
+    width: 60px;
+    border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+  }
+  .BtnDelete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .TaskTitleAfter {
+    /* width: 240px; */
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid rgba(24, 28, 39, 0.2);
+  }
+
+  /* ================================================================================================== */
+
+  @media screen and (max-width: 1279px) {
+    .TaskDescriptionTablet {
+      /* display: block !important; */
+      display: block;
+
+      width: 100%;
+    }
+
+    .TaskDescriptionDesktop {
+      /* display: none !important; */
+      display: none;
+    }
+
+    .TitleWrapper {
+      /* width: 100% !important; */
+      width: 100%;
+      /* margin-right: 0px !important; */
+      margin-right: 0px;
+    }
+  }
+
+  /* ============================================= Tablet ================================================================= */
+  @media screen and (min-width: 768px) {
+    width: 216px;
+    :nth-child(2n + 1) {
+      margin-right: 20px;
+    }
+
+    /* .TaskTitleAfter {
+    } */
+
     .describtionHour {
-        font-size: 10px;
-        line-height: 1.2;
+      font-size: 14px;
+      line-height: 1.2;
+      width: 98px;
     }
 
     .describtionNumber {
-        display: flex;
-        justify-content: end;
-        font-size: 14px;
-        line-height: 1.12;
-        width: 60px;
-        border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+      font-size: 18px;
+      line-height: 1.2px;
+      display: flex;
+      align-items: center;
     }
-    .BtnDelete {
-        position: absolute;
-            bottom: 10px;
-            right: 10px;
+
+    .describtionHourNumber {
+      font-size: 14px;
+      line-height: 1.2;
+
+      display: flex;
+      align-items: flex-end;
     }
+  }
+
+  /* ============================================= Desktop ================================================================= */
+  @media screen and (min-width: 1280px) {
+    margin: 0px;
+    width: 100%;
+    flex-direction: row;
+    :nth-child(2n + 1) {
+      margin-right: 0px;
+    }
+    margin-bottom: 10px;
+    /* margin-right: 0px; */
+    /* background-color: black; */
+
+    .TaskDescriptionTablet {
+      display: none;
+    }
+
+    .TaskDescriptionDesktop {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .TitleWrapper {
+      margin-right: 30px;
+      /* display: flex;
+        align-items: center; */
+    }
+
+    .describtionHourNumber {
+      width: 100px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .TitleWrapper {
+      width: 170px;
+    }
+
+    .TaskTitleAfter {
+      margin-bottom: 0px;
+    }
+  }
 `;

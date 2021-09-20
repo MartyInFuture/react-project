@@ -13,13 +13,12 @@ import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/auth-slice";
 import { error } from "./error/error-reducer";
-
-import projects from '../redux/projects/projects-reducer';
+import projects from "./projects/newProject/newProjects-slice";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["accessToken", "refreshToken"],
+  whitelist: ["token", "refreshToken", "sid", "isLoggedIn"],
 };
 
 export const store = configureStore({

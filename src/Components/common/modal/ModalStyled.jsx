@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const Overlay = styled.div`
   position: fixed;
@@ -69,4 +69,4 @@ export const Overlay = styled.div`
     top: 8px;
     right: 8px;
   }
-`;
+`

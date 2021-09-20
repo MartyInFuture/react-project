@@ -6,7 +6,9 @@ const HeaderMenu = ({ userEmail = "marty", icon = "logout" }) => {
   const dispatch = useDispatch();
 
   const onHandleLogOut = () => {
-    dispatch(authOperations.logOut());
+    try {
+      dispatch(authOperations.logOut());
+    } catch (error) {}
   };
 
   return (

@@ -15,7 +15,7 @@ export const LoginPageWrapper = styled.div`
     width: 332px;
     height: 565px;
     overflow-x: hidden;
-
+    pointer-events: none;
     @media screen and (min-width: 769px) {
       z-index: 120;
       top: 240px;
