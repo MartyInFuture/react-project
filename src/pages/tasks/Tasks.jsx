@@ -6,28 +6,28 @@
 // import Counter from '../../Components/tasks/Counter/Counter';
 // import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 // import { TasksStyled } from './TasksStyled';
-import Chart from "../../Components/chart/Chart"
+import Chart from "../../Components/chart/Chart";
 
-
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Button from "../../Components/common/button/Button"
-import TaskList from "../../Components/tasks/taskList/TaskList"
-import Title from "../../Components/common/title/Title"
-import Counter from "../../Components/tasks/Counter/Counter"
-import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer"
-import { TasksStyled } from "./TasksStyled"
-import "material-icons/iconfont/material-icons.css"
-import NavMenu from "../../Components/navMenu/NavMenu"
-import NavContainer from "../../Components/common/containers/navContainer/NavContainer"
-import CreateProject from "../../Components/projects/createProject/CreateProject"
-import CreateTask from "../../Components/tasks/createTask/CreateTask"
-
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Button from "../../Components/common/button/Button";
+import TaskList from "../../Components/tasks/taskList/TaskList";
+import Title from "../../Components/common/title/Title";
+import Counter from "../../Components/tasks/counter/Counter";
+import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
+import { TasksStyled } from "./TasksStyled";
+import "material-icons/iconfont/material-icons.css";
+import NavMenu from "../../Components/navMenu/NavMenu";
+import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+import CreateProject from "../../Components/projects/createProject/CreateProject";
+import CreateTask from "../../Components/tasks/createTask/CreateTask";
 
 const Tasks = () => {
-  const [filterText, setfilterText] = useState("")
-  const [open, setOpen] = useState(false)
-  const [closeModalTask, setCloseModalTask] = useState(false)
+  //   const [filterText, setfilterText] = useState("");
+  const [open, setOpen] = useState(false);
+  const [closeModalTask, setCloseModalTask] = useState(false);
+  const [tasks, setTasks] = useState([]);
+  const [filtredTasks, setFiltredTasks] = useState([]);
 
   const data = {
     title: "Sprint 1",
@@ -234,25 +234,32 @@ const Tasks = () => {
     projectId: "507f1f77bcf86cd799439012",
     _id: "507f1f77bcf86cd799439013",
     __v: 0,
-  }
+  };
+
+  useEffect(() => {
+    setTasks(data.tasks);
+  }, []);
 
   const modalOpen = () => {
-    console.log("modalOpen()")
-  }
+    console.log("modalOpen()");
+  };
 
   const correctTitleTask = () => {
-    console.log("correctTitleTask()")
-  }
+    console.log("correctTitleTask()");
+  };
 
   const diagrammOpenFn = () => {
-    console.log("diagrammOpenFn()")
-    setOpen(true)
-  }
+    console.log("diagrammOpenFn()");
+    setOpen(true);
+  };
 
   const filterChange = (e) => {
-    const text = e.target.value
-    setfilterText(text)
-  }
+    const text = e.target.value;
+    const Filter = text.toLowerCase();
+    // setfilterText(text);
+    const res = tasks.filter((task) => tasks.title.includes(Filter));
+    setFiltredTasks(res);
+  };
 
   return (
     <>
@@ -269,7 +276,11 @@ const Tasks = () => {
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
 
-                <input type="text" onChange={filterChange} className="inputSearch" />
+                <input
+                  type="text"
+                  onChange={filterChange}
+                  className="inputSearch"
+                />
               </div>
             </div>
 
@@ -287,12 +298,10 @@ const Tasks = () => {
                   <Button />
                 </div>
 
-
                 <div className="btnCreateTaskTablet ">
                   {/* Копка для создания спринта Планшет */}
                   <div className="btnCreateSprintTitle openModalTask btnEdit">
                     <Button onHandleClick={() => setCloseModalTask(true)} />
-
                   </div>
                   <p className="AddTaskParagraph">Створити задачу</p>
                 </div>
@@ -308,8 +317,14 @@ const Tasks = () => {
                 <p className="discrbtionHours">Витрачено год / день</p>
                 <p className="discrbtionHours">Витрачено годин</p>
                 <div className="SearchDesktop">
-                  <span className="material-icons iconSearchDesktop">search</span>
-                  <input type="text" onChange={filterChange} className="inputSearchDesktop" />
+                  <span className="material-icons iconSearchDesktop">
+                    search
+                  </span>
+                  <input
+                    type="text"
+                    onChange={filterChange}
+                    className="inputSearchDesktop"
+                  />
                 </div>
               </div>
               <div className="discrbtionHoursContainerAfter"></div>
@@ -329,14 +344,17 @@ const Tasks = () => {
         </div>
         <ContentContainer>
           <div className="TaskListMaimContainner">
-            <TaskList />
+            <TaskList filtredTasks={filtredTasks} />
           </div>
         </ContentContainer>
       </TasksStyled>
       <Chart open={open} setOpen={() => setOpen(false)} />
-      <CreateTask closeModal={closeModalTask} setCloseModal={setCloseModalTask} />
+      <CreateTask
+        closeModal={closeModalTask}
+        setCloseModal={setCloseModalTask}
+      />
     </>
-  )
-}
+  );
+};
 
-export default Tasks
+export default Tasks;

@@ -2,7 +2,7 @@ import TaskListItem from "../taskListItem/TaskListItem";
 import { useState, useEffect } from "react";
 import { Tasklist } from "./TaskListStyled";
 
-const TaskList = () => {
+const TaskList = ({ filtredTasks }) => {
   const data = {
     title: "Sprint 1",
     startDate: "2020-12-30",
@@ -213,7 +213,7 @@ const TaskList = () => {
   return (
     <Tasklist>
       {/* filterText === "" && */}
-      {data.tasks.map((item) => (
+      {filtredTasks.map((item) => (
         <TaskListItem key={item._id} task={item} />
       ))}
     </Tasklist>
