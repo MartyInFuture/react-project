@@ -1,6 +1,7 @@
 
 import Button from '../Components/common/button/Button';
 import Title from "../Components/common/title/Title";
+import SprintList from "../Components/sprints/SprintList/SprintList";
 // import CreateMembers from '../Components/projects/addMembers/CreateMembers';
 import { SprintStyled } from "./SprintStyled";
 import buttonIcons from "../configs/buttonIcons.json";
@@ -35,14 +36,14 @@ const SprintPage = () => {
                             </form>
                             {/* {!showInput && ( */}
                             <>
-                                <Button
+                              <Button
                                 icon={buttonIcons.edit}
                                 classBtn = "edit"
                                 title="Edit the name"
                                 type="button"
                                 className="buttonChange"
                                 // onClick={editNameHandle}
-                                ></Button>   
+                                ></Button>     
                                 <Title />
                             </>
                             {/* )} */}
@@ -77,7 +78,7 @@ const SprintPage = () => {
                     )} */}
                 </div>
 
-            {/* <SprintList /> */}
+              <SprintList />
             </article>
         {/* </div> */}
       </SprintStyled>

@@ -1,6 +1,6 @@
 import TaskListItem from '../taskListItem/TaskListItem';
-import { useState, useEffect } from 'react';
-import { Tasklist } from './TaskListStyled';
+// import { useState, useEffect } from 'react';
+// import { Tasklist } from './TaskListStyled';
 
 const TaskList = () => {
   const data = {

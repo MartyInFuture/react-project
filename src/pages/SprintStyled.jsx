@@ -23,6 +23,9 @@ export const SprintStyled = styled.div`
 
 
   article {
+    background: #E5E5E5;
+    /* width: 100%; */
+    /* height: 100%; */
     @media screen and (max-width: 414px) {
       padding: 30px 20px 30px 20px;
       margin-left: auto;
