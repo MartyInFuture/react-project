@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/common/button/Button";
-import TaskList from "../../Components/tasks/TaskList/TaskList";
+import TaskList from "../../Components/tasks/taskList/TaskList";
 import Title from "../../Components/common/title/Title";
-import Counter from "../../Components/tasks/Counter/Counter";
+import Counter from "../../Components/tasks/counter/Counter";
 import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
 import { TasksStyled } from "./TasksStyled";
 import "material-icons/iconfont/material-icons.css";
@@ -217,7 +217,7 @@ const Tasks = () => {
     projectId: "507f1f77bcf86cd799439012",
     _id: "507f1f77bcf86cd799439013",
     __v: 0,
-  }
+  };
 
   const modalOpen = () => {
     console.log("modalOpen()");
@@ -232,9 +232,9 @@ const Tasks = () => {
   };
 
   const filterChange = (e) => {
-    const text = e.target.value
-    setfilterText(text)
-  }
+    const text = e.target.value;
+    setfilterText(text);
+  };
 
   return (
     <>
@@ -251,7 +251,11 @@ const Tasks = () => {
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
 
-                <input type="text" onChange={filterChange} className="inputSearch" />
+                <input
+                  type="text"
+                  onChange={filterChange}
+                  className="inputSearch"
+                />
               </div>
             </div>
 
@@ -330,7 +334,7 @@ const Tasks = () => {
         </ContentContainer>
       </TasksStyled>
     </>
-  )
-}
+  );
+};
 
-export default Tasks
+export default Tasks;
