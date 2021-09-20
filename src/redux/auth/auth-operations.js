@@ -1,23 +1,20 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { resetErrorAction } from '../error/error-action';
+
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { resetErrorAction } from "../error/error-action";
+import { setErrorStatus } from "../../helpers/function";
+import { projectLogOut } from "../projects/newProject/newProjects-slice";
+
 
 axios.defaults.baseURL = 'https://sbc-backend.goit.global';
 
-const token = {
+export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
   },
-};
-
-const setErrorStatus = (error) => {
-  return {
-    status: +error.message.slice(-3),
-    message: error.message,
-  };
 };
 
 const logIn = createAsyncThunk(
@@ -45,8 +42,8 @@ const register = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.log(`error-register`, error);
       return rejectWithValue(setErrorStatus(error));
+      //
     } finally {
       dispatch(resetErrorAction());
     }
@@ -54,12 +51,13 @@ const register = createAsyncThunk(
 );
 
 const logOut = createAsyncThunk(
-  'auth/logout',
-  async (_, { rejectWithValue, dispatch }) => {
-    console.log(axios.defaults.headers.common.Authorization);
+
+  "auth/logout",
+  async (_, { rejectWithValue, dispatch, getState }) => {
     try {
-      await axios.post('/auth/logout');
-      token.unset();
+      await axios.post("/auth/logout");
+      dispatch(projectLogOut());
+
     } catch (error) {
       return rejectWithValue(setErrorStatus(error));
     } finally {
@@ -67,40 +65,50 @@ const logOut = createAsyncThunk(
     }
   }
 );
-/*
- * GET @ /users/current
- * headers:
- *    Authorization: Bearer token
- *
- * 1. Забираем токен из стейта через getState()
- * 2. Если токена нет, выходим не выполняя никаких операций
- * 3. Если токен есть, добавляет его в HTTP-заголовок и выполянем операцию
- */
-const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
+
+
+const fetchNewToken = createAsyncThunk(
+  "auth/fetchNewToken",
+  async ({ dataLastQuery = null, funcOperation }, thunkAPI) => {
+    console.log(`thunkAPI`, thunkAPI);
     const state = thunkAPI.getState();
     const persistedToken = state.auth.refreshToken;
+    const sid = state.auth.sid;
 
     if (persistedToken === null) {
-      console.log('Токена нет, уходим из fetchCurrentUser');
+      console.log("Токена нет, уходим из fetchCurrentUser");
+      token.unset();
+
       return thunkAPI.rejectWithValue();
     }
-
     token.set(persistedToken);
     try {
-      const { data } = await axios.get('/users/current');
-      return data;
+
+      const { data } = await axios.post("/auth/refresh", { sid });
+      token.set(data.newAccessToken);
+
+      if (funcOperation) {
+        console.log(`funcOperation`, funcOperation);
+        return dataLastQuery
+          ? thunkAPI.dispatch([funcOperation](dataLastQuery))
+          : thunkAPI.dispatch([funcOperation]());
+      } else {
+        console.log(`fetchNewToken`, data);
+        return data;
+      }
+
     } catch (error) {
-      // TODO: Добавить обработку ошибки error.message
+      return thunkAPI.rejectWithValue(setErrorStatus(error));
+    } finally {
+      thunkAPI.dispatch(resetErrorAction());
     }
   }
 );
 
-const operations = {
+export const operations = {
   register,
   logOut,
   logIn,
-  fetchCurrentUser,
+  fetchNewToken,
 };
 export default operations;
