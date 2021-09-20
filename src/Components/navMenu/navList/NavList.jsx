@@ -6,7 +6,7 @@ import { List } from "./NavListStyled";
 const NavList = ({ title, list, path }) => {
   return (
     <List>
-      {list.map((item) => (
+      {list?.map((item) => (
         <li key={item.title} className="item">
           <NavLink
             className="nav_link"
