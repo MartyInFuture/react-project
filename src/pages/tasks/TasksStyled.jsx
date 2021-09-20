@@ -19,7 +19,7 @@ export const TasksStyled = styled.div`
     align-items: center;
   }
 
-  .btnAddTitle {
+  .btnCreateTask {
     position: fixed;
     right: 20px;
     bottom: 20px;
@@ -64,19 +64,19 @@ export const TasksStyled = styled.div`
   }
 
   .discrbtionHoursContainer {
-    /* display: none; */
+    display: none;
   }
 
   .discrbtionHoursContainerAfter {
-    /* display: none; */
+    display: none;
   }
 
-  .btnAddTitleTablet {
-    /* display: none; */
+  .btnCreateTaskTablet {
+    display: none;
   }
 
   .AddTaskParagraph {
-    /* display: none; */
+    display: none;
   }
 
   .discrbtionHoursContainerDesktop {
@@ -164,11 +164,11 @@ export const TasksStyled = styled.div`
       border: 1px solid rgba(24, 28, 39, 0.1);
     } */
 
-    .btnAddTitle {
-      /* display: none; */
+    .btnCreateTask {
+      display: none;
     }
 
-    .btnAddTitleTablet {
+    .btnCreateTaskTablet {
       display: block;
     }
 
@@ -208,12 +208,12 @@ export const TasksStyled = styled.div`
       display: flex;
       align-items: center;
     }
-    .btnAddTitleTablet {
+    .btnCreateTaskTablet {
       display: flex;
       align-items: center;
     }
 
-    .btnEdit {
+    .btnCreateSprintTitle {
       margin-right: 20px;
     }
 
