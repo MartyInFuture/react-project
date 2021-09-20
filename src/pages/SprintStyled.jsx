@@ -123,10 +123,24 @@ export const SprintStyled = styled.div`
         .addWrap {
           display: flex;
           align-items: center;
+          font-family: Montserrat;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 22px;
+          letter-spacing: 0.04em;
+          text-align: left;
 
-          .AddGroupIcon {
+
+          .group_add {
             cursor: pointer;
             margin-right: 10px;
+            text-decoration: none;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            color: #181C27;
+            background-color: transparent;
           }
           span {
             line-height: 16px;

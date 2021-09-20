@@ -44,12 +44,22 @@ const SprintPage = () => {
                                 className="buttonChange"
                                 // onClick={editNameHandle}
                                 ></Button>     
-                                <Title />
+                              <Title />
                             </>
                             {/* )} */}
                         </div>
 
                         <p>current project description</p>
+                        
+                        <div className="addWrap">
+                          <Button
+                            icon={buttonIcons.group_add}
+                            classBtn = "group_add"
+                            title="Add people"
+                            type="button"
+                            ></Button>
+                          <span >Add people</span>
+                        </div>
 
                         <div className="addWrap">
                             {/* <CreateMembers className="AddGroupIcon" />
