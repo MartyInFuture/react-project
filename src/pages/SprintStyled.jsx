@@ -20,7 +20,7 @@ export const SprintStyled = styled.div`
   } */
 
 
-
+/* пррп */
 
   article {
     background: #E5E5E5;
