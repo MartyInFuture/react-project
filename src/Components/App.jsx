@@ -1,3 +1,4 @@
+
 import React, { lazy, Suspense, useEffect } from "react";
 import { Switch } from "react-router";
 import { authSelectors, authOperations } from "../redux/auth";
@@ -19,6 +20,7 @@ const App = () => {
   const Projects = lazy(() => import("../pages/projects/Projects"));
   // const Sprints = lazy(() => import('../pages/sprints/Sprints'));
   const Tasks = lazy(() => import("../pages/tasks/Tasks"));
+
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   // const dispatch = useDispatch();
@@ -46,11 +48,13 @@ const App = () => {
                     <Login />
                   </PublicRoute>
                   <PrivateRoute path="/" exact>
-                    <Projects />
+                    {/* <Projects /> */}
+                    <Tasks />
+                    {/* <Sprints /> */}
                   </PrivateRoute>
-                  {/* <PrivateRoute path="/project/:id" exact>
-              <Sprints />
-            </PrivateRoute> */}
+                  <PrivateRoute path="/project/:id" exact>
+                    <Sprints />
+                  </PrivateRoute>
                   <PrivateRoute path="/sprint/:id" exact>
                     <Tasks />
                   </PrivateRoute>

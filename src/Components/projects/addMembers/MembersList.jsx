@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { getMembersFromState } from '../../../redux/addMembers/addMembers-selectors';
+import { existingMembers } from '../../../redux/addMembers/addMembers-selectors';
 
 const MembersList = () => {
-  const arrayMembers = useSelector(getMembersFromState);
+  const arrayMembers = useSelector(existingMembers);
 
   return (
     <ul>

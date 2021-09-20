@@ -4,6 +4,7 @@ import { authSelectors } from "../../redux/auth";
 
 const PrivateRoute = ({ children, redirectTo = "/login", ...props }) => {
   const isLogedIn = useSelector(authSelectors.getIsLoggedIn);
+  console.log(isLogedIn);
 
   return (
     <Route {...props}>
