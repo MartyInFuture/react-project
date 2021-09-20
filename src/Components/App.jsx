@@ -14,6 +14,7 @@ import projectOperations from "../redux/projects/newProject/newProjects-operatio
 
 const App = () => {
   // const isAuth = useSelector(authSelectors.getAccessToken);
+  const isAuth = useSelector(authSelectors.getAccessToken)
   const Register = lazy(() => import("../pages/register/Register"))
   const Login = lazy(() => import("../pages/login/Login"))
   const Projects = lazy(() => import("../pages/projects/Projects"))
@@ -29,6 +30,10 @@ const App = () => {
   //   isAuth && dispatch(projectOperations.getProjects());
   // }, [dispatch]);
   console.log(`app`, authOperations)
+
+  useEffect(() => {
+    token.set(isAuth)
+  }, [])
 
   return (
     <>
