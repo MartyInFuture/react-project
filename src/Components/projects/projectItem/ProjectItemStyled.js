@@ -25,7 +25,7 @@ export const ProjectItemStyled = styled.li`
     width: 135px;
     height: 135px;
     padding: 10px;
-    background-color: skyblue;
+    /* background-color: skyblue; */
     border-radius: 5px;
     cursor: pointer;
     @media (min-width: 768px) {

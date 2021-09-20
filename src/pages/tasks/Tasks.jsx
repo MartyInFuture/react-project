@@ -1,17 +1,29 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "../../Components/common/button/Button";
-import TaskList from "../../Components/tasks/taskList/TaskList";
-import Title from "../../Components/common/title/Title";
-import Counter from "../../Components/tasks/counter/Counter";
-import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
-import { TasksStyled } from "./TasksStyled";
-import "material-icons/iconfont/material-icons.css";
-import NavMenu from "../../Components/navMenu/NavMenu";
-import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+
+// import { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
+// import Button from '../../Components/common/button/Button';
+// import TaskList from '../../Components/tasks/taskList/TaskList';
+// import Title from '../../Components/common/title/Title';
+// import Counter from '../../Components/tasks/Counter/Counter';
+// import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
+// import { TasksStyled } from './TasksStyled';
+import Chart from '../../Components/chart/Chart';
+
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../Components/common/button/Button';
+import TaskList from '../../Components/tasks/taskList/TaskList';
+import Title from '../../Components/common/title/Title';
+import Counter from '../../Components/tasks/Counter/Counter';
+import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
+import { TasksStyled } from './TasksStyled';
+import 'material-icons/iconfont/material-icons.css';
+import NavMenu from '../../Components/navMenu/NavMenu';
+import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
 
 const Tasks = () => {
-  const [filterText, setfilterText] = useState("");
+  const [filterText, setfilterText] = useState('');
+  const [open, setOpen] = useState(false);
   const data = {
     title: "Sprint 1",
     startDate: "2020-12-30",
@@ -228,7 +240,9 @@ const Tasks = () => {
   };
 
   const diagrammOpenFn = () => {
-    console.log("diagrammOpenFn()");
+    console.log('diagrammOpenFn()');
+    setOpen(true);
+
   };
 
   const filterChange = (e) => {
@@ -313,6 +327,18 @@ const Tasks = () => {
             </div>
             {/* </ContentContainer> */}
           </div>
+
+//          <div className="btnEditTitleAfter"></div>
+//          <div className="btnAddTitle">
+//            <Button onHandleClick={() => setOpen(true)} />
+//          </div>
+//          <div className="btnAddchartTitle">
+//            <Button icon="addchart" onHandleClick={() => setOpen(true)} />
+//          </div>
+//        </TasksStyled>
+//      </ContentContainer>
+//      <Chart open={open} setOpen={() => setOpen(false)} />
+
           {/* <ContentContainer> */}
           {/* <div>
                 <Link>Показати спринти</Link>
@@ -333,6 +359,7 @@ const Tasks = () => {
           </div>
         </ContentContainer>
       </TasksStyled>
+
     </>
   );
 };

@@ -64,19 +64,19 @@ export const TasksStyled = styled.div`
   }
 
   .discrbtionHoursContainer {
-    display: none;
+    /* display: none; */
   }
 
   .discrbtionHoursContainerAfter {
-    display: none;
+    /* display: none; */
   }
 
   .btnAddTitleTablet {
-    display: none;
+    /* display: none; */
   }
 
   .AddTaskParagraph {
-    display: none;
+    /* display: none; */
   }
 
   .discrbtionHoursContainerDesktop {
@@ -165,7 +165,7 @@ export const TasksStyled = styled.div`
     } */
 
     .btnAddTitle {
-      display: none;
+      /* display: none; */
     }
 
     .btnAddTitleTablet {
