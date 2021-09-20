@@ -6,6 +6,7 @@
 // import Counter from '../../Components/tasks/Counter/Counter';
 // import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 // import { TasksStyled } from './TasksStyled';
+import Chart from '../../Components/chart/Chart';
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -21,6 +22,7 @@ import NavContainer from '../../Components/common/containers/navContainer/NavCon
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState('');
+  const [open, setOpen] = useState(false);
 
   const data = {
     title: 'Sprint 1',
@@ -239,6 +241,7 @@ const Tasks = () => {
 
   const diagrammOpenFn = () => {
     console.log('diagrammOpenFn()');
+    setOpen(true);
   };
 
   const filterChange = (e) => {
@@ -324,13 +327,14 @@ const Tasks = () => {
           </div>
           <div className="btnEditTitleAfter"></div>
           <div className="btnAddTitle">
-            <Button />
+            <Button onHandleClick={() => setOpen(true)} />
           </div>
           <div className="btnAddchartTitle">
-            <Button icon="addchart" />
+            <Button icon="addchart" onHandleClick={() => setOpen(true)} />
           </div>
         </TasksStyled>
       </ContentContainer>
+      <Chart open={open} setOpen={() => setOpen(false)} />
     </>
   );
 };

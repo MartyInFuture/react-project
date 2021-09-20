@@ -1,70 +1,74 @@
-
 import Button from '../Components/common/button/Button';
-import Title from "../Components/common/title/Title";
+import Title from '../Components/common/title/Title';
 // import CreateMembers from '../Components/projects/addMembers/CreateMembers';
-import { SprintStyled } from "./SprintStyled";
-import buttonIcons from "../configs/buttonIcons.json";
+import { SprintStyled } from './SprintStyled';
+import buttonIcons from '../configs/buttonIcons.json';
+import NavContainer from '../Components/common/containers/navContainer/NavContainer';
+import ContentContainer from '../Components/common/containers/contentContainer/ContentContainer';
+import NavMenu from '../Components/navMenu/NavMenu';
 
 const SprintPage = () => {
-
   return (
     <>
+      <NavContainer>
+        <NavMenu />
+      </NavContainer>
+      <ContentContainer>
         <SprintStyled>
           {/* <div className="main"> */}
-            <article>
-                <div className="headerWrap">
-                    <div className="contentWrap">
-                        <div className="titleWrap">
-                            <form
-                            //   onSubmit={closeInputHandler}
-                            //   className={
-                            //     showInput ? changeTitleFormActive : changeTitleForm
-                            //   }
-                            >
-                                <input
-                                    className="inputChangeTitle"
-                                    // value={name}
-                                    name="name"
-                                    type="text"
-                                    // onChange={handleNameChange}
-                                />
-                                {/* <button
+          <article>
+            <div className="headerWrap">
+              <div className="contentWrap">
+                <div className="titleWrap">
+                  <form
+                  //   onSubmit={closeInputHandler}
+                  //   className={
+                  //     showInput ? changeTitleFormActive : changeTitleForm
+                  //   }
+                  >
+                    <input
+                      className="inputChangeTitle"
+                      // value={name}
+                      name="name"
+                      type="text"
+                      // onChange={handleNameChange}
+                    />
+                    {/* <button
                                     onHandleClick={null}
                                     
                                 /> */}
-                            </form>
-                            {/* {!showInput && ( */}
-                            <>
-                                <Button
-                                icon={buttonIcons.edit}
-                                classBtn = "edit"
-                                title="Edit the name"
-                                type="button"
-                                className="buttonChange"
-                                // onClick={editNameHandle}
-                                ></Button>   
-                                <Title />
-                            </>
-                            {/* )} */}
-                        </div>
+                  </form>
+                  {/* {!showInput && ( */}
+                  <>
+                    <Button
+                      icon={buttonIcons.edit}
+                      classBtn="editDelete"
+                      title="Edit the name"
+                      type="button"
+                      className="buttonChange"
+                      // onClick={editNameHandle}
+                    ></Button>
+                    <Title />
+                  </>
+                  {/* )} */}
+                </div>
 
-                        <p>current project description</p>
+                <p>current project description</p>
 
-                        <div className="addWrap">
-                            {/* <CreateMembers className="AddGroupIcon" />
+                <div className="addWrap">
+                  {/* <CreateMembers className="AddGroupIcon" />
                             <span onClick={() => toggleModal('addPeople')}>Add people</span> */}
-                        </div>
-                    
-                    </div>
+                </div>
+              </div>
 
-                    {767 && (
-                          <Button
-                            icon={buttonIcons.add}
-                            classBtn="add"
-                            // onClick={() => toggleModal('createSprint')}
-                          />
-                    )}
-                    {/* {768 && (
+              {767 && (
+                <Button
+                  icon={buttonIcons.add}
+                  classBtn="add"
+                  // onClick={() => toggleModal('createSprint')}
+                />
+              )}
+              {/* {768 && (
                     <div className="createSprintWrap">
                         {768 && (
                         <Button icon = {buttonIcons.add} classBtn = "add"
@@ -75,12 +79,13 @@ const SprintPage = () => {
                         { 1280 && <span>Create a sprint</span>}
                     </div>
                     )} */}
-                </div>
+            </div>
 
             {/* <SprintList /> */}
-            </article>
-        {/* </div> */}
-      </SprintStyled>
+          </article>
+          {/* </div> */}
+        </SprintStyled>
+      </ContentContainer>
     </>
   );
 };
