@@ -141,6 +141,7 @@ export const SprintStyled = styled.div`
             font-size: 18px;
             color: #181C27;
             background-color: transparent;
+
           }
           span {
             line-height: 16px;
