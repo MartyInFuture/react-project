@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
-import { getMembersFromState } from '../../../redux/addMembers/addMembers-selectors';
+import { useSelector } from "react-redux";
+import { getMembersFromState } from "../../../redux/addMembers/addMembers-selectors";
 
-import Modal from '../../common/modal/Modal';
-import MembersForm from './MembersForm';
-import MembersList from './MembersList';
+import Modal from "../../common/modal/Modal";
+import MembersForm from "./MembersForm";
+import MembersList from "./MembersList";
 
-const createMembers = () => {
+const CreateMembers = () => {
   const members = useSelector(getMembersFromState);
   return (
     <Modal>
@@ -19,4 +19,4 @@ const createMembers = () => {
   );
 };
 
-export default createMembers;
+export default CreateMembers;

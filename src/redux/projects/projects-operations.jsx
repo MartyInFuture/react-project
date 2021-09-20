@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   getAllProjectsRequest,
@@ -22,15 +22,15 @@ import {
   getProjectByIdRequest,
   getProjectByIdSuccess,
   getProjectByIdError,
-} from './projects-actions';
+} from "./projects-actions";
 
-const getAllProjects = () => async dispatch => {
+const getAllProjects = () => async (dispatch) => {
   dispatch(getAllProjectsRequest());
 
   try {
     const {
       data: { data },
-    } = await axios.get('/projects');
+    } = await axios.get("/projects");
     dispatch(getAllProjectsSuccess(data.projects));
 
     return data.projects;
@@ -39,7 +39,7 @@ const getAllProjects = () => async dispatch => {
   }
 };
 
-const getProjectById = projectId => async dispatch => {
+const getProjectById = (projectId) => async (dispatch) => {
   dispatch(getProjectByIdRequest());
 
   try {
@@ -54,13 +54,13 @@ const getProjectById = projectId => async dispatch => {
   }
 };
 
-const createProject = project => async dispatch => {
+const createProject = (project) => async (dispatch) => {
   dispatch(createProjectRequest());
 
   try {
     const {
       data: { data },
-    } = await axios.post('/projects', project);
+    } = await axios.post("/projects", project);
     dispatch(createProjectSuccess(data.project));
 
     return data.project;
@@ -69,7 +69,7 @@ const createProject = project => async dispatch => {
   }
 };
 
-const deleteProject = projectId => async dispatch => {
+const deleteProject = (projectId) => async (dispatch) => {
   dispatch(deleteProjectRequest());
 
   try {
@@ -80,7 +80,7 @@ const deleteProject = projectId => async dispatch => {
   }
 };
 
-const updateProject = (projectId, updatedProject) => async dispatch => {
+const updateProject = (projectId, updatedProject) => async (dispatch) => {
   dispatch(updateProjectRequest());
 
   try {
@@ -95,7 +95,7 @@ const updateProject = (projectId, updatedProject) => async dispatch => {
   }
 };
 
-const addParticipant = (projectId, email) => async dispatch => {
+const addParticipant = (projectId, email) => async (dispatch) => {
   dispatch(addParticipantRequest());
 
   try {
@@ -112,7 +112,7 @@ const addParticipant = (projectId, email) => async dispatch => {
 
 const deleteParticipant =
   (projectId, { email }) =>
-  async dispatch => {
+  async (dispatch) => {
     dispatch(deleteParticipantRequest());
 
     try {
