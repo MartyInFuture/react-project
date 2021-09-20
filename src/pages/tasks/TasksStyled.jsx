@@ -1,9 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TasksStyled = styled.div`
+  /* .TitleWrapper {
+    display: flex;
+    align-items: center;
+  } */
   .TaskWrapper {
     display: flex;
-    margin-bottom: 30px;
+    /* margin-bottom: 10px; */
   }
 
   .SprintTitleBtnEditWrapper {
@@ -75,6 +79,22 @@ export const TasksStyled = styled.div`
     display: none;
   }
 
+  .discrbtionHoursContainerDesktop {
+    display: none;
+  }
+
+  .btnAddchartTitleTablet {
+    display: none;
+  }
+
+  .TaskInterfaceContainer {
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(24, 28, 39, 0.1);
+    /* padding-bottom: 30px; */
+  }
+
   /* .hidden {
         display: none;
     } */
@@ -85,6 +105,13 @@ export const TasksStyled = styled.div`
 
   /* ============================================= Tablet ================================================================= */
   @media screen and (min-width: 768px) {
+    .TaskInterfaceContainer {
+      border: none;
+      border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+      width: 472px;
+      padding-left: 20px;
+      /* padding-bottom: 80px; */
+    }
     .counterSearchContainer {
       display: flex;
     }
@@ -127,14 +154,15 @@ export const TasksStyled = styled.div`
 
     .TaskWrapper {
       margin-bottom: 24px;
+      justify-content: space-between;
     }
 
-    .discrbtionHoursContainerAfter {
+    /* .discrbtionHoursContainerAfter {
       display: block;
       margin-top: 10px;
       margin-bottom: 20px;
       border: 1px solid rgba(24, 28, 39, 0.1);
-    }
+    } */
 
     .btnAddTitle {
       display: none;
@@ -155,9 +183,23 @@ export const TasksStyled = styled.div`
     .btnAddchartTitle {
       display: none;
     }
+
+    .btnAddchartTitleTablet {
+      display: block;
+      position: fixed;
+      z-index: 2;
+      right: 25px;
+      bottom: 30px;
+    }
   }
   /* ============================================= Desktop ================================================================= */
   @media screen and (min-width: 1280px) {
+    .TaskInterfaceContainer {
+      padding-top: 20px;
+      width: 970px;
+      padding-left: 70px;
+      padding-right: 30px;
+    }
     .TaskTitleWrapper {
       margin-right: 43px;
     }
@@ -226,13 +268,9 @@ export const TasksStyled = styled.div`
       width: 100px;
     }
 
-    /* .inputSearchDesktop:active,
-                            :hover,
-                            :focus
-                            {
-                            outline: 0;
-                            outline-offset: 0;
-                            background-color: transparent;
-                            } */
+    .btnAddchartTitleTablet {
+      right: 55px;
+      bottom: 60px;
+    }
   }
 `;
