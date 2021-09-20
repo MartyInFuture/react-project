@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const SprintStyled = styled.div`
 /* .main {
@@ -136,21 +136,31 @@ export const SprintStyled = styled.div`
             cursor: pointer;
             margin-right: 10px;
             text-decoration: none;
-            width: 30px;
+            max-width: 180px;
             height: 30px;
             font-size: 18px;
             color: #181C27;
-            background-color: transparent;
-
+            background-color: transparent;                       
           }
-          span {
+
+          .textAddPeople {
             line-height: 16px;
             letter-spacing: 0.04em;
             color: $text-dark;
             border-bottom: 1px solid #181c27;
             cursor: pointer;
+            font-weight: 500;
           }
         }
+      }
+
+      .btnWrap {        
+        background-color: transparent;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        
       }
 
       // div
@@ -291,4 +301,4 @@ export const SprintStyled = styled.div`
   }
 /* } */
 /* dfdfdfd */
-`;
+`

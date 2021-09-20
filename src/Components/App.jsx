@@ -11,12 +11,15 @@ import GlobalStyle from "../style/GlobalStyle";
 import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
 
 const App = () => {
-  const isAuth = useSelector(authSelectors.getAccessToken);
-  const Register = lazy(() => import("../pages/register/Register"));
-  const Login = lazy(() => import("../pages/login/Login"));
-  const Projects = lazy(() => import("../pages/projects/Projects"));
-  const Sprints = lazy(() => import("../pages/sprints/Sprint"));
-  const Tasks = lazy(() => import("../pages/tasks/Tasks"));
+
+  // const isAuth = useSelector(authSelectors.getAccessToken);
+  const isAuth = useSelector(authSelectors.getAccessToken)
+  const Register = lazy(() => import("../pages/register/Register"))
+  const Login = lazy(() => import("../pages/login/Login"))
+  const Projects = lazy(() => import("../pages/projects/Projects"))
+  const Sprints = lazy(() => import("../pages/Sprint"))
+  const Tasks = lazy(() => import("../pages/tasks/Tasks"))
+
 
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
 
@@ -25,6 +28,10 @@ const App = () => {
   useEffect(() => {
     token.set(isAuth);
   }, []);
+
+  useEffect(() => {
+    token.set(isAuth)
+  }, [])
 
   return (
     <>
