@@ -1,10 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
+
+
+
 import { getError } from "../error/error-handler";
 
 export const addTask = createAsyncThunk(
   "task/addTask",
   async ({ sprintId, task }, { dispatch, rejectWithValue }) => {
+
     try {
       const { data } = await axios.post(`/task/${sprintId}`, task);
       return data;
@@ -24,7 +29,9 @@ export const addTask = createAsyncThunk(
 
 export const getSprintsTasks = createAsyncThunk(
   "task/getTAsks",
+
   async (sprintId, { dispatch, rejectWithValue }) => {
+
     try {
       const { data } = await axios.get(`/task/${sprintId}`);
       return data;
@@ -38,6 +45,18 @@ export const getSprintsTasks = createAsyncThunk(
       );
       return rejectWithValue(error.message);
       // throw error;
+    }
+  }
+);
+
+export const deleteSprintsTask = createAsyncThunk(
+  "task/deleteTask",
+  async (taskId) => {
+    try {
+      await axios.delete(`/task/${taskId}`);
+      return taskId;
+    } catch (error) {
+      console.log(error);
     }
   }
 );

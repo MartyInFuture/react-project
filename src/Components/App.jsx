@@ -56,7 +56,7 @@ const App = () => {
                   <PrivateRoute path="/project/:id" exact>
                     <Sprints />
                   </PrivateRoute>
-                  <PrivateRoute path="/sprint/:id" exact>
+                  <PrivateRoute path="/project/:id/sprint/:id" exact>
                     <Tasks />
                   </PrivateRoute>
                 </Suspense>
