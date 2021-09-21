@@ -1,39 +1,19 @@
-import Button from '../../Components/common/button/Button';
-import Title from '../../Components/common/title/Title';
-import SprintList from '../../Components/sprints/SprintList/SprintList';
+import Button from '../Components/common/button/Button';
+import Title from '../Components/common/title/Title';
+import SprintList from '../Components/sprints/SprintList/SprintList';
 // import CreateMembers from '../Components/projects/addMembers/CreateMembers';
 import { SprintStyled } from './SprintStyled';
-import buttonIcons from '../../configs/buttonIcons.json';
-import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
-import NavMenu from '../../Components/navMenu/NavMenu';
+import buttonIcons from '../configs/buttonIcons.json';
+import NavContainer from '../Components/common/containers/navContainer/NavContainer';
+import NavMenu from '../Components/navMenu/NavMenu';
 // import CreateMembers from "../Components/projects/addMembers/CreateMembers"
-import CreateMembers from '../../Components/projects/addMembers/CreateMember';
-import { useState, useEffect } from 'react';
-import CreateSprint from '../../Components/sprints/createSprint/CreateSprint';
-import { useDispatch, useSelector } from 'react-redux';
-import { token } from '../../redux/auth/auth-operations';
-import { authSelectors } from '../../redux/auth';
-import { getProjectsSprints } from '../../redux/sprints/sprints-operations';
-import { useHistory } from 'react-router';
-import sprintSelectors from '../../redux/sprints/sprints-selectors';
-import projectOperations from '../../redux/projects/projects-operations';
+import CreateMembers from '../Components/projects/addMembers/CreateMember';
+import { useState } from 'react';
+import CreateSprint from '../Components/sprints/createSprint/CreateSprint';
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
   const [openModalSprints, setOpenModalSprints] = useState(false);
-  const isAuth = useSelector(authSelectors.getAccessToken);
-  const sprints = useSelector(sprintSelectors.getSprints);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const idProject = history.location.pathname.slice(9);
-
-  useEffect(() => {
-    token.set(isAuth);
-    isAuth &&
-      dispatch(getProjectsSprints(idProject)) &&
-      dispatch(projectOperations.getProjects());
-  }, [dispatch]);
-
   return (
     <>
       <NavContainer>
@@ -45,7 +25,12 @@ const SprintPage = () => {
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                <form>
+                <form
+                //   onSubmit={closeInputHandler}
+                //   className={
+                //     showInput ? changeTitleFormActive : changeTitleForm
+                //   }
+                >
                   <input
                     className="inputChangeTitle"
                     // value={name}
@@ -102,16 +87,28 @@ const SprintPage = () => {
                   icon={buttonIcons.add}
                   classBtn="add"
                   onHandleClick={() => setOpenModalSprints(true)}
+                  // onClick={() => toggleModal('createSprint')}
                 />
                 <CreateSprint
                   closeModal={openModalSprints}
-                  setOpenModal={setOpenModalSprints}
+                  setCloseModal={setOpenModalSprints}
                 />
               </>
             )}
+            {/* {768 && (
+                    <div className="createSprintWrap">
+                        {768 && (
+                        <Button icon = {buttonIcons.add} classBtn = "add"
+                            title="Create a sprint"
+                            onClick={() => toggleModal('createSprint')}
+                        />
+                        )}
+                        { 1280 && <span>Create a sprint</span>}
+                    </div>
+                    )} */}
           </div>
 
-          <SprintList sprints={sprints} />
+          <SprintList />
         </article>
         {/* </div> */}
       </SprintStyled>
