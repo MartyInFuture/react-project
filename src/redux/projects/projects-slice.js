@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import projectOperations from "./projects-operations";
+import { createSlice } from '@reduxjs/toolkit';
+import projectOperations from './projects-operations';
 
 const initialState = [];
 
@@ -9,14 +9,14 @@ const initialState = [];
 // };
 
 const projectsSlice = createSlice({
-  name: "projects",
+  name: 'projects',
   initialState,
   reducers: {
     projectLogOut: () => [],
   },
   extraReducers: {
     [projectOperations.getProjects.fulfilled](_, { payload }) {
-      if (payload.message === "No projects found") return [];
+      if (payload.message === 'No projects found') return [];
       return [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
@@ -26,10 +26,13 @@ const projectsSlice = createSlice({
       return [...state.filter((item) => item._id ?? item.id !== payload)];
     },
     [projectOperations.addMember.fulfilled](state, { payload }) {
-      const currentProject = state.filter(
-        (item) => item._id ?? item.id === payload.id
-      );
+      console.log(state);
+      const currentProject = state.filter((item) => {
+        return item._id ?? item.id === payload.id;
+      });
+
       const idx = state.indexOf(currentProject[0]);
+
       state[idx].members = [...payload.data.newMembers];
     },
     // [authOperations.logOut.fulfilled](state) {

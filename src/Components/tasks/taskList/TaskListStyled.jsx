@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Tasklist = styled.div`
+export const TasklistStyled = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;

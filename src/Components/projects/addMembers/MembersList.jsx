@@ -2,12 +2,12 @@ const MembersList = ({ members }) => {
   return (
     <ul>
       {members?.map((member) => (
-        <li>
+        <li key={member}>
           <p className="infoText">{member}</p>
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default MembersList
+export default MembersList;
