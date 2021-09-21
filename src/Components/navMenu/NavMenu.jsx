@@ -2,11 +2,11 @@ import { Wrapper } from "./NavMenuStyled";
 import NavList from "./navList/NavList";
 import Button from "../common/button/Button";
 import { Link } from "react-router-dom";
-
+ 
 const NavMenu = ({ title, list, path }) => {
   return (
-    <Wrapper>
-      <Link className="goBack" to={{ pathname: `/` }}>
+    <Wrapper>                                       
+      <Link className="goBa  ck" to={{ pathname: `/` }}>
         <div>
           <span className="material-icons-outlined arrow">arrow_right_alt</span>
         </div>
