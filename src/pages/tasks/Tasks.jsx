@@ -55,7 +55,6 @@ const Tasks = () => {
     dispatch(projectOperations.getProjects());
     isAuth && dispatch(getProjectsSprints(id));
   }, [dispatch, id]);
-  useEffect();
 
   const modalOpen = () => {
     console.log("modalOpen()");
@@ -79,7 +78,12 @@ const Tasks = () => {
   return (
     <>
       <NavContainer>
-        <NavMenu title="спринти" list={sprints} path="sprint" />
+        <NavMenu
+          title="спринти"
+          list={sprints}
+          path="sprint"
+          linkTo={`/project/${projectId}`}
+        />
       </NavContainer>
 
       <TasksStyled>
