@@ -3,9 +3,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const addSprint = createAsyncThunk(
   "sprint/addSprint",
-  async (projectId, sprintData) => {
+  async ({ projectId, sprintData }) => {
+    console.log(axios.defaults.headers.common.Authorization);
     try {
       const { data } = await axios.post(`/sprint/${projectId}`, sprintData);
+
+      console.log(`data`, data);
       return data;
     } catch (error) {
       console.log(error);
