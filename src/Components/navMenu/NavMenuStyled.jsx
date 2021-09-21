@@ -10,8 +10,7 @@ export const Wrapper = styled.div`
     text-align: center;
   }
   .button__wrapper {
-    position: absolute;
-    top: 100vh;
+    margin-top: 50px;
   }
   .arrow {
     display: inline-block;
