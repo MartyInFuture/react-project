@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -8,19 +8,21 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
-import thunk from "redux-thunk";
-import storage from "redux-persist/lib/storage";
-import authReducer from "./auth/auth-slice";
-import { error } from "./error/error-reducer";
-import projects from "../redux/projects/projects-slice";
-import sprints from "./sprints/sprints-slice";
-import tasks from "./task/task-slice";
+
+} from 'redux-persist';
+import thunk from 'redux-thunk';
+import storage from 'redux-persist/lib/storage';
+import authReducer from './auth/auth-slice';
+import { error } from './error/error-reducer';
+import projects from '../redux/projects/projects-slice';
+import sprints from './sprints/sprints-slice';
+import tasks from './task/task-slice';
+
 
 const authPersistConfig = {
-  key: "auth",
+  key: 'auth',
   storage,
-  whitelist: ["token", "refreshToken", "sid", "isLoggedIn"],
+  whitelist: ['token', 'refreshToken', 'sid', 'isLoggedIn'],
 };
 
 export const store = configureStore({
@@ -37,7 +39,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }).concat(thunk),
-  devTools: process.env.NODE_ENV === "development",
+  devTools: process.env.NODE_ENV === 'development',
 });
 
 export const persistor = persistStore(store);

@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { addTask, getSprintsTasks } from "./task-operations";
+
+import { createSlice } from '@reduxjs/toolkit';
+import { addTask, getSprintsTasks } from './task-operations';
+
 
 const initialState = {
   items: [],
@@ -25,14 +27,14 @@ const tasksSlice = createSlice({
       };
     },
 
-    // [addTask.pending](state) {
-    //   state.loading = true;
-    // },
 
-    // [addTask.rejected](state, { payload }) {
-    //   state.error = payload;
-    //   state.loading = false;
-    // },
+    [addTask.rejected](state, { payload }) {
+      state.error = payload;
+      state.loading = false;
+    },
+    [getSprintsTasks.fulfilled](state, { payload }) {
+      state.items = [...payload];
+    },
   },
 });
 

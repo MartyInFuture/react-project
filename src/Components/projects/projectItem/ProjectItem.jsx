@@ -2,9 +2,16 @@ import { ProjectItemStyled } from './ProjectItemStyled';
 import Button from '../../common/button/Button';
 import { Link } from 'react-router-dom';
 import buttonIcons from '../../../configs/buttonIcons.json';
+import { useDispatch } from 'react-redux';
+import projectOperations from '../../../redux/projects/projects-operations';
 
 const ProjectItem = ({ project, background }) => {
-  console.log(background);
+  const dispatch = useDispatch();
+
+  const deleteProject = () => {
+    dispatch(projectOperations.deleteProject(project._id));
+  };
+
   return (
     <ProjectItemStyled>
       <Link
@@ -15,10 +22,14 @@ const ProjectItem = ({ project, background }) => {
         <div className="projectTextWrapper">
           <p className="projectTextDescription">{project.description}</p>
         </div>
-        <div className="projectButtonWrapper">
-          <Button classBtn="deleteProject" icon={buttonIcons.delete} />
-        </div>
       </Link>
+      <div className="projectButtonWrapper">
+        <Button
+          classBtn="deleteProject"
+          icon={buttonIcons.delete}
+          onHandleClick={deleteProject}
+        />
+      </div>
     </ProjectItemStyled>
   );
 };
