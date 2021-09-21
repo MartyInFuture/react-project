@@ -1,23 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
-import projectOperations from "./projects-operations";
+import { createSlice } from '@reduxjs/toolkit';
+import projectOperations from './projects-operations';
 
 console.log(`projectOperations`, projectOperations);
 
 const initialState = [];
 
 const projectsSlice = createSlice({
-  name: "projects",
+  name: 'projects',
   initialState,
   reducers: {
     projectLogOut: () => [],
   },
   extraReducers: {
-    [projectOperations.getProjects.fulfilled](state, action) {
+    [projectOperations.getProjects.fulfilled](_, action) {
       return [...action.payload];
-      // state.push(action.payload);
     },
     [projectOperations.postProject.fulfilled](state, action) {
-      return [...state, action.payload];
+      state.push(action.payload);
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];

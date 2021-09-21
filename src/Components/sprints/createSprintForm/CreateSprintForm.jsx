@@ -5,10 +5,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addSprint } from "../../../redux/sprints/sprints-operations";
 import SubmitButton from "../../common/submitButton/SubmitButton";
 import { WrapperForm } from "./CreateSprintFormStyled";
+import { useHistory } from "react-router";
 
 const CreateSprintForm = () => {
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const history = useHistory();
+  const projectId = history.location.pathname.slice(9);
+  const [date, setDate] = useState("");
+  const [duration, setDuration] = useState("");
   const [isActivelastDate, setIsActiveLastDate] = useState(true);
 
   const handleChange = (e) => {
@@ -18,18 +22,36 @@ const CreateSprintForm = () => {
         setName(value);
         break;
       case "number":
-        setNumber(value);
+        setDate(value);
+        break;
+      case "duration":
+        setDuration(value);
         break;
       default:
         break;
     }
   };
 
+  // const onHandleClick = () => {
+  //   const projectId = "614776eef4a6c03db8cc8ef3";
+  //   dispatch(
+  //     addSprint({
+  //       projectId,
+  //       sprintData: {
+  //         title: "Sprint 6",
+  //         endDate: "2020-12-31",
+  //         duration: 1,
+  //       },
+  //     })
+  //   );
+  // };
+
   const dispatch = useDispatch();
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addSprint({ name }, name));
+    console.log(`ObjData`, name);
+    // dispatch(addSprint({ name }, name));
     setName("");
   };
   const changeActiveDate = (e) => {
@@ -68,6 +90,8 @@ const CreateSprintForm = () => {
             <DatePicker
               popperPlacement="bottom"
               className="date"
+              name="date"
+              value={date}
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               minDate={isActivelastDate && new Date()}
@@ -77,8 +101,8 @@ const CreateSprintForm = () => {
             <input
               className="input duration"
               type="number"
-              name="number"
-              value={number}
+              name="duration"
+              value={duration}
               placeholder="Тривалість"
               required
               onChange={handleChange}

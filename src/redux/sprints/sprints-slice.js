@@ -32,9 +32,11 @@ const sprintsSlice = createSlice({
     // },
 
     [getProjectsSprints.fulfilled](state, { payload }) {
-      state.error = null;
-      state.items = [...payload];
-      state.loading = false;
+      return {
+        error: null,
+        items: [...payload.sprints],
+        loading: false,
+      };
     },
 
     // [getProjectsSprints.pending](state) {
@@ -54,3 +56,5 @@ const sprintsSlice = createSlice({
     // }
   },
 });
+
+export default sprintsSlice.reducer;
