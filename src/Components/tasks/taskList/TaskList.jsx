@@ -15,9 +15,9 @@ const TaskList = ({ filter }) => {
 
   useEffect(() => {
     dispatch(getSprintsTasks(id));
-  }, []);
+  }, [id]);
   useEffect(() => {
-    const res = tasks.filter((task) => tasks.title.includes(filter));
+    const res = tasks.filter((task) => tasks.title?.includes(filter));
     setFiltredTasks(res);
   }, [filter]);
 
@@ -29,7 +29,7 @@ const TaskList = ({ filter }) => {
   return (
     <Tasklist>
       {/* filterText === "" && */}
-      {tasks.map((item) => (
+      {tasks?.map((item) => (
         <TaskListItem key={item._id} task={item} />
       ))}
     </Tasklist>
