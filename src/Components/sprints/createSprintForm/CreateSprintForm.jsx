@@ -6,12 +6,12 @@ import { addSprint } from "../../../redux/sprints/sprints-operations";
 import SubmitButton from "../../common/submitButton/SubmitButton";
 import { WrapperForm } from "./CreateSprintFormStyled";
 import { useHistory } from "react-router";
+import moment from "moment";
 
-const CreateSprintForm = () => {
+const CreateSprintForm = ({ setOpenModal }) => {
   const [name, setName] = useState("");
   const history = useHistory();
   const projectId = history.location.pathname.slice(9);
-  const [date, setDate] = useState("");
   const [duration, setDuration] = useState("");
   const [isActivelastDate, setIsActiveLastDate] = useState(true);
 
@@ -21,9 +21,6 @@ const CreateSprintForm = () => {
       case "name":
         setName(value);
         break;
-      case "number":
-        setDate(value);
-        break;
       case "duration":
         setDuration(value);
         break;
@@ -32,26 +29,22 @@ const CreateSprintForm = () => {
     }
   };
 
-  // const onHandleClick = () => {
-  //   const projectId = "614776eef4a6c03db8cc8ef3";
-  //   dispatch(
-  //     addSprint({
-  //       projectId,
-  //       sprintData: {
-  //         title: "Sprint 6",
-  //         endDate: "2020-12-31",
-  //         duration: 1,
-  //       },
-  //     })
-  //   );
-  // };
-
   const dispatch = useDispatch();
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log(`ObjData`, name);
-    // dispatch(addSprint({ name }, name));
+    const formatDate = moment(startDate).format("YYYY-M-D");
+    dispatch(
+      addSprint({
+        projectId,
+        sprintData: {
+          title: name,
+          endDate: formatDate,
+          duration,
+        },
+      })
+    );
+    setOpenModal(false);
     setName("");
   };
   const changeActiveDate = (e) => {
@@ -91,7 +84,7 @@ const CreateSprintForm = () => {
               popperPlacement="bottom"
               className="date"
               name="date"
-              value={date}
+              // value={date}
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               minDate={isActivelastDate && new Date()}

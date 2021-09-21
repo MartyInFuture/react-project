@@ -13,23 +13,27 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import { useHistory } from "react-router";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
-// import { projectOperations } from "../../redux/projects/projects-operations";
+import projectOperations from "../../redux/projects/projects-operations"
+
 
 const SprintPage = () => {
-  const [openModalMembers, setOpenModalMembers] = useState(false);
-  const [openModalSprints, setOpenModalSprints] = useState(false);
-  const isAuth = useSelector(authSelectors.getAccessToken);
-  const sprints = useSelector(sprintSelectors.getSprints);
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const idProject = history.location.pathname.slice(9);
-  
-  
+  const [openModalMembers, setOpenModalMembers] = useState(false)
+  const [openModalSprints, setOpenModalSprints] = useState(false)
+  const isAuth = useSelector(authSelectors.getAccessToken)
+  const sprints = useSelector(sprintSelectors.getSprints)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const idProject = history.location.pathname.slice(9)
   
   const [name, setName] = useState('');
   const [showInput, setShowInput] = useState(false);
+
+  useEffect(() => {
+    token.set(isAuth)
+    isAuth && dispatch(getProjectsSprints(idProject)) && dispatch(projectOperations.getProjects())
+  }, [dispatch])
   
-  const handleNameChange = event => setName(event.target.value);
+   const handleNameChange = event => setName(event.target.value);
   const editNameHandle = () => {
     // eslint-disable-next-line no-undef
     setName(currentProject?.name);
@@ -45,25 +49,6 @@ const SprintPage = () => {
     }
     setShowInput(false);
   };
-
-  // const onHandleClick = () => {
-  //   const projectId = "614776eef4a6c03db8cc8ef3";
-  //   dispatch(
-  //     addSprint({
-  //       projectId,
-  //       sprintData: {
-  //         title: "Sprint 6",
-  //         endDate: "2020-12-31",
-  //         duration: 1,
-  //       },
-  //     })
-  //   );
-  // };
-
-  useEffect(() => {
-    token.set(isAuth);
-    isAuth && dispatch(getProjectsSprints(idProject));
-  }, [dispatch]);
 
   return (
     <>
@@ -117,23 +102,12 @@ const SprintPage = () => {
               <p>current project description</p>
 
               <div className="addWrap">
-                <button
-                  className="btnWrap"
-                  onClick={() => setOpenModalMembers(true)}
-                >
-                  <Button
-                    icon={buttonIcons.group_add}
-                    classBtn="group_add"
-                    title="Add people"
-                    type="button"
-                  />
-                  <span className="textAddPeople">Add people</span>
+                <button className="btnWrap" onClick={() => setOpenModalMembers(true)}>
+                  <Button icon={buttonIcons.group_add} classBtn="group_add" title="Add people" type="button" />
+                  <span className="textAddPeople">Add people</span>{" "}
                 </button>
 
-                <CreateMembers
-                  closeModal={openModalMembers}
-                  setCloseModal={setOpenModalMembers}
-                />
+                <CreateMembers closeModal={openModalMembers} setOpenModal={setOpenModalMembers} />
               </div>
             </div>
 
@@ -153,6 +127,7 @@ const SprintPage = () => {
                 </>
             </div>
            
+
           </div>
 
           <SprintList sprints={sprints} />
@@ -160,7 +135,7 @@ const SprintPage = () => {
         {/* </div> */}
       </SprintStyled>
     </>
-  );
-};
+  )
+}
 
-export default SprintPage;
+export default SprintPage
