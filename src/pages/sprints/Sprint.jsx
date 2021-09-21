@@ -7,7 +7,7 @@ import buttonIcons from "../../configs/buttonIcons.json";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
 import NavMenu from "../../Components/navMenu/NavMenu";
 // import CreateMembers from "../Components/projects/addMembers/CreateMembers"
-import CreateMembers from "../../Components/projects/addMembers/createMembers";
+import CreateMembers from "../../Components/projects/addMembers/CreateMembers";
 import { useState, useEffect } from "react";
 import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import { useHistory } from "react-router";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectOperations from "../../redux/projects/projects-operations";
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
@@ -26,23 +27,11 @@ const SprintPage = () => {
   const history = useHistory();
   const idProject = history.location.pathname.slice(9);
 
-  // const onHandleClick = () => {
-  //   const projectId = "614776eef4a6c03db8cc8ef3";
-  //   dispatch(
-  //     addSprint({
-  //       projectId,
-  //       sprintData: {
-  //         title: "Sprint 6",
-  //         endDate: "2020-12-31",
-  //         duration: 1,
-  //       },
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     token.set(isAuth);
-    isAuth && dispatch(getProjectsSprints(idProject));
+    isAuth &&
+      dispatch(getProjectsSprints(idProject)) &&
+      dispatch(projectOperations.getProjects());
   }, [dispatch]);
 
   return (
