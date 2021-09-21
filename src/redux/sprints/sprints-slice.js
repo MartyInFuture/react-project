@@ -1,10 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   addSprint,
   changeSprintsTitle,
   deleteSprint,
   getProjectsSprints,
-} from "./sprints-operations";
+} from './sprints-operations';
 
 const initialState = {
   items: [],
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const sprintsSlice = createSlice({
-  name: "sprints",
+  name: 'sprints',
   initialState,
   extraReducers: {
     [addSprint.fulfilled](state, { payload }) {
@@ -32,6 +32,9 @@ const sprintsSlice = createSlice({
     // },
 
     [getProjectsSprints.fulfilled](state, { payload }) {
+      console.log('payload gesprints', payload);
+      // console.log()
+      if (payload.message === 'No sprints found') return false;
       return {
         error: null,
         items: [...payload.sprints],
