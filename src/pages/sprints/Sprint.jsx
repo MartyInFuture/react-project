@@ -1,28 +1,5 @@
-// import Button from "../../Components/common/button/Button";
-// import Title from "../../Components/common/title/Title";
-// import SprintList from "../../Components/sprints/SprintList/SprintList";
-// import CreateMembers from '../Components/projects/addMembers/CreateMembers';
-// import { SprintStyled } from "./SprintStyled";
-// import buttonIcons from "../../configs/buttonIcons.json";
-// import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
-// import NavMenu from "../../Components/navMenu/NavMenu";
-// import CreateMembers from "../Components/projects/addMembers/CreateMembers"
-// import CreateMembers from "../../Components/projects/addMembers/CreateMembers";
-// import {} from "../../Components/projects/addMembers/CreateMembers";
-// import { useState, useEffect } from "react";
-// import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
-// import { useDispatch, useSelector } from "react-redux";
-// import { token } from "../../redux/auth/auth-operations";
-// import { authSelectors } from "../../redux/auth";
-// import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
-// import { useHistory } from "react-router";
-// import sprintSelectors from "../../redux/sprints/sprints-selectors";
-// import projectOperations from "../../redux/projects/projects-operations";
-
 import Button from "../../Components/common/button/Button";
-import Title from "../../Components/common/title/Title";
 import SprintList from "../../Components/sprints/SprintList/SprintList";
-// import CreateMembers from '../Components/projects/addMembers/CreateMembers';
 import { SprintStyled } from "./SprintStyled";
 import buttonIcons from "../../configs/buttonIcons.json";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
@@ -44,12 +21,14 @@ import { useParams } from "react-router-dom";
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
   const [openModalSprints, setOpenModalSprints] = useState(false);
-  const projects = useSelector(projectsSeletors.getProjects);
   const isAuth = useSelector(authSelectors.getAccessToken);
   const sprints = useSelector(sprintSelectors.getSprints);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const idProject = history.location.pathname.slice(9);
+  const projects = useSelector(projectsSeletors.getProjects);
+  const [name, setName] = useState("");
+  const [showInput, setShowInput] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -58,6 +37,23 @@ const SprintPage = () => {
       dispatch(getProjectsSprints(id)) &&
       dispatch(projectOperations.getProjects());
   }, [dispatch, id]);
+
+  const handleNameChange = (event) => setName(event.target.value);
+  const editNameHandle = () => {
+    // eslint-disable-next-line no-undef
+    setName(currentProject?.name);
+    setShowInput(true);
+  };
+
+  const closeInputHandler = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-undef
+    if (currentProject.name !== name || name !== "") {
+      // eslint-disable-next-line no-undef
+      dispatch(projectOperations.updateProject(projectId, { name }));
+    }
+    setShowInput(false);
+  };
 
   return (
     <>
@@ -69,19 +65,45 @@ const SprintPage = () => {
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                <form>
-                  <input className="inputChangeTitle" name="name" type="text" />
-                </form>
-                <>
+                <form
+                  onSubmit={closeInputHandler}
+                  className={
+                    showInput ? "changeTitleFormActive" : "changeTitleForm"
+                  }
+                >
+                  <input
+                    className="inputChangeTitle"
+                    value={name}
+                    name="name"
+                    type="text"
+                    onChange={handleNameChange}
+                  />
                   <Button
                     icon={buttonIcons.edit}
                     classBtn="editDelete"
                     title="Edit the name"
-                    type="button"
+                    type="submit"
                     className="buttonChange"
+
+                    //   />
+                    //   <Title />
+                    // </>
                   />
-                  <Title />
-                </>
+                </form>
+                {!showInput && (
+                  <>
+                    {/* <h2>{currentProject?.name}</h2> */}
+                    {/* {userEmail === currentProject?.owner.email && ( */}
+                    <Button
+                      title="Edit the name"
+                      icon={buttonIcons.edit}
+                      classBtn="editDelete"
+                      type="button"
+                      className="buttonChange"
+                      onClick={editNameHandle}
+                    ></Button>
+                  </>
+                )}
               </div>
 
               <p>current project description</p>
@@ -97,29 +119,30 @@ const SprintPage = () => {
                     title="Add people"
                     type="button"
                   />
-                  <span className="textAddPeople">Add people</span>
+                  <span className="textAddPeople">Add people</span>{" "}
                 </button>
 
                 <CreateMembers
                   closeModal={openModalMembers}
-                  setCloseModal={setOpenModalMembers}
+                  setOpenModal={setOpenModalMembers}
                 />
               </div>
             </div>
-
-            {767 && (
+            <div className="createSprintWrap">
               <>
                 <Button
                   icon={buttonIcons.add}
                   classBtn="add"
+                  className="createNewSprintFixed"
                   onHandleClick={() => setOpenModalSprints(true)}
                 />
                 <CreateSprint
                   closeModal={openModalSprints}
-                  setOpenModal={setOpenModalSprints}
+                  setCloseModal={setOpenModalSprints}
                 />
+                <span className="createSprintSpan">Create a sprint</span>
               </>
-            )}
+            </div>
           </div>
           <SprintList sprints={sprints} />
         </article>

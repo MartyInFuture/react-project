@@ -6,11 +6,12 @@ export const SprintListItemStyled = styled.div`
   position: relative;
   height: 255px;
   padding: 20px 20px 20px;
-  width: 100%;
+  /* width: 100%; */
   
 
   @media screen and (min-width: 1280px) {
     padding: 20px 30px 30px;
+    height: 224px;
   }
 
   a {

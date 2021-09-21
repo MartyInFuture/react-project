@@ -6,7 +6,7 @@ import { WrapperForm } from "./MembersFormStyled"
 import MembersList from "./MembersList"
 import { useParams } from "react-router-dom"
 
-const MembersForm = () => {
+const MembersForm = ({ setOpenModal }) => {
   const [email, setEmail] = useState("")
 
   const { id } = useParams()
@@ -16,10 +16,8 @@ const MembersForm = () => {
   }
 
   const members = useSelector((state) => {
-    console.log("id", id)
     return state.projects.filter((project) => project._id === id)[0].members
   })
-  console.log("m", members)
 
   const dispatch = useDispatch()
 
@@ -27,6 +25,7 @@ const MembersForm = () => {
     e.preventDefault()
     dispatch(addMember({ id, email: { email } }))
     setEmail("")
+    setOpenModal(false)
   }
 
   return (

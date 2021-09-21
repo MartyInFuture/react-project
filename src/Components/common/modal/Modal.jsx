@@ -44,6 +44,4 @@ const Modal = ({ closeModal, setCloseModal, children, nameForm = "Name form" }) 
   )
 }
 
-// sdg
-
 export default Modal

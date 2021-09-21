@@ -6,11 +6,12 @@ export const SprintListStyled = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
-    /* width: 452px;
-  } */
+  
+  }
   
   @media screen and (min-width: 1280) {
-    /* width: 870px; */
+    width: 870px;
+    
   }
 }
 
@@ -53,5 +54,5 @@ export const SprintListStyled = styled.div`
     }
   }
 }
-}
+    
 `
