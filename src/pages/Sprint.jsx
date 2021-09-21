@@ -6,8 +6,14 @@ import { SprintStyled } from './SprintStyled';
 import buttonIcons from '../configs/buttonIcons.json';
 import NavContainer from '../Components/common/containers/navContainer/NavContainer';
 import NavMenu from '../Components/navMenu/NavMenu';
+// import CreateMembers from "../Components/projects/addMembers/CreateMembers"
+import CreateMembers from '../Components/projects/addMembers/createMembers';
+import { useState } from 'react';
+import CreateSprint from '../Components/sprints/createSprint/CreateSprint';
 
 const SprintPage = () => {
+  const [openModalMembers, setOpenModalMembers] = useState(false);
+  const [openModalSprints, setOpenModalSprints] = useState(false);
   return (
     <>
       <NavContainer>
@@ -46,7 +52,7 @@ const SprintPage = () => {
                     type="button"
                     className="buttonChange"
                     // onClick={editNameHandle}
-                  ></Button>
+                  />
                   <Title />
                 </>
                 {/* )} */}
@@ -55,27 +61,39 @@ const SprintPage = () => {
               <p>current project description</p>
 
               <div className="addWrap">
-                <Button
-                  icon={buttonIcons.group_add}
-                  classBtn="group_add"
-                  title="Add people"
-                  type="button"
-                ></Button>
-                <span>Add people</span>
-              </div>
+                <button
+                  className="btnWrap"
+                  onClick={() => setOpenModalMembers(true)}
+                >
+                  <Button
+                    icon={buttonIcons.group_add}
+                    classBtn="group_add"
+                    title="Add people"
+                    type="button"
+                  />
+                  <span className="textAddPeople">Add people</span>
+                </button>
 
-              <div className="addWrap">
-                {/* <CreateMembers className="AddGroupIcon" />
-                            <span onClick={() => toggleModal('addPeople')}>Add people</span> */}
+                <CreateMembers
+                  closeModal={openModalMembers}
+                  setCloseModal={setOpenModalMembers}
+                />
               </div>
             </div>
 
             {767 && (
-              <Button
-                icon={buttonIcons.add}
-                classBtn="add"
-                // onClick={() => toggleModal('createSprint')}
-              />
+              <>
+                <Button
+                  icon={buttonIcons.add}
+                  classBtn="add"
+                  onHandleClick={() => setOpenModalSprints(true)}
+                  // onClick={() => toggleModal('createSprint')}
+                />
+                <CreateSprint
+                  closeModal={openModalSprints}
+                  setCloseModal={setOpenModalSprints}
+                />
+              </>
             )}
             {/* {768 && (
                     <div className="createSprintWrap">

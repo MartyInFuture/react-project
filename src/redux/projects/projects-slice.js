@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import projectOperations from "./projects-operations";
 
-import projectOperations from "./newProjects-operations";
+console.log(`projectOperations`, projectOperations);
 
 const initialState = [];
 
@@ -12,11 +13,11 @@ const projectsSlice = createSlice({
   },
   extraReducers: {
     [projectOperations.getProjects.fulfilled](state, action) {
-      console.log(`action.payload`, action.payload);
-      state.push(...action.payload);
+      return [...action.payload];
+      // state.push(action.payload);
     },
     [projectOperations.postProject.fulfilled](state, action) {
-      state = [...state, action.payload];
+      return [...state, action.payload];
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];

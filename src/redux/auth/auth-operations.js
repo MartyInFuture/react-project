@@ -1,29 +1,26 @@
-
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { resetErrorAction } from "../error/error-action";
 import { setErrorStatus } from "../../helpers/function";
-import { projectLogOut } from "../projects/newProject/newProjects-slice";
+import { projectLogOut } from "../projects/projects-slice";
 
-
-axios.defaults.baseURL = 'https://sbc-backend.goit.global';
+axios.defaults.baseURL = "https://sbc-backend.goit.global";
 
 export const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authorization = '';
+    axios.defaults.headers.common.Authorization = "";
   },
 };
 
 const logIn = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
-      const { data } = await axios.post('/auth/login', credentials);
+      const { data } = await axios.post("/auth/login", credentials);
       token.set(data.accessToken);
-      console.log(`data`, data);
       return data;
     } catch (error) {
       return rejectWithValue(setErrorStatus(error));
@@ -34,10 +31,10 @@ const logIn = createAsyncThunk(
 );
 
 const register = createAsyncThunk(
-  'auth/register',
+  "auth/register",
   async (credentials, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/auth/register', credentials);
+      const { data } = await axios.post("/auth/register", credentials);
       await dispatch(logIn(credentials));
 
       return data;
@@ -51,13 +48,12 @@ const register = createAsyncThunk(
 );
 
 const logOut = createAsyncThunk(
-
   "auth/logout",
   async (_, { rejectWithValue, dispatch, getState }) => {
     try {
       await axios.post("/auth/logout");
-      dispatch(projectLogOut());
 
+      dispatch(projectLogOut());
     } catch (error) {
       return rejectWithValue(setErrorStatus(error));
     } finally {
@@ -65,7 +61,6 @@ const logOut = createAsyncThunk(
     }
   }
 );
-
 
 const fetchNewToken = createAsyncThunk(
   "auth/fetchNewToken",
@@ -83,12 +78,10 @@ const fetchNewToken = createAsyncThunk(
     }
     token.set(persistedToken);
     try {
-
       const { data } = await axios.post("/auth/refresh", { sid });
       token.set(data.newAccessToken);
 
       if (funcOperation) {
-        console.log(`funcOperation`, funcOperation);
         return dataLastQuery
           ? thunkAPI.dispatch([funcOperation](dataLastQuery))
           : thunkAPI.dispatch([funcOperation]());
@@ -96,7 +89,6 @@ const fetchNewToken = createAsyncThunk(
         console.log(`fetchNewToken`, data);
         return data;
       }
-
     } catch (error) {
       return thunkAPI.rejectWithValue(setErrorStatus(error));
     } finally {

@@ -9,26 +9,27 @@ import Header from "./header/Header";
 import MainContainer from "./common/containers/mainContainer/Container";
 import GlobalStyle from "../style/GlobalStyle";
 import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
-import operations from "../redux/auth/auth-operations";
-import projectOperations from "../redux/projects/newProject/newProjects-operations";
 
 const App = () => {
   // const isAuth = useSelector(authSelectors.getAccessToken);
+  const isAuth = useSelector(authSelectors.getAccessToken);
   const Register = lazy(() => import("../pages/register/Register"));
   const Login = lazy(() => import("../pages/login/Login"));
   const Projects = lazy(() => import("../pages/projects/Projects"));
-  const Sprints = lazy(() => import("../pages/sprintsPage/Sprint"));
+  const Sprints = lazy(() => import("../pages/Sprint"));
   const Tasks = lazy(() => import("../pages/tasks/Tasks"));
 
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent);
 
   // const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   token.set(isAuth);
-  //   isAuth && dispatch(projectOperations.getProjects());
-  // }, [dispatch]);
-  console.log(`app`, authOperations);
+  useEffect(() => {
+    token.set(isAuth);
+  }, []);
+
+  useEffect(() => {
+    token.set(isAuth);
+  }, []);
 
   return (
     <>
@@ -47,9 +48,7 @@ const App = () => {
                     <Login />
                   </PublicRoute>
                   <PrivateRoute path="/" exact>
-                    {/* <Projects /> */}
-                    {/* <Tasks /> */}
-                    <Sprints />
+                    <Projects />
                   </PrivateRoute>
                   <PrivateRoute path="/project/:id" exact>
                     <Sprints />

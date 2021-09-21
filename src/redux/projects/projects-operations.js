@@ -1,15 +1,14 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { resetErrorAction } from "../../error/error-action";
-import { setErrorStatus } from "../../../helpers/function";
-import { fetchNewToken } from "../../auth/auth-operations";
+import { resetErrorAction } from "../error/error-action";
+import { setErrorStatus } from "../../helpers/function";
+import { projectRejected } from "../auth/auth-slice";
 
 const postProject = createAsyncThunk(
   "postProject/project",
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post("/project", credentials);
-      console.log(`data`, data);
       return data;
     } catch (error) {
       return rejectWithValue(setErrorStatus(error));
@@ -27,6 +26,7 @@ const getProjects = createAsyncThunk(
       return data;
     } catch (error) {
       // fetchNewToken(["projectOperations", "getProjects"]);
+      dispatch(projectRejected());
       return rejectWithValue(setErrorStatus(error));
     } finally {
       dispatch(resetErrorAction());

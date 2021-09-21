@@ -1,9 +1,9 @@
-import Button from "../../common/button/Button";
-import { TaskListItemWrapper } from "./TaskListItemStyled";
+import Button from '../../common/button/Button';
+import { TaskListItemWrapper } from './TaskListItemStyled';
 
 const TaskListItem = ({ task }) => {
   const deleteTask = () => {
-    console.log("deleteTask()");
+    console.log('deleteTask()');
   };
 
   return (
