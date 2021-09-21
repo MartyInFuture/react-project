@@ -22,14 +22,14 @@ const sprintsSlice = createSlice({
       state.loading = false;
     },
 
-    [addSprint.pending](state) {
-      state.loading = true;
-    },
+    // [addSprint.pending](state) {
+    //   state.loading = true;
+    // },
 
-    [addSprint.rejected](state, { payload }) {
-      state.error = payload;
-      state.loading = false;
-    },
+    // [addSprint.rejected](state, { payload }) {
+    //   state.error = payload;
+    //   state.loading = false;
+    // },
 
     [getProjectsSprints.fulfilled](state, { payload }) {
       state.error = null;
@@ -37,18 +37,18 @@ const sprintsSlice = createSlice({
       state.loading = false;
     },
 
-    [getProjectsSprints.pending](state) {
-      state.loading = true;
-    },
+    // [getProjectsSprints.pending](state) {
+    //   state.loading = true;
+    // },
 
-    [getProjectsSprints.rejected](state, { payload }) {
-      state.error = payload;
-      state.loading = false;
-    },
-    [deleteSprint.fulfilled](state, { payload }) {
-      state.error = false;
-      state.items.filter(({ id }) => id !== payload);
-    },
+    // [getProjectsSprints.rejected](state, { payload }) {
+    //   state.error = payload;
+    //   state.loading = false;
+    // },
+    // [deleteSprint.fulfilled](state, { payload }) {
+    //   state.error = false;
+    //   state.items.filter(({ id }) => id !== payload);
+    // },
     //   [changeSprintsTitle.fulfilled](state, { payload }) {
 
     // }

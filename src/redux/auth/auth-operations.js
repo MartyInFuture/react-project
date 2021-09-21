@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { resetErrorAction } from "../error/error-action";
 import { setErrorStatus } from "../../helpers/function";
 import { projectLogOut } from "../projects/projects-slice";
-console.log(`projectLogOut`, projectLogOut);
 
 axios.defaults.baseURL = "https://sbc-backend.goit.global";
 
