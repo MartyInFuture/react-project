@@ -27,20 +27,6 @@ const SprintPage = () => {
   const history = useHistory()
   const idProject = history.location.pathname.slice(9)
 
-  // const onHandleClick = () => {
-  //   const projectId = "614776eef4a6c03db8cc8ef3";
-  //   dispatch(
-  //     addSprint({
-  //       projectId,
-  //       sprintData: {
-  //         title: "Sprint 6",
-  //         endDate: "2020-12-31",
-  //         duration: 1,
-  //       },
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     token.set(isAuth)
     isAuth && dispatch(getProjectsSprints(idProject)) && dispatch(projectOperations.getProjects())
