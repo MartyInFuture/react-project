@@ -1,29 +1,30 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import SubmitButton from "../../common/submitButton/SubmitButton"
-import { WrapperForm } from "./AddProjectModalStyled"
+import SubmitButton from '../../common/submitButton/SubmitButton';
+import { WrapperForm } from './AddProjectModalStyled';
+import projectsOperations from '../../../redux/projects/projects-operations';
 
 const AddProjectModal = () => {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
 
   const handleChangeTitle = (e) => {
-    setTitle(e.currentTarget.value)
-  }
+    setTitle(e.currentTarget.value);
+  };
 
   const handleDescription = (e) => {
-    setDescription(e.currentTarget.value)
-  }
-
-  const dispatch = useDispatch()
+    setDescription(e.currentTarget.value);
+  };
 
   const onHandleSubmit = (e) => {
-    e.preventDefault()
-    // dispatch(addProject({ title, description }, title))
-    setTitle("")
-    setDescription("")
-  }
+    e.preventDefault();
+    console.log({ title, description });
+    dispatch(projectsOperations.postProject({ title, description }));
+    // setTitle("")
+    // setDescription("")
+  };
 
   return (
     <WrapperForm>
@@ -56,7 +57,7 @@ const AddProjectModal = () => {
         </div>
       </form>
     </WrapperForm>
-  )
-}
+  );
+};
 
-export default AddProjectModal
+export default AddProjectModal;
