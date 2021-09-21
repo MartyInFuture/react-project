@@ -9,6 +9,7 @@ const postProject = createAsyncThunk(
   async (credentials, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post('/project', credentials);
+      console.log('post project', data);
       return data;
     } catch (error) {
       return rejectWithValue(setErrorStatus(error));

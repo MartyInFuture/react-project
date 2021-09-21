@@ -17,14 +17,16 @@ const projectsSlice = createSlice({
     projectLogOut: () => [],
   },
   extraReducers: {
-    [projectOperations.getProjects.fulfilled](_, action) {
-      return [...action.payload];
+    [projectOperations.getProjects.fulfilled](_, { payload }) {
+      if (payload.message === 'No projects found') return [];
+      return [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
       state.push(action.payload);
     },
-    [projectOperations.deleteProject.fulfilled](state, action) {
-      return [state.filter((item) => item._id !== action.payload)];
+    [projectOperations.deleteProject.fulfilled](state, { payload }) {
+      console.log('projectid must', payload);
+      return [...state.filter((item) => item._id ?? item.id !== payload)];
       // deletePost(state, action);
     },
     // [authOperations.logOut.fulfilled](state) {

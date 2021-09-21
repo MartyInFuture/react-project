@@ -9,7 +9,7 @@ const ProjectItem = ({ project, background }) => {
   const dispatch = useDispatch();
 
   const deleteProject = () => {
-    dispatch(projectOperations.deleteProject(project._id));
+    dispatch(projectOperations.deleteProject(project._id ?? project.id));
   };
 
   return (
