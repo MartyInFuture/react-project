@@ -1,4 +1,3 @@
-
 // import Button from "../../Components/common/button/Button";
 // import Title from "../../Components/common/title/Title";
 // import SprintList from "../../Components/sprints/SprintList/SprintList";
@@ -20,67 +19,59 @@
 // import sprintSelectors from "../../redux/sprints/sprints-selectors";
 // import projectOperations from "../../redux/projects/projects-operations";
 
-import Button from '../../Components/common/button/Button';
-import Title from '../../Components/common/title/Title';
-import SprintList from '../../Components/sprints/SprintList/SprintList';
+import Button from "../../Components/common/button/Button";
+import Title from "../../Components/common/title/Title";
+import SprintList from "../../Components/sprints/SprintList/SprintList";
 // import CreateMembers from '../Components/projects/addMembers/CreateMembers';
-import { SprintStyled } from './SprintStyled';
-import buttonIcons from '../../configs/buttonIcons.json';
-import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
-import NavMenu from '../../Components/navMenu/NavMenu';
+import { SprintStyled } from "./SprintStyled";
+import buttonIcons from "../../configs/buttonIcons.json";
+import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+import NavMenu from "../../Components/navMenu/NavMenu";
 // import CreateMembers from "../Components/projects/addMembers/CreateMembers"
-import CreateMembers from '../../Components/projects/addMembers/CreateMember';
-import { useState, useEffect } from 'react';
-import CreateSprint from '../../Components/sprints/createSprint/CreateSprint';
-import { useDispatch, useSelector } from 'react-redux';
-import { token } from '../../redux/auth/auth-operations';
-import { authSelectors } from '../../redux/auth';
-import { getProjectsSprints } from '../../redux/sprints/sprints-operations';
-import { useHistory } from 'react-router';
-import sprintSelectors from '../../redux/sprints/sprints-selectors';
-import projectOperations from '../../redux/projects/projects-operations';
+import CreateMembers from "../../Components/projects/addMembers/CreateMember";
+import { useState, useEffect } from "react";
+import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
+import { useDispatch, useSelector } from "react-redux";
+import { token } from "../../redux/auth/auth-operations";
+import { authSelectors } from "../../redux/auth";
+import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
+import projectsSeletors from "../../redux/projects/projects-selectors";
+import { useHistory } from "react-router";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectOperations from "../../redux/projects/projects-operations";
+import { useParams } from "react-router-dom";
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
   const [openModalSprints, setOpenModalSprints] = useState(false);
+  const projects = useSelector(projectsSeletors.getProjects);
   const isAuth = useSelector(authSelectors.getAccessToken);
   const sprints = useSelector(sprintSelectors.getSprints);
   const dispatch = useDispatch();
   const history = useHistory();
-  const idProject = history.location.pathname.slice(9);
+
+  const { id } = useParams();
 
   useEffect(() => {
     token.set(isAuth);
     isAuth &&
-      dispatch(getProjectsSprints(idProject)) &&
+      dispatch(getProjectsSprints(id)) &&
       dispatch(projectOperations.getProjects());
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>
       <NavContainer>
-        <NavMenu />
+        <NavMenu title="проекти" list={projects} path="project" />
       </NavContainer>
       <SprintStyled>
-        {/* <div className="main"> */}
         <article>
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
                 <form>
-                  <input
-                    className="inputChangeTitle"
-                    // value={name}
-                    name="name"
-                    type="text"
-                    // onChange={handleNameChange}
-                  />
-                  {/* <button
-                                    onHandleClick={null}
-                                    
-                                /> */}
+                  <input className="inputChangeTitle" name="name" type="text" />
                 </form>
-                {/* {!showInput && ( */}
                 <>
                   <Button
                     icon={buttonIcons.edit}
@@ -88,11 +79,9 @@ const SprintPage = () => {
                     title="Edit the name"
                     type="button"
                     className="buttonChange"
-                    // onClick={editNameHandle}
                   />
                   <Title />
                 </>
-                {/* )} */}
               </div>
 
               <p>current project description</p>
@@ -127,19 +116,13 @@ const SprintPage = () => {
                 />
                 <CreateSprint
                   closeModal={openModalSprints}
-
-//                   setCloseModal={setOpenModalSprints}
-
                   setOpenModal={setOpenModalSprints}
-
                 />
               </>
             )}
           </div>
-
           <SprintList sprints={sprints} />
         </article>
-        {/* </div> */}
       </SprintStyled>
     </>
   );

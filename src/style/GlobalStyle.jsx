@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 html {
@@ -76,7 +76,7 @@ background-color: #e7e76c;
   background-color: #cd5886;
 }
 .white{
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   /* overflow-x: hidden; */
 }
 `;
