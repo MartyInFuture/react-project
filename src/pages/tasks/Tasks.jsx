@@ -6,27 +6,27 @@
 // import Counter from '../../Components/tasks/Counter/Counter';
 // import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 // import { TasksStyled } from './TasksStyled';
-import Chart from "../../Components/chart/Chart";
-import { useHistory, useLocation } from "react-router";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "../../Components/common/button/Button";
-import TaskList from "../../Components/tasks/taskList/TaskList";
-import Title from "../../Components/common/title/Title";
-import Counter from "../../Components/tasks/counter/Counter";
-import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
-import { TasksStyled } from "./TasksStyled";
-import "material-icons/iconfont/material-icons.css";
-import NavMenu from "../../Components/navMenu/NavMenu";
-import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
-import CreateProject from "../../Components/projects/createProject/CreateProject";
-import CreateTask from "../../Components/tasks/createTask/CreateTask";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getSprintsTasks } from "../../redux/task/task-operations";
-import taskSelectors from "../../redux/task/task-selectors";
+import Chart from "../../Components/chart/Chart"
+import { useHistory, useLocation } from "react-router"
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import Button from "../../Components/common/button/Button"
+import TaskList from "../../Components/tasks/taskList/TaskList"
+import Title from "../../Components/common/title/Title"
+import Counter from "../../Components/tasks/counter/Counter"
+import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer"
+import { TasksStyled } from "./TasksStyled"
+import "material-icons/iconfont/material-icons.css"
+import NavMenu from "../../Components/navMenu/NavMenu"
+import NavContainer from "../../Components/common/containers/navContainer/NavContainer"
+import CreateProject from "../../Components/projects/createProject/CreateProject"
+import CreateTask from "../../Components/tasks/createTask/CreateTask"
+import { useDispatch } from "react-redux"
+import { useParams } from "react-router-dom"
+import { getSprintsTasks } from "../../redux/task/task-operations"
+import taskSelectors from "../../redux/task/task-selectors"
 // import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
 
 // import { useLocation } from "react-router-dom";
 // import { useDispatch } from "react-redux";
@@ -37,7 +37,7 @@ import { useSelector } from "react-redux";
 //   const [closeModalTask, setCloseModalTask] = useState(false);
 //   const sprints = useSelector(taskSelectors.getSprint);
 //   const history = useHistory();
-//   const sprintId = history.location.pathname.slice(8);
+// const sprintId = history.location.pathname.slice(8)
 //   const id = useParams();
 //   const tasks = useSelector(taskSelectors.getTasks);
 
@@ -45,14 +45,15 @@ import { useSelector } from "react-redux";
 //     dispatch(getSprintsTasks(id));
 //   }, []);
 
-import { token } from "../../redux/auth/auth-operations";
-import { authSelectors } from "../../redux/auth";
-import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
-import projectOperations from "../../redux/projects/projects-operations";
-import sprintSelectors from "../../redux/sprints/sprints-selectors";
-import projectSelectors from "../../redux/projects/projects-selectors";
+import { token } from "../../redux/auth/auth-operations"
+import { authSelectors } from "../../redux/auth"
+import { getProjectsSprints } from "../../redux/sprints/sprints-operations"
+import projectOperations from "../../redux/projects/projects-operations"
+import sprintSelectors from "../../redux/sprints/sprints-selectors"
+import projectSelectors from "../../redux/projects/projects-selectors"
 // import { useDispatch } from "react-redux";
 const Tasks = () => {
+
   const [filterText, setfilterText] = useState("");
   const [sprintName, setSprintName] = useState("");
 
@@ -70,11 +71,13 @@ const Tasks = () => {
   //     project.sprints.includes(id)
   //   )[0]._id;
 
+
   useEffect(() => {
-    token.set(isAuth);
-    dispatch(projectOperations.getProjects());
-    isAuth && dispatch(getProjectsSprints(id));
-  }, [dispatch, id]);
+    token.set(isAuth)
+    dispatch(projectOperations.getProjects())
+    isAuth && dispatch(getProjectsSprints(id))
+  }, [dispatch, id])
+
 
   console.log("Location obj", location.pathname.split("/"));
   const projectId = location.pathname.split("/")[2];
@@ -87,13 +90,14 @@ const Tasks = () => {
     setSprintName(SprintName);
   }, []);
 
+
   //   const modalOpen = () => {
   //     console.log("modalOpen()");
   //   };
 
   const correctTitleTask = () => {
     // console.log("correctTitleTask()");
-  };
+  }
 
   //   const diagrammOpenFn = () => {
   //     console.log("diagrammOpenFn()");
@@ -101,20 +105,22 @@ const Tasks = () => {
   //   };
 
   const filterChange = (e) => {
-    const text = e.target.value;
-    const Filter = text.toLowerCase();
-    setfilterText(Filter);
-  };
+    const text = e.target.value
+    const Filter = text.toLowerCase()
+    setfilterText(Filter)
+  }
 
   return (
     <>
       <NavContainer>
+
         <NavMenu
           title="спринти"
           list={sprints}
           path={`project/${projectId}/sprint`}
           linkTo={`/project/${projectId}}`}
         />
+
       </NavContainer>
 
       <TasksStyled>
@@ -124,11 +130,7 @@ const Tasks = () => {
               <div className="inputBox">
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
-                <input
-                  type="text"
-                  onChange={filterChange}
-                  className="inputSearch"
-                />
+                <input type="text" onChange={filterChange} className="inputSearch" />
               </div>
             </div>
 
@@ -166,14 +168,8 @@ const Tasks = () => {
                 <p className="discrbtionHours">Витрачено год / день</p>
                 <p className="discrbtionHours">Витрачено годин</p>
                 <div className="SearchDesktop">
-                  <span className="material-icons iconSearchDesktop">
-                    search
-                  </span>
-                  <input
-                    type="text"
-                    onChange={filterChange}
-                    className="inputSearchDesktop"
-                  />
+                  <span className="material-icons iconSearchDesktop">search</span>
+                  <input type="text" onChange={filterChange} className="inputSearchDesktop" />
                 </div>
               </div>
               <div className="discrbtionHoursContainerAfter"></div>
@@ -198,12 +194,9 @@ const Tasks = () => {
         </ContentContainer>
       </TasksStyled>
       <Chart open={open} setOpen={() => setOpen(false)} />
-      <CreateTask
-        closeModal={closeModalTask}
-        setCloseModal={setCloseModalTask}
-      />
+      <CreateTask closeModal={closeModalTask} setCloseModal={setCloseModalTask} />
     </>
-  );
-};
+  )
+}
 
-export default Tasks;
+export default Tasks
