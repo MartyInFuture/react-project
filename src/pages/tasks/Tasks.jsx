@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../Components/common/button/Button';
 import TaskList from '../../Components/tasks/taskList/TaskList';
 import Title from '../../Components/common/title/Title';
-import Counter from '../../Components/tasks/conter/Counter';
+import Counter from '../../Components/tasks/counter/Counter';
 import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 import { TasksStyled } from './TasksStyled';
 import 'material-icons/iconfont/material-icons.css';
