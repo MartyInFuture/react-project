@@ -12,7 +12,7 @@ const projectsSlice = createSlice({
     projectLogOut: () => [],
   },
   extraReducers: {
-    [projectOperations.getProjects.fulfilled](state, action) {
+    [projectOperations.getProjects.fulfilled](_, action) {
       return [...action.payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
