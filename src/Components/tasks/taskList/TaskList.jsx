@@ -16,10 +16,13 @@ const TaskList = ({ filter }) => {
   useEffect(() => {
     dispatch(getSprintsTasks(id));
   }, []);
+
   useEffect(() => {
-    const res = tasks.filter((task) => tasks.title.includes(filter));
-    setFiltredTasks(res);
-  }, [filter]);
+    if (tasks) {
+      const res = tasks.filter((task) => task.title.includes(filter));
+      setFiltredTasks(res);
+    }
+  }, [filter, tasks]);
 
   //   const filterTasks = () => {
   //     const res = tasks.filter((task) => tasks.title.includes(Filter));
@@ -28,10 +31,10 @@ const TaskList = ({ filter }) => {
 
   return (
     <Tasklist>
-      {/* filterText === "" && */}
-      {tasks.map((item) => (
-        <TaskListItem key={item._id} task={item} />
-      ))}
+      {filtredTasks.length === 0 &&
+        tasks.map((item) => <TaskListItem key={item._id} task={item} />)}
+      {filtredTasks.length > 0 &&
+        filtredTasks.map((item) => <TaskListItem key={item._id} task={item} />)}
     </Tasklist>
   );
 };

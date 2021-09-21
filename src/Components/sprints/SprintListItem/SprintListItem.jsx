@@ -1,14 +1,15 @@
 /* eslint-disable no-undef */
-import Button from '../../common/button/Button';
-import buttonIcons from '../../../configs/buttonIcons.json';
-import { Link } from 'react-router-dom';
-import { SprintListItemStyled } from './SprintListItemStyled';
-
+import Button from "../../common/button/Button";
+import buttonIcons from "../../../configs/buttonIcons.json";
+import { Link } from "react-router-dom";
+import { SprintListItemStyled } from "./SprintListItemStyled";
+import { useParams } from "react-router";
 const SprintListItem = ({ sprint }) => {
+  const { id } = useParams();
   return (
     <SprintListItemStyled>
       <div className="LinkWrapper">
-        <Link to={`/sprint/${sprint._id}`}>
+        <Link to={`/project/${id}/sprint/${sprint._id}`}>
           <div className="itemWrap">
             <h3>{sprint.name}</h3>
 

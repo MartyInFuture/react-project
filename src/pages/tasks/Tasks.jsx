@@ -7,7 +7,7 @@
 // import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
 // import { TasksStyled } from './TasksStyled';
 import Chart from "../../Components/chart/Chart";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/common/button/Button";
@@ -27,35 +27,46 @@ import { getSprintsTasks } from "../../redux/task/task-operations";
 import taskSelectors from "../../redux/task/task-selectors";
 // import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+// import { useLocation } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
-
+  const sprints = useSelector(taskSelectors.getSprint);
+  const [sprintName, setSprintName] = useState("");
   const history = useHistory();
   const sprintId = history.location.pathname.slice(8);
-  //   const { id } = useParams();
+  const id = useParams();
   //   const tasks = useSelector(taskSelectors.getTasks);
+  const location = useLocation();
 
-  //   useEffect(() => {
-  //     dispatch(getSprintsTasks(id));
-  // console.log();
-  //   }, []);
+  useEffect(() => {
+    dispatch(getSprintsTasks(id));
+  }, []);
 
-  const modalOpen = () => {
-    console.log("modalOpen()");
-  };
+  console.log("Location obj", location.pathname.split("/"));
+
+  //   console.log("Sprint", sprints);
+  useEffect(() => {
+    const Sprint = sprints.filter((sprint) => sprint._id === sprintId);
+    const SprintName = Sprint[0].title;
+    setSprintName(SprintName);
+  }, []);
+
+  //   const modalOpen = () => {
+  //     console.log("modalOpen()");
+  //   };
 
   const correctTitleTask = () => {
-    console.log("correctTitleTask()");
+    // console.log("correctTitleTask()");
   };
 
-  const diagrammOpenFn = () => {
-    console.log("diagrammOpenFn()");
-    setOpen(true);
-  };
+  //   const diagrammOpenFn = () => {
+  //     console.log("diagrammOpenFn()");
+  //     setOpen(true);
+  //   };
 
   const filterChange = (e) => {
     const text = e.target.value;
@@ -92,7 +103,7 @@ const Tasks = () => {
               <div className="TaskWrapper">
                 <div className="SprintTitleBtnEditWrapper">
                   <div className="TaskTitleWrapper">
-                    {/* <Title title={data.title} /> */}
+                    <Title title={sprintName} />
                   </div>
                   <div className="btnEditTitle">
                     <Button icon="edit" classBtn="editDelete" />
