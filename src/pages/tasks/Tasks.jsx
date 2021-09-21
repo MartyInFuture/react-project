@@ -32,6 +32,7 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import projectOperations from "../../redux/projects/projects-operations";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectSelectors from "../../redux/projects/projects-selectors";
 // import { useDispatch } from "react-redux";
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
@@ -44,11 +45,17 @@ const Tasks = () => {
   const history = useHistory();
   // const sprintId = history.location.pathname.slice(8);
   const { id } = useParams();
+  const projects = useSelector(projectSelectors.getProjects);
+  const projectId = projects.filter((project) =>
+    project.sprints.includes(id)
+  )[0]._id;
 
   useEffect(() => {
     token.set(isAuth);
+    dispatch(projectOperations.getProjects());
     isAuth && dispatch(getProjectsSprints(id));
   }, [dispatch, id]);
+  useEffect();
 
   const modalOpen = () => {
     console.log("modalOpen()");
