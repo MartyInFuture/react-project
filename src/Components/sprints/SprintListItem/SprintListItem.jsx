@@ -9,11 +9,11 @@ const SprintListItem = ({ sprint }) => {
   return (
     <SprintListItemStyled>
         <div className="LinkWrapper">
-            {/* <Link
+            <Link
                 to={{
                 pathname: `/projects/${sprint.project}/${sprint.id}`,
                 }}
-            > */}
+            >
                 <div className="itemWrap">
                 <h3>{sprint.name}</h3>
 
@@ -39,7 +39,7 @@ const SprintListItem = ({ sprint }) => {
                 title="Edit the name"
                 type="button"
                 className="deleteBtn"
-                // onClick={handleDelete}
+                onClick={handleDelete}
             ></Button> 
         </div>
     </SprintListItemStyled>

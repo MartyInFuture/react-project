@@ -25,7 +25,6 @@ const SprintPage = () => {
   const idProject = history.location.pathname.slice(9);
   
   
-  
   const [name, setName] = useState('');
   const [showInput, setShowInput] = useState(false);
   
