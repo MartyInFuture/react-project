@@ -21,6 +21,7 @@ const tasksSlice = createSlice({
       state.loading = false;
     },
     [getSprintsTasks.fulfilled](state, { payload }) {
+      if (payload.message === 'No tasks found') return initialState;
       if (payload.length === 0) {
         return false;
       }
