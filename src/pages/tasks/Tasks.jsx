@@ -36,7 +36,6 @@ import { useSelector } from "react-redux"
 //   const [open, setOpen] = useState(false);
 //   const [closeModalTask, setCloseModalTask] = useState(false);
 //   const sprints = useSelector(taskSelectors.getSprint);
-//   const [sprintName, setSprintName] = useState("");
 //   const history = useHistory();
 // const sprintId = history.location.pathname.slice(8)
 //   const id = useParams();
@@ -54,19 +53,24 @@ import sprintSelectors from "../../redux/sprints/sprints-selectors"
 import projectSelectors from "../../redux/projects/projects-selectors"
 // import { useDispatch } from "react-redux";
 const Tasks = () => {
-  const [filterText, setfilterText] = useState("")
-  const [sprintName, setSprintName] = useState("")
-  const isAuth = useSelector(authSelectors.getAccessToken)
-  const dispatch = useDispatch()
-  const [open, setOpen] = useState(false)
-  const [closeModalTask, setCloseModalTask] = useState(false)
-  const sprints = useSelector(sprintSelectors.getSprints)
-  const location = useLocation()
-  const history = useHistory()
-  const sprintId = history.location.pathname.slice(8)
-  const { id } = useParams()
-  const projects = useSelector(projectSelectors.getProjects)
-  const projectId = projects.filter((project) => project.sprints.includes(id))[0]._id
+
+  const [filterText, setfilterText] = useState("");
+  const [sprintName, setSprintName] = useState("");
+
+  const isAuth = useSelector(authSelectors.getAccessToken);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const [closeModalTask, setCloseModalTask] = useState(false);
+  const sprints = useSelector(sprintSelectors.getSprints);
+  const location = useLocation();
+  const history = useHistory();
+  //   const sprintId = history.location.pathname.slice(8);
+  const { id } = useParams();
+  const projects = useSelector(projectSelectors.getProjects);
+  //   const projectId = projects.filter((project) =>
+  //     project.sprints.includes(id)
+  //   )[0]._id;
+
 
   useEffect(() => {
     token.set(isAuth)
@@ -74,14 +78,18 @@ const Tasks = () => {
     isAuth && dispatch(getProjectsSprints(id))
   }, [dispatch, id])
 
-  console.log("Location obj", location.pathname.split("/"))
 
+  console.log("Location obj", location.pathname.split("/"));
+  const projectId = location.pathname.split("/")[2];
   //   console.log("Sprint", sprints);
   useEffect(() => {
-    const Sprint = sprints.filter((sprint) => sprint._id === sprintId)
-    const SprintName = Sprint[0].title
-    setSprintName(SprintName)
-  }, [])
+    const Sprint = sprints.filter((sprint) => sprint._id === id);
+    console.log("Sprint", Sprint);
+    const SprintName = Sprint[0].title;
+    console.log("SprintName", SprintName);
+    setSprintName(SprintName);
+  }, []);
+
 
   //   const modalOpen = () => {
   //     console.log("modalOpen()");
@@ -105,7 +113,14 @@ const Tasks = () => {
   return (
     <>
       <NavContainer>
-        <NavMenu title="спринти" list={sprints} path="sprint" linkTo={`/project/${projectId}`} />
+
+        <NavMenu
+          title="спринти"
+          list={sprints}
+          path={`project/${projectId}/sprint`}
+          linkTo={`/project/${projectId}}`}
+        />
+
       </NavContainer>
 
       <TasksStyled>

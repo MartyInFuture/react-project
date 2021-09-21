@@ -24,11 +24,13 @@ const TaskList = ({ filter }) => {
     //       setFiltredTasks(res);
     //     }
     //   }, [filter, tasks]);
-  }, [id])
+
+  }, [id]);
   useEffect(() => {
-    const res = tasks.filter((task) => tasks.title?.includes(filter))
-    setFiltredTasks(res)
-  }, [filter])
+    const res = tasks.filter((task) => tasks.title?.includes(filter));
+    setFiltredTasks(res);
+  }, [filter]);
+
 
   //   const filterTasks = () => {
   //     const res = tasks.filter((task) => tasks.title.includes(Filter));
@@ -36,16 +38,19 @@ const TaskList = ({ filter }) => {
   //   };
 
   return (
+
     <TaskList>
       {filtredTasks.length === 0 && tasks.map((item) => <TaskListItem key={item._id} task={item} />)}
       {filtredTasks.length > 0 && filtredTasks.map((item) => <TaskListItem key={item._id} task={item} />)}
+
       {/* filterText === "" && */}
       //{" "}
       {tasks?.map((item) => (
         <TaskListItem key={item._id} task={item} />
       ))}
-    </TaskList>
-  )
-}
 
-export default TaskList
+    </Tasklist>
+  );
+};
+
+export default TaskList;
