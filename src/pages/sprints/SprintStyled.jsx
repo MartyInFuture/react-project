@@ -90,21 +90,7 @@ export const SprintStyled = styled.div`
               height: 85px;
             }
           }
-          /* .buttonChange {
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-            min-width: 20px;
-            height: 20px;
-            background-color: #a6a6a6;
-            background: url(./svg/btnChange.svg) no-repeat;
-            transition: all 0.25s linear;
-            &:hover,
-            &:focus {
-              background: url(./svg/btnChangeActive.svg) no-repeat;
-              transform: scale(1.2);
-            }
-          } */
+        
         }
 
         p {
@@ -140,7 +126,8 @@ export const SprintStyled = styled.div`
             height: 30px;
             font-size: 18px;
             color: #181C27;
-            background-color: transparent;                       
+            background-color: transparent;
+            
           }
 
           .textAddPeople {
@@ -173,50 +160,50 @@ export const SprintStyled = styled.div`
         @media screen and (min-width: 1280px) {
           display: flex;
           align-items: center;
-          padding-right: 34px;
+          padding-right: 95px;
           height: 52px;
+        } 
+        
+      }
+      .createSprintSpan {
+          @media screen and (max-width: 1279px) {
+          display: none;
+         
         }
+        
+      }
+        
 
-        // Circle with plus ("button")
-        .CreateNewSprint {
-          cursor: pointer;
-          width: 44px;
-          height: 44px;
-          border-radius: 25px;
-
-          transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-          &:focus,
-          &:hover {
-            outline: none;
-            box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-            transform: scale(1.15);
-          }
-          @media screen and (min-width: 1280px) {
-            margin-right: 16px;
-          }
-        }
+        
       }
     }
   }
-}
+
+
 
 // Circle with plus ("button" Fixed)
-.CreateNewSprintFixed {
-  position: fixed;
-  right: 10px;
-  bottom: 60px;
+.add {
   cursor: pointer;
-  z-index: 2;
   width: 44px;
   height: 44px;
   border-radius: 25px;
-  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   &:focus,
   &:hover {
     outline: none;
     box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
     transform: scale(1.15);
+  }
+  @media screen and (min-width: 1280px) {
+    margin-right: 16px;
+  }
+  @media screen and (max-width: 767px) {
+  position: fixed;
+  right: 10px;
+  bottom: 60px;
+  cursor: pointer;
+  z-index: 2;
   }
 }
 
@@ -269,36 +256,18 @@ export const SprintStyled = styled.div`
   align-items: center;
 }
 
-/* .buttonSave {
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  width: 25px;
-  height: 25px;
-  background: center url(./svg/saver.svg) no-repeat;
-  background-size: 18px;
-  &:hover,
-  &:focus {
-    background: center url(./svg/saverActive.svg) no-repeat;
-    background-size: 18px;
+.createSprintWrap {
+  @media screen and (min-width: 768px) and (max-width: 767px) {
+    position: absolute;
+    right: 0px;
   }
-} */
 
-.sButton {
-  background-color: $main-orange;
-  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-  transition: all 300ms ease;
-  padding: 11px 44px;
-  border: none;
-  border-radius: 25px;
-  font-size: 12px;
-  outline: none;
-  &:hover {
-    color: #ff6b08;
-    font-weight: 800;
-    box-shadow: 0px 4px 10px 4px rgba(255, 107, 8, 0.3);
-    outline: none;
+  @media screen and (min-width: 1280px) {
+    display: flex;
+    align-items: center;
+    padding-right: 34px;
+    height: 52px;
   }
-/* } */
-/* dfdfdfd */
+
+
 `

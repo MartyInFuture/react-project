@@ -1,12 +1,9 @@
 import Button from "../../Components/common/button/Button";
-import Title from "../../Components/common/title/Title";
 import SprintList from "../../Components/sprints/SprintList/SprintList";
-// import CreateMembers from '../Components/projects/addMembers/CreateMembers';
 import { SprintStyled } from "./SprintStyled";
 import buttonIcons from "../../configs/buttonIcons.json";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
 import NavMenu from "../../Components/navMenu/NavMenu";
-// import CreateMembers from "../Components/projects/addMembers/CreateMembers"
 import CreateMembers from "../../Components/projects/addMembers/createMembers";
 import { useState, useEffect } from "react";
 import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
@@ -16,6 +13,7 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import { useHistory } from "react-router";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
+// import { projectOperations } from "../../redux/projects/projects-operations";
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
@@ -25,6 +23,28 @@ const SprintPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const idProject = history.location.pathname.slice(9);
+  
+  
+  
+  const [name, setName] = useState('');
+  const [showInput, setShowInput] = useState(false);
+  
+  const handleNameChange = event => setName(event.target.value);
+  const editNameHandle = () => {
+    // eslint-disable-next-line no-undef
+    setName(currentProject?.name);
+    setShowInput(true);
+  };
+  
+  const closeInputHandler = e => {
+    e.preventDefault();
+    // eslint-disable-next-line no-undef
+    if (currentProject.name !== name || name !== '') {
+      // eslint-disable-next-line no-undef
+      dispatch(projectOperations.updateProject(projectId, { name }));
+    }
+    setShowInput(false);
+  };
 
   // const onHandleClick = () => {
   //   const projectId = "614776eef4a6c03db8cc8ef3";
@@ -56,32 +76,42 @@ const SprintPage = () => {
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                <form>
+                <form
+                  onSubmit={closeInputHandler}
+                  className={
+                    showInput ? "changeTitleFormActive" : "changeTitleForm"
+                  }
+                   >
                   <input
                     className="inputChangeTitle"
-                    // value={name}
+                    value={name}
                     name="name"
                     type="text"
-                    // onChange={handleNameChange}
+                    onChange={handleNameChange}
                   />
-                  {/* <button
-                                    onHandleClick={null}
-                                    
-                                /> */}
-                </form>
-                {/* {!showInput && ( */}
-                <>
                   <Button
                     icon={buttonIcons.edit}
                     classBtn="editDelete"
                     title="Edit the name"
-                    type="button"
+                    type="submit"
                     className="buttonChange"
-                    // onClick={editNameHandle}
-                  />
-                  <Title />
-                </>
-                {/* )} */}
+                  />   
+                </form>
+                {!showInput && (
+                  <>
+                    {/* <h2>{currentProject?.name}</h2> */}
+                    {/* {userEmail === currentProject?.owner.email && ( */}
+                      <Button
+                        title="Edit the name"
+                        icon={buttonIcons.edit}
+                        classBtn="editDelete"
+                        type="button"
+                        className="buttonChange"
+                        onClick={editNameHandle}
+                      ></Button>
+                    )
+                  </>
+                )}
               </div>
 
               <p>current project description</p>
@@ -107,19 +137,22 @@ const SprintPage = () => {
               </div>
             </div>
 
-            {767 && (
-              <>
-                <Button
-                  icon={buttonIcons.add}
-                  classBtn="add"
-                  onHandleClick={() => setOpenModalSprints(true)}
-                />
-                <CreateSprint
-                  closeModal={openModalSprints}
-                  setCloseModal={setOpenModalSprints}
-                />
-              </>
-            )}
+            <div className="createSprintWrap">            
+                <>
+                  <Button
+                    icon={buttonIcons.add}
+                    classBtn="add"
+                    className="createNewSprintFixed"
+                    onHandleClick={() => setOpenModalSprints(true)}
+                  />
+                  <CreateSprint
+                    closeModal={openModalSprints}
+                    setCloseModal={setOpenModalSprints}
+                  />
+                  <span className="createSprintSpan">Create a sprint</span>
+                </>
+            </div>
+           
           </div>
 
           <SprintList sprints={sprints} />
