@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTask } from './task-operations';
+import { addTask, getSprintsTasks } from './task-operations';
 
 const initialState = {
   items: [],
@@ -25,7 +25,10 @@ const tasksSlice = createSlice({
       state.error = payload;
       state.loading = false;
     },
+    [getSprintsTasks.fulfilled](state, { payload }) {
+      state.items = [...payload];
+    },
   },
 });
 
-export default tasksSlice;
+export default tasksSlice.reducer;
