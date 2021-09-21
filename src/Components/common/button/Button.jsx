@@ -1,8 +1,6 @@
-import { ButtonWrapper } from "./ButtonStyled";
+import { ButtonWrapper } from './ButtonStyled';
 
-const Button = ({ onHandleClick, icon = "add", classBtn = "add" }) => {
-  // console.log(onHandleClick)
-
+const Button = ({ onHandleClick, icon = 'add', classBtn = 'add' }) => {
   return (
     <ButtonWrapper>
       <button
