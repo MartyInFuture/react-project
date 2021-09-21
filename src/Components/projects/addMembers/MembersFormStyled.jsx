@@ -36,6 +36,7 @@ export const WrapperForm = styled.div`
     font-weight: normal;
 
     color: rgba(24, 28, 39, 0.6);
+    margin-bottom: 20px;
   }
 
   .infoText {
@@ -53,7 +54,7 @@ export const WrapperForm = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    padding: 0px 51px 0px 32px;
+    padding: 0px 51px 0px 51px;
     background: #ffffff;
 
     .input {

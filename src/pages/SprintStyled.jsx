@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const SprintStyled = styled.div`
 /* .main {
@@ -20,9 +20,12 @@ export const SprintStyled = styled.div`
   } */
 
 
-
+/* пррп */
 
   article {
+
+    /* width: 100%; */
+    /* height: 100%; */
     @media screen and (max-width: 414px) {
       padding: 30px 20px 30px 20px;
       margin-left: auto;
@@ -120,19 +123,44 @@ export const SprintStyled = styled.div`
         .addWrap {
           display: flex;
           align-items: center;
+          font-family: Montserrat;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 22px;
+          letter-spacing: 0.04em;
+          text-align: left;
 
-          .AddGroupIcon {
+
+          .group_add {
             cursor: pointer;
             margin-right: 10px;
+            text-decoration: none;
+            max-width: 180px;
+            height: 30px;
+            font-size: 18px;
+            color: #181C27;
+            background-color: transparent;                       
           }
-          span {
+
+          .textAddPeople {
             line-height: 16px;
             letter-spacing: 0.04em;
             color: $text-dark;
             border-bottom: 1px solid #181c27;
             cursor: pointer;
+            font-weight: 500;
           }
         }
+      }
+
+      .btnWrap {        
+        background-color: transparent;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        
       }
 
       // div
@@ -272,5 +300,5 @@ export const SprintStyled = styled.div`
     outline: none;
   }
 /* } */
-
+/* dfdfdfd */
 `

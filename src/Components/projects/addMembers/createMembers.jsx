@@ -1,12 +1,12 @@
-import Modal from "../../common/modal/Modal";
-import MembersForm from "./MembersForm";
+import Modal from "../../common/modal/Modal"
+import MembersForm from "./MembersForm"
 
-const CreateMembers = () => {
+const CreateMembers = ({ closeModal, setCloseModal }) => {
   return (
-    <Modal nameForm="Додати людей">
+    <Modal nameForm="Додати людей" closeModal={closeModal} setCloseModal={setCloseModal}>
       <MembersForm />
     </Modal>
-  );
-};
+  )
+}
 
-export default CreateMembers;
+export default CreateMembers
