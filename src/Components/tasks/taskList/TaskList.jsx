@@ -16,21 +16,19 @@ const TaskList = ({ filter }) => {
   useEffect(() => {
     dispatch(getSprintsTasks(id));
 
-//   }, []);
+    //   }, []);
 
-//   useEffect(() => {
-//     if (tasks) {
-//       const res = tasks.filter((task) => task.title.includes(filter));
-//       setFiltredTasks(res);
-//     }
-//   }, [filter, tasks]);
-
+    //   useEffect(() => {
+    //     if (tasks) {
+    //       const res = tasks.filter((task) => task.title.includes(filter));
+    //       setFiltredTasks(res);
+    //     }
+    //   }, [filter, tasks]);
   }, [id]);
   useEffect(() => {
     const res = tasks.filter((task) => tasks.title?.includes(filter));
     setFiltredTasks(res);
   }, [filter]);
-
 
   //   const filterTasks = () => {
   //     const res = tasks.filter((task) => tasks.title.includes(Filter));
@@ -39,17 +37,15 @@ const TaskList = ({ filter }) => {
 
   return (
     <Tasklist>
-
       {filtredTasks.length === 0 &&
         tasks.map((item) => <TaskListItem key={item._id} task={item} />)}
       {filtredTasks.length > 0 &&
         filtredTasks.map((item) => <TaskListItem key={item._id} task={item} />)}
-
       {/* filterText === "" && */}
-//       {tasks?.map((item) => (
-//         <TaskListItem key={item._id} task={item} />
-//       ))}
-
+      //{" "}
+      {tasks?.map((item) => (
+        <TaskListItem key={item._id} task={item} />
+      ))}
     </Tasklist>
   );
 };
