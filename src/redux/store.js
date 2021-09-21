@@ -8,6 +8,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+
 } from 'redux-persist';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
@@ -16,6 +17,7 @@ import { error } from './error/error-reducer';
 import projects from '../redux/projects/projects-slice';
 import sprints from './sprints/sprints-slice';
 import tasks from './task/task-slice';
+
 
 const authPersistConfig = {
   key: 'auth',
