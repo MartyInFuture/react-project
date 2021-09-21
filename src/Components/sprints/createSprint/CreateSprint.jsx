@@ -1,14 +1,14 @@
-import Modal from "../../common/modal/Modal";
-import CreateSprintForm from "../createSprintForm/CreateSprintForm";
+import Modal from '../../common/modal/Modal';
+import CreateSprintForm from '../createSprintForm/CreateSprintForm';
 
-const CreateSprint = ({ closeModal, setOpenModal }) => {
+const CreateSprint = ({ closeModal, setCloseModal }) => {
   return (
     <Modal
       nameForm="Створення спринта"
       closeModal={closeModal}
-      setCloseModal={setOpenModal}
+      setCloseModal={setCloseModal}
     >
-      <CreateSprintForm setOpenModal={setOpenModal} />
+      <CreateSprintForm setOpenModal={setCloseModal} />
     </Modal>
   );
 };
