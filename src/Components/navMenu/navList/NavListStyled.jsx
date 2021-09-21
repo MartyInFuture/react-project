@@ -5,6 +5,8 @@ export const List = styled.ul`
   @media screen and (min-width: 768px) {
     display: block;
     margin-top: 60px;
+    height: 340px;
+    overflow: auto;
   }
 
   @media screen and (min-width: 1280px) {
