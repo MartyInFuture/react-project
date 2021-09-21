@@ -13,10 +13,11 @@ const projectsSlice = createSlice({
   },
   extraReducers: {
     [projectOperations.getProjects.fulfilled](state, action) {
-      state.push(...action.payload);
+      return [...action.payload];
+      // state.push(action.payload);
     },
     [projectOperations.postProject.fulfilled](state, action) {
-      state = [...state, action.payload];
+      return [...state, action.payload];
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];
