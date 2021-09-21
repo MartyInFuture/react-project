@@ -10,7 +10,7 @@ const Sprint = () => {
       addSprint({
         projectId,
         sprintData: {
-          title: "Sprint 5",
+          title: "Sprint 6",
           endDate: "2020-12-31",
           duration: 1,
         },

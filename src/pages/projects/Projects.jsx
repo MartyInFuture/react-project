@@ -53,21 +53,11 @@ const Projects = () => {
 
   const [closeModalProject, setCloseModalProject] = useState(false);
 
-  // const onHandleClick = () => {
-  //   dispatch(
-  //     postProject({
-  //       title: "Project Repet`s best students",
-  //       description: "Project Repet`s best students description",
-  //     })
-  //   );
-  // };
-
   useEffect(() => {
     token.set(isAuth);
     isAuth && dispatch(projectOperations.getProjects());
   }, [dispatch]);
 
-  console.log(`projects`, projects);
   return (
     <ProjectsStyled>
       <div className="headerWrapper">
