@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import projectOperations from "../projects/projects-operations";
 import authOperations from "./auth-operations";
 
 const initialState = {
@@ -35,18 +34,13 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.sid = null;
     },
-
-    // [authOperations.fetchNewToken.pending](state) {
-    //   state.isFetchingCurrentUser = true;
-    // },
-    // [authOperations.fetchNewToken.fulfilled](state, action) {
-    //   state.user = action.payload;
-    //   state.isLoggedIn = true;
-    //   state.isFetchingCurrentUser = false;
-    // },
-    // [authOperations.fetchNewToken.rejected](state) {
-    //   state.isFetchingCurrentUser = false;
-    // },
+    [authOperations.refreshToken.fulfilled](state, action) {
+      state.token = action.payload.newAccessToken;
+      state.refreshToken = action.payload.newRefreshToken;
+      state.sid = action.payload.newSid;
+      state.isLoggedIn = true;
+      state.isFetchingCurrentUser = false;
+    },
   },
 });
 

@@ -62,37 +62,34 @@ const logOut = createAsyncThunk(
   }
 );
 
-const fetchNewToken = createAsyncThunk(
-  "auth/fetchNewToken",
-  async ({ dataLastQuery = null, funcOperation }, thunkAPI) => {
-    console.log(`thunkAPI`, thunkAPI);
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.refreshToken;
+const refreshToken = createAsyncThunk(
+  "auth/refreshToken",
+  async (cb, { getState, rejectWithValue, dispatch }) => {
+    const state = getState();
+    const persistedRefreshToken = state.auth.refreshToken;
     const sid = state.auth.sid;
 
-    if (persistedToken === null) {
+    if (persistedRefreshToken === null) {
       console.log("Токена нет, уходим из fetchCurrentUser");
       token.unset();
 
-      return thunkAPI.rejectWithValue();
+      return rejectWithValue();
     }
-    token.set(persistedToken);
+    token.set(persistedRefreshToken);
     try {
       const { data } = await axios.post("/auth/refresh", { sid });
       token.set(data.newAccessToken);
-
-      if (funcOperation) {
-        return dataLastQuery
-          ? thunkAPI.dispatch([funcOperation](dataLastQuery))
-          : thunkAPI.dispatch([funcOperation]());
-      } else {
-        console.log(`fetchNewToken`, data);
-        return data;
+      if (cb) {
+        dispatch(cb());
       }
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(setErrorStatus(error));
-    } finally {
-      thunkAPI.dispatch(resetErrorAction());
+      console.log("refreshError");
+      dispatch(logOut());
+      // return rejectWithValue(error.message);
+      // нужно дипатчить экшин Логаут для выхода
+
+      // return;
     }
   }
 );
@@ -101,6 +98,6 @@ export const operations = {
   register,
   logOut,
   logIn,
-  fetchNewToken,
+  refreshToken,
 };
 export default operations;
