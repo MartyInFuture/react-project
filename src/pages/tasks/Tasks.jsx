@@ -27,24 +27,55 @@ import { getSprintsTasks } from "../../redux/task/task-operations";
 import taskSelectors from "../../redux/task/task-selectors";
 // import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 // import { useLocation } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// const Tasks = () => {
+//   const [filterText, setfilterText] = useState("");
+//   const dispatch = useDispatch();
+//   const [open, setOpen] = useState(false);
+//   const [closeModalTask, setCloseModalTask] = useState(false);
+//   const sprints = useSelector(taskSelectors.getSprint);
+//   const [sprintName, setSprintName] = useState("");
+//   const history = useHistory();
+//   const sprintId = history.location.pathname.slice(8);
+//   const id = useParams();
+  //   const tasks = useSelector(taskSelectors.getTasks);
+  
+
+//   useEffect(() => {
+//     dispatch(getSprintsTasks(id));
+//   }, []);
+
+import { token } from "../../redux/auth/auth-operations";
+import { authSelectors } from "../../redux/auth";
+import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
+import projectOperations from "../../redux/projects/projects-operations";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectSelectors from "../../redux/projects/projects-selectors";
 // import { useDispatch } from "react-redux";
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
+  const isAuth = useSelector(authSelectors.getAccessToken);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
-  const sprints = useSelector(taskSelectors.getSprint);
-  const [sprintName, setSprintName] = useState("");
+  const sprints = useSelector(sprintSelectors.getSprints);
+const location = useLocation();
   const history = useHistory();
-  const sprintId = history.location.pathname.slice(8);
-  const id = useParams();
-  //   const tasks = useSelector(taskSelectors.getTasks);
-  const location = useLocation();
+  // const sprintId = history.location.pathname.slice(8);
+  const { id } = useParams();
+  const projects = useSelector(projectSelectors.getProjects);
+  const projectId = projects.filter((project) =>
+    project.sprints.includes(id)
+  )[0]._id;
 
   useEffect(() => {
-    dispatch(getSprintsTasks(id));
-  }, []);
+    token.set(isAuth);
+    dispatch(projectOperations.getProjects());
+    isAuth && dispatch(getProjectsSprints(id));
+  }, [dispatch, id]);
+
 
   console.log("Location obj", location.pathname.split("/"));
 
@@ -72,25 +103,26 @@ const Tasks = () => {
     const text = e.target.value;
     const Filter = text.toLowerCase();
     setfilterText(Filter);
-    // const res = tasks.filter((task) => tasks.title.includes(Filter));
-    // setFiltredTasks(res);
   };
 
   return (
     <>
       <NavContainer>
-        <NavMenu />
+        <NavMenu
+          title="спринти"
+          list={sprints}
+          path="sprint"
+          linkTo={`/project/${projectId}`}
+        />
       </NavContainer>
 
       <TasksStyled>
         <div className="TaskInterfaceContainer">
           <div>
             <div className="counterSearchContainer">
-              {/* <Counter data={data} /> */}
               <div className="inputBox">
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
-
                 <input
                   type="text"
                   onChange={filterChange}
@@ -102,9 +134,13 @@ const Tasks = () => {
             <div>
               <div className="TaskWrapper">
                 <div className="SprintTitleBtnEditWrapper">
+
                   <div className="TaskTitleWrapper">
                     <Title title={sprintName} />
                   </div>
+
+//                   <div className="TaskTitleWrapper"></div>
+
                   <div className="btnEditTitle">
                     <Button icon="edit" classBtn="editDelete" />
                   </div>

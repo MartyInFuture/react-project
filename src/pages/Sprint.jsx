@@ -1,15 +1,15 @@
-import Button from '../Components/common/button/Button';
-import Title from '../Components/common/title/Title';
-import SprintList from '../Components/sprints/SprintList/SprintList';
+import Button from "../Components/common/button/Button";
+import Title from "../Components/common/title/Title";
+import SprintList from "../Components/sprints/SprintList/SprintList";
 // import CreateMembers from '../Components/projects/addMembers/CreateMembers';
-import { SprintStyled } from './SprintStyled';
-import buttonIcons from '../configs/buttonIcons.json';
-import NavContainer from '../Components/common/containers/navContainer/NavContainer';
-import NavMenu from '../Components/navMenu/NavMenu';
+import { SprintStyled } from "./SprintStyled";
+import buttonIcons from "../configs/buttonIcons.json";
+import NavContainer from "../Components/common/containers/navContainer/NavContainer";
+import NavMenu from "../Components/navMenu/NavMenu";
 // import CreateMembers from "../Components/projects/addMembers/CreateMembers"
-import CreateMembers from '../Components/projects/addMembers/CreateMember';
-import { useState } from 'react';
-import CreateSprint from '../Components/sprints/createSprint/CreateSprint';
+import CreateMembers from "../Components/projects/addMembers/CreateMember";
+import { useState } from "react";
+import CreateSprint from "../Components/sprints/createSprint/CreateSprint";
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
@@ -17,7 +17,7 @@ const SprintPage = () => {
   return (
     <>
       <NavContainer>
-        <NavMenu />
+        <NavMenu title="спринти" />
       </NavContainer>
       <SprintStyled>
         {/* <div className="main"> */}

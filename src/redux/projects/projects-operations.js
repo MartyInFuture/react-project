@@ -31,6 +31,18 @@ const deleteProject = createAsyncThunk(
   }
 );
 
+const addMember = createAsyncThunk(
+  'member/addMember',
+  async ({ id, email }) => {
+    try {
+      const { data } = await axios.patch(`/project/contributor/${id}`, email);
+      return { data, id };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const getProjects = createAsyncThunk(
   'getProject/project',
   async (_, { rejectWithValue, dispatch, getState }) => {
@@ -51,5 +63,6 @@ const projectOperations = {
   postProject,
   getProjects,
   deleteProject,
+  addMember,
 };
 export default projectOperations;

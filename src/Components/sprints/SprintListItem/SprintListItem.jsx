@@ -9,7 +9,11 @@ const SprintListItem = ({ sprint }) => {
   return (
     <SprintListItemStyled>
       <div className="LinkWrapper">
+
         <Link to={`/project/${id}/sprint/${sprint._id}`}>
+
+
+
           <div className="itemWrap">
             <h3>{sprint.name}</h3>
 

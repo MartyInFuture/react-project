@@ -27,7 +27,13 @@ const projectsSlice = createSlice({
     [projectOperations.deleteProject.fulfilled](state, { payload }) {
       console.log('projectid must', payload);
       return [...state.filter((item) => item._id ?? item.id !== payload)];
-      // deletePost(state, action);
+    },
+    [projectOperations.addMember.fulfilled](state, { payload }) {
+      const currentProject = state.filter(
+        (item) => item._id ?? item.id === payload.id
+      );
+      const idx = state.indexOf(currentProject[0]);
+      state[idx].members = [...payload.data.newMembers];
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];

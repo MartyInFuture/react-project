@@ -32,6 +32,7 @@ export const ButtonWrapper = styled.div`
     background-color: white;
     color: rgba(0, 0, 0, 0.4);
     font-size: 22px;
+    bottom: 5px;
   }
 
   .logout {
