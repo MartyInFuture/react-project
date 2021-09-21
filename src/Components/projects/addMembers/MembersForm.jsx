@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addMember } from "../../../redux/addMembers/addMembers-operations"
-import { existingMembers } from "../../../redux/addMembers/addMembers-selectors"
 import SubmitButton from "../../common/submitButton/SubmitButton"
 import { WrapperForm } from "./MembersFormStyled"
 import MembersList from "./MembersList"
