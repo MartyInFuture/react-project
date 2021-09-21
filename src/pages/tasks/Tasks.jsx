@@ -22,21 +22,27 @@ import NavContainer from "../../Components/common/containers/navContainer/NavCon
 import CreateProject from "../../Components/projects/createProject/CreateProject";
 import CreateTask from "../../Components/tasks/createTask/CreateTask";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { getSprintsTasks } from "../../redux/task/task-operations";
-
+import taskSelectors from "../../redux/task/task-selectors";
+// import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 const Tasks = () => {
-  //   const [filterText, setfilterText] = useState("");
-  const dispatch = useDispatch();
+  const [filterText, setfilterText] = useState("");
+  //   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
-  const [tasks, setTasks] = useState([]);
-  const [filtredTasks, setFiltredTasks] = useState([]);
+
   const history = useHistory();
   const sprintId = history.location.pathname.slice(8);
+  //   const { id } = useParams();
+  //   const tasks = useSelector(taskSelectors.getTasks);
 
-  useEffect(() => {
-    dispatch(getSprintsTasks(sprintId));
-  }, []);
+  //   useEffect(() => {
+  //     dispatch(getSprintsTasks(id));
+  // console.log();
+  //   }, []);
 
   const modalOpen = () => {
     console.log("modalOpen()");
@@ -54,9 +60,9 @@ const Tasks = () => {
   const filterChange = (e) => {
     const text = e.target.value;
     const Filter = text.toLowerCase();
-    // setfilterText(text);
-    const res = tasks.filter((task) => tasks.title.includes(Filter));
-    setFiltredTasks(res);
+    setfilterText(Filter);
+    // const res = tasks.filter((task) => tasks.title.includes(Filter));
+    // setFiltredTasks(res);
   };
 
   return (
@@ -142,7 +148,7 @@ const Tasks = () => {
         </div>
         <ContentContainer>
           <div className="TaskListMaimContainner">
-            <TaskList filtredTasks={filtredTasks} />
+            <TaskList filter={filterText} />
           </div>
         </ContentContainer>
       </TasksStyled>
