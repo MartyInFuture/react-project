@@ -44,7 +44,7 @@ export const WrapperForm = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    padding: 0px 51px 0px 32px;
+    padding: 0px 51px 0px 51px;
     background: #ffffff;
 
     .input {
