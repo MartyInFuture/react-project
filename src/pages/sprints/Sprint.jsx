@@ -116,7 +116,7 @@ const SprintPage = () => {
                 />
                 <CreateSprint
                   closeModal={openModalSprints}
-                  setCloseModal={setOpenModalSprints}
+                  setOpenModal={setOpenModalSprints}
                 />
               </>
             )}
