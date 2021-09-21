@@ -32,9 +32,7 @@ const sprintsSlice = createSlice({
     // },
 
     [getProjectsSprints.fulfilled](state, { payload }) {
-      console.log('payload gesprints', payload);
-      // console.log()
-      if (payload.message === 'No sprints found') return false;
+      if (payload.message === 'No sprints found') return initialState;
       return {
         error: null,
         items: [...payload.sprints],
