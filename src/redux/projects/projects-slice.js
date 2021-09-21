@@ -5,6 +5,11 @@ console.log(`projectOperations`, projectOperations);
 
 const initialState = [];
 
+// const deletePost = (state, action) => {
+//   // state.filter((item) => item._id !== action.payload)
+//   return [state.filter((item) => item._id !== action.payload)];
+// };
+
 const projectsSlice = createSlice({
   name: 'projects',
   initialState,
@@ -17,6 +22,10 @@ const projectsSlice = createSlice({
     },
     [projectOperations.postProject.fulfilled](state, action) {
       state.push(action.payload);
+    },
+    [projectOperations.deleteProject.fulfilled](state, action) {
+      return [state.filter((item) => item._id !== action.payload)];
+      // deletePost(state, action);
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];
