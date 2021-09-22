@@ -13,6 +13,10 @@ import WrapperContainer from "./common/containers/WrapperContainer/WrapperContai
 import { resetErrorAction } from "../redux/error/error-action"
 import LoaderSpinner from "./loader/Loader"
 
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify"
+
 const Register = lazy(() => import("../pages/register/Register"))
 const Login = lazy(() => import("../pages/login/Login"))
 const Projects = lazy(() => import("../pages/projects/Projects"))
@@ -27,6 +31,19 @@ const App = () => {
   const isFetchingUser = useSelector(authSelectors.getIsFetchingCurrent)
 
   useEffect(() => {
+    if (errorMessage) console.log("errorMessage", errorMessage)
+    {
+      switch (errorMessage?.status) {
+        case 409:
+          return toast.error(`Користувач з таким логіном вже існує`)
+        case 403:
+          return toast.error(`Користувача з вказаним email не існує`)
+        case 404:
+          return toast.error(`Введені некоректні дані користувача`)
+        default:
+          return
+      }
+    }
     errorMessage && dispatch(resetErrorAction())
   }, [errorMessage])
 
@@ -61,6 +78,7 @@ const App = () => {
                   </PrivateRoute>
                 </Suspense>
               </Switch>
+              <ToastContainer autoClose={1500} />
             </WrapperContainer>
           </MainContainer>
         </>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components"
 
 export const ButtonWrapper = styled.div`
   .btnCommon {
@@ -8,6 +8,14 @@ export const ButtonWrapper = styled.div`
     justify-content: center;
     align-items: center;
     color: white;
+
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+      transform: scale(1.15);
+    }
   }
 
   .add {
@@ -68,4 +76,4 @@ export const ButtonWrapper = styled.div`
   .icon {
     font-size: inherit;
   }
-`;
+`

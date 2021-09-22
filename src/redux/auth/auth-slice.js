@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import authOperations from "./auth-operations";
+import { createSlice } from "@reduxjs/toolkit"
+import authOperations from "./auth-operations"
 
 const initialState = {
   user: { id: null, email: null },
@@ -8,7 +8,7 @@ const initialState = {
   sid: null,
   isLoggedIn: false,
   isFetchingCurrentUser: false,
-};
+}
 
 const authSlice = createSlice({
   name: "auth",
@@ -20,29 +20,29 @@ const authSlice = createSlice({
     [authOperations.register.fulfilled](state, action) {},
 
     [authOperations.logIn.fulfilled](state, action) {
-      state.user.id = action.payload.data.id;
-      state.user.email = action.payload.data.email;
-      state.token = action.payload.accessToken;
-      state.sid = action.payload.sid;
-      state.refreshToken = action.payload.refreshToken;
-      state.isLoggedIn = true;
+      state.user.id = action.payload.data.id
+      state.user.email = action.payload.data.email
+      state.token = action.payload.accessToken
+      state.sid = action.payload.sid
+      state.refreshToken = action.payload.refreshToken
+      state.isLoggedIn = true
     },
     [authOperations.logOut.fulfilled](state, action) {
-      state.user = { id: null, email: null };
-      state.token = null;
-      state.refreshToken = null;
-      state.isLoggedIn = false;
-      state.sid = null;
+      state.user = { id: null, email: null }
+      state.token = null
+      state.refreshToken = null
+      state.isLoggedIn = false
+      state.sid = null
     },
     [authOperations.refreshToken.fulfilled](state, action) {
-      state.token = action.payload.newAccessToken;
-      state.refreshToken = action.payload.newRefreshToken;
-      state.sid = action.payload.newSid;
-      state.isLoggedIn = true;
-      state.isFetchingCurrentUser = false;
+      state.token = action.payload.newAccessToken
+      state.refreshToken = action.payload.newRefreshToken
+      state.sid = action.payload.newSid
+      state.isLoggedIn = true
+      state.isFetchingCurrentUser = false
     },
   },
-});
+})
 
-export const { projectRejected } = authSlice.actions;
-export default authSlice.reducer;
+export const { projectRejected } = authSlice.actions
+export default authSlice.reducer

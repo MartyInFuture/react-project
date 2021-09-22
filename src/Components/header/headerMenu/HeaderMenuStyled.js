@@ -1,13 +1,18 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const HeaderMenuStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  margin-left: auto;
+
   .userEmail {
-    margin-right: 70px;
+    margin-right: 10px;
     font-weight: 600;
+    @media (min-width: 768px) {
+      margin-right: 70px;
+    }
   }
   .logOutButton {
     border: none;
