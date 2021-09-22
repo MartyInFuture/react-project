@@ -6,13 +6,7 @@ export const SprintListStyled = styled.div`
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
-  
-  }
-  
-  @media screen and (min-width: 1280) {
-    width: 870px;
-    
-  }
+  } 
 }
 
 .listItem {
@@ -28,6 +22,11 @@ export const SprintListStyled = styled.div`
     margin-bottom: 10px;
   }
 
+  @media screen and (max-width: 767px) {
+      width: 280px;
+      height: 170px;
+    }
+
   @media screen and (min-width: 768px) and (max-width: 767px) {
     width: 216px;
     height: 255px;
@@ -42,7 +41,7 @@ export const SprintListStyled = styled.div`
   }
 
   @media screen and (min-width: 1280px) {
-    width: 270px;
+    width: 260px;
     height: 224px;
 
     &:not(:nth-child(3n)) {
@@ -54,5 +53,5 @@ export const SprintListStyled = styled.div`
     }
   }
 }
-    
+
 `

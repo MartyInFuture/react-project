@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
 export const SprintListItemStyled = styled.div`
+
   .LinkWrapper {
     position: relative;
     height: 255px;
     padding: 20px 20px 20px;
-    /* width: 100%; */
+
+    @media screen and (max-width: 767px) {
+      width: 280px;
+      height: 170px;
+    }
 
     @media screen and (min-width: 1280px) {
       padding: 20px 30px 30px;
@@ -76,4 +81,4 @@ export const SprintListItemStyled = styled.div`
     height: 20px;
     bottom: 5px;
   }
-`;
+`

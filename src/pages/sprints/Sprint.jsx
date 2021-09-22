@@ -91,31 +91,6 @@ const SprintPage = () => {
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                {/* <form
-                  onSubmit={closeInputHandler}
-                  className={
-                    showInput ? 'changeTitleFormActive' : 'changeTitleForm'
-                  }
-                >
-                  <input
-                    className="inputChangeTitle"
-                    value={name}
-                    name="name"
-                    type="text"
-                    onChange={handleNameChange}
-                  />
-                  <Button
-                    icon={buttonIcons.edit}
-                    classBtn="editDelete"
-                    title="Edit the name"
-                    type="submit"
-                    className="buttonChange"
-
-                    //   />
-                    //   <Title />
-                    // </>
-                  />
-                </form> */}
                 {!showInput && (
                   <>
                     <h2>{title}</h2>

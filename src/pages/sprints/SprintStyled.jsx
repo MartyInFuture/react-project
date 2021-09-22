@@ -30,7 +30,7 @@ article {
 
     .contentWrap {
       @media screen and (min-width: 768px) {
-        width: 452px;
+        width: 472px;
       }
 
       @media screen and (min-width: 1280px) {
@@ -126,7 +126,6 @@ article {
       
     }
 
-    // div
     .createSprintWrap {
       @media screen and (min-width: 768px) and (max-width: 1279px) {
         position: absolute;
