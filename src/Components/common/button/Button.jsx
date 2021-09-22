@@ -1,13 +1,21 @@
+import { ButtonWrapper } from './ButtonStyled';
 
-import { ButtonWrapper } from "./ButtonStyled"
-
-const Button = ({ onHandleClick, icon = "add", classBtn = "add" }) => {
-  console.log(onHandleClick)
-
+const Button = ({
+  onHandleClick,
+  icon = 'add',
+  classBtn = 'add',
+  background = '',
+}) => {
   return (
     <ButtonWrapper>
-      <button type="button" className={`${classBtn} btnCommon`} onClick={onHandleClick}>
-        <span className="material-icons-outlined icon ">{icon}</span>
+      <button
+        type="button"
+        className={`${classBtn} btnCommon`}
+        onClick={onHandleClick}
+      >
+        <span className={`material-icons-outlined icon ${background}Icon`}>
+          {icon}
+        </span>
       </button>
     </ButtonWrapper>
   );

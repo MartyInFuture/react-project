@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import SubmitButton from '../../common/submitButton/SubmitButton';
-import { WrapperForm } from './AddProjectModalStyled';
-import projectsOperations from '../../../redux/projects/projects-operations';
+import SubmitButton from "../../common/submitButton/SubmitButton";
+import { WrapperForm } from "./AddProjectModalStyled";
+import projectsOperations from "../../../redux/projects/projects-operations";
 
-const AddProjectModal = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+const AddProjectModal = ({ setCloseModal }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
   const handleChangeTitle = (e) => {
@@ -20,10 +20,10 @@ const AddProjectModal = () => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log({ title, description });
     dispatch(projectsOperations.postProject({ title, description }));
-    // setTitle("")
-    // setDescription("")
+    setTitle("");
+    setDescription("");
+    setCloseModal();
   };
 
   return (

@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const TasksStyled = styled.div`
+  width: 100%;
   /* .TitleWrapper {
     display: flex;
     align-items: center;
   } */
+  @media (min-width: 768px) {
+    border-right: 1px solid rgba(24, 28, 39, 0.1);
+  }
   .TaskWrapper {
     display: flex;
     /* margin-bottom: 10px; */
@@ -91,17 +95,7 @@ export const TasksStyled = styled.div`
     width: 100%;
     padding-bottom: 10px;
     padding-top: 20px;
-    border-top: 1px solid rgba(24, 28, 39, 0.1);
-    /* padding-bottom: 30px; */
   }
-
-  /* .hidden {
-        display: none;
-    } */
-
-  /* .inputSearch:focus {
-        border-color: red !important;
-    } */
 
   /* ============================================= Tablet ================================================================= */
   @media screen and (min-width: 768px) {
@@ -110,7 +104,6 @@ export const TasksStyled = styled.div`
       border-bottom: 1px solid rgba(24, 28, 39, 0.1);
       width: 472px;
       padding-left: 20px;
-      /* padding-bottom: 80px; */
     }
     .counterSearchContainer {
       display: flex;
@@ -157,13 +150,6 @@ export const TasksStyled = styled.div`
       justify-content: space-between;
     }
 
-    /* .discrbtionHoursContainerAfter {
-      display: block;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(24, 28, 39, 0.1);
-    } */
-
     .btnCreateTask {
       display: none;
     }
@@ -196,7 +182,7 @@ export const TasksStyled = styled.div`
   @media screen and (min-width: 1280px) {
     .TaskInterfaceContainer {
       padding-top: 20px;
-      width: 970px;
+      width: 100%;
       padding-left: 70px;
       padding-right: 30px;
     }

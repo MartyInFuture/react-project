@@ -1,53 +1,79 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getError } from "../error/error-handler";
 
 export const addSprint = createAsyncThunk(
   "sprint/addSprint",
-  async ({ projectId, sprintData }) => {
-    console.log(axios.defaults.headers.common.Authorization);
+  async ({ projectId, sprintData }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/sprint/${projectId}`, sprintData);
-
-      console.log(`data`, data);
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch(
+        getError({
+          error,
+          cb: () => addSprint(),
+          operationType: "sprint/addSprint",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const getProjectsSprints = createAsyncThunk(
   "sprint/getSprints",
-  async (projectId) => {
+  async (projectId, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/sprint/${projectId}`);
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch(
+        getError({
+          error,
+          cb: () => getProjectsSprints(),
+          operationType: "sprint/getSprints",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const changeSprintsTitle = createAsyncThunk(
   "sprint/changeTitle",
-  async (sprintId) => {
+  async (sprintId, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.patch(sprintId);
       return data;
     } catch (error) {
-      console.log(error);
+      dispatch(
+        getError({
+          error,
+          cb: () => changeSprintsTitle(),
+          operationType: "sprint/changeTitle",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const deleteSprint = createAsyncThunk(
   "sprint/deleteSprint",
-  async (sprintId) => {
+  async (sprintId, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.delete(sprintId);
-      return data;
+      await axios.delete(`/sprint/${sprintId}`);
+      return sprintId;
     } catch (error) {
-      console.log(error);
+      dispatch(
+        getError({
+          error,
+          cb: () => deleteSprint(),
+          operationType: "sprint/deleteSprint",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );

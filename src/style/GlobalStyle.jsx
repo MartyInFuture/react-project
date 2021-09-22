@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 html {
@@ -76,7 +76,32 @@ background-color: #e7e76c;
   background-color: #cd5886;
 }
 .white{
-  background-color: #e5e5e5;
-  /* overflow-x: hidden; */
+  background-color: #ffffff;
+}
+
+
+.blueIcon{
+  color: #8C72DF;
+}
+.greenIcon{
+ color: #71DF87;
+}
+.peachIcon{
+  color: #FF765F;
+}
+.yellowIcon{
+color: #e7e76c;
+}
+.chestnutIcon{
+  color: #da8989;
+}
+.brownIcon{
+  color: #a07d70;
+}
+.purpleIcon{
+  color: #bc8fb7;
+}
+.pinkIcon{
+  color: #cd5886;
 }
 `;

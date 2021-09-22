@@ -1,54 +1,100 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { resetErrorAction } from '../error/error-action';
-import { setErrorStatus } from '../../helpers/function';
-import { projectRejected } from '../auth/auth-slice';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getError } from "../error/error-handler";
 
 const postProject = createAsyncThunk(
-  'postProject/project',
-  async (credentials, { rejectWithValue, dispatch }) => {
+  "postProject/project",
+  async (credentials, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/project', credentials);
+      const { data } = await axios.post("/project", credentials);
       return data;
     } catch (error) {
-      return rejectWithValue(setErrorStatus(error));
-    } finally {
-      dispatch(resetErrorAction());
+      dispatch(
+        getError({
+          error,
+          cb: () => postProject(),
+          operationType: "postProject/project",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
 
 const deleteProject = createAsyncThunk(
-  'deleteProject/project',
-  async (id, { rejectWithValue }) => {
+  "deleteProject/project",
+  async (id, { dispatch, rejectWithValue }) => {
     try {
       await axios.delete(`/project/${id}`);
       return id;
     } catch (error) {
-      return rejectWithValue(error);
+      dispatch(
+        getError({
+          error,
+          cb: () => deleteProject(),
+          operationType: "deleteProject/project",
+        })
+      );
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+const addMember = createAsyncThunk(
+  "member/addMember",
+  async ({ id, email }, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axios.patch(`/project/contributor/${id}`, email);
+      return { data, id };
+    } catch (error) {
+      dispatch(
+        getError({
+          error,
+          cb: () => addMember(),
+          operationType: "member/addMember",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
 
 const getProjects = createAsyncThunk(
-  'getProject/project',
-  async (_, { rejectWithValue, dispatch, getState }) => {
+  "getProject/project",
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      const { data } = await axios.get('/project');
+      const { data } = await axios.get("/project");
       return data;
     } catch (error) {
-      // fetchNewToken(["projectOperations", "getProjects"]);
-      dispatch(projectRejected());
-      return rejectWithValue(setErrorStatus(error));
-    } finally {
-      dispatch(resetErrorAction());
+      dispatch(
+        getError({
+          error,
+          cb: () => getProjects(),
+          operationType: "getProject/project",
+        })
+      );
+      return rejectWithValue(error.message);
     }
   }
 );
+
+export const updateProjectTitle = createAsyncThunk(
+  "updateProjectTitle/projectId",
+  async (data) => {
+    try {
+      await axios.patch(`/project/title/${data.id}`, data.title);
+      return;
+    } catch (error) {
+    }
+  }
+);
+
 
 const projectOperations = {
   postProject,
   getProjects,
   deleteProject,
+  addMember,
+  updateProjectTitle,
 };
 export default projectOperations;

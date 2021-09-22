@@ -1,27 +1,34 @@
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { addMember } from "../../../redux/addMembers/addMembers-operations"
-import { existingMembers } from "../../../redux/addMembers/addMembers-selectors"
-import SubmitButton from "../../common/submitButton/SubmitButton"
-import { WrapperForm } from "./MembersFormStyled"
-import MembersList from "./MembersList"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SubmitButton from "../../common/submitButton/SubmitButton";
+import { WrapperForm } from "./MembersFormStyled";
+import MembersList from "./MembersList";
+import { useParams } from "react-router-dom";
+import projectOperations from "../../../redux/projects/projects-operations";
 
 const MembersForm = () => {
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
+
+  const { id } = useParams();
 
   const handleChange = (e) => {
-    setEmail(e.currentTarget.value)
-  }
+    setEmail(e.currentTarget.value);
+  };
 
-  const members = useSelector(existingMembers)
+  const members = useSelector((state) => {
+    return state.projects.items.filter((project) => {
+      const projectId = project._id ?? project.id;
+      return projectId === id;
+    })[0].members;
+  });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onHandleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(addMember({ email }, email))
-    setEmail("")
-  }
+    e.preventDefault();
+    dispatch(projectOperations.addMember({ id, email: { email } }));
+    setEmail("");
+  };
 
   return (
     <WrapperForm>
@@ -39,7 +46,7 @@ const MembersForm = () => {
         </label>
         <h3 className="inputTitle">Додані користувачі:</h3>
         {members?.length ? (
-          <MembersList className="infoText" />
+          <MembersList members={members} />
         ) : (
           <p className="infoText">Ви ще не додали жодного користувача</p>
         )}
@@ -48,7 +55,7 @@ const MembersForm = () => {
         </div>
       </form>
     </WrapperForm>
-  )
-}
+  );
+};
 
-export default MembersForm
+export default MembersForm;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import moduleName from '../../image/background/orangr-rigth-group.svg'
 
 export const LoginPageWrapper = styled.div`
   position: relative;
@@ -17,6 +16,9 @@ export const LoginPageWrapper = styled.div`
     overflow-x: hidden;
     pointer-events: none;
     @media screen and (min-width: 769px) {
+      left: -100px;
+    }
+    @media screen and (min-width: 1000px) {
       z-index: 120;
       top: 240px;
       left: 112px;

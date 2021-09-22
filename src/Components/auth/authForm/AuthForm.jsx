@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { AuthFormStyled } from "./AuthFormStyled";
 import { authOperations } from "../../../redux/auth";
 import { useDispatch } from "react-redux";
 import SubmitButton from "../../common/submitButton/SubmitButton";
-
+import { Formik, Form, Field } from "formik";
+import { validationSchema } from "./validationSchema";
+import { toast } from "react-toastify";
 const initialState = {
   email: "",
   password: "",
@@ -12,73 +13,74 @@ const initialState = {
 
 const AuthForm = ({ repeatPassword = true }) => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(initialState);
 
-  const handleChangeInput = (e) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const onHandleSubmit = (e) => {
-    e.preventDefault();
-    const email = user.email;
-    const password = user.password;
-
+  const onHandleSubmit = ({ email, password, repeatPassword }) => {
     if (repeatPassword) {
-      if (user.repeatPassword === user.password) {
+      if (repeatPassword === password) {
         dispatch(authOperations.register({ email, password }));
-        setUser({
-          email: "",
-          password: "",
-          repeatPassword: "",
-        });
       } else {
-        console.log(`Пароли не совпадают повторить ввод`);
+        toast.error(`Паролі не співпадають, потрібно повторити введеня`);
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
-      setUser({
-        email: "",
-        password: "",
-        repeatPassword: "",
-      });
+
+      toast.success(`Вітаємо!`);
     }
   };
 
   return (
-    <AuthFormStyled onSubmit={onHandleSubmit}>
-      <input
-        className="inputForm"
-        type="email"
-        placeholder="E-mail"
-        name="email"
-        onChange={handleChangeInput}
-        value={user.email}
-        required
-      />
-      <input
-        className="inputForm"
-        type="text"
-        placeholder="Пароль"
-        name="password"
-        onChange={handleChangeInput}
-        value={user.password}
-        required
-      />
-      {repeatPassword && (
-        <input
-          className="inputForm"
-          type="password"
-          placeholder="Повторіть пароль"
-          name="repeatPassword"
-          onChange={handleChangeInput}
-          value={user.repeatPassword}
-          required
-        />
-      )}
-      <SubmitButton
-        nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`}
-      />
+    <AuthFormStyled>
+      <Formik
+        initialValues={initialState}
+        validationSchema={validationSchema}
+        onSubmit={(values) => onHandleSubmit(values)}
+      >
+        {({ values, errors, touched, handleSubmit, handleChange }) => (
+          <Form onSubmit={handleSubmit} className="inputWrapper">
+            <Field
+              className={`inputForm  ${errors.email ? "errorPassword" : null} `}
+              type="text"
+              placeholder="E-mail"
+              name="email"
+              onChange={handleChange}
+              value={values.email}
+            />
+            {errors.email && touched.email ? (
+              <div className="errors">{errors.email}</div>
+            ) : null}
+
+            <Field
+              className={`inputForm  ${
+                errors.password ? "errorPassword" : null
+              } `}
+              type="text"
+              placeholder="Пароль"
+              name="password"
+              onChange={handleChange}
+              value={values.password}
+            />
+            {errors.password && touched.password ? (
+              <div className="errors">{errors.password}</div>
+            ) : null}
+            {repeatPassword && (
+              <Field
+                className={`inputForm  ${
+                  errors.password ? "errorPassword" : null
+                } `}
+                type="text"
+                placeholder="Повторіть пароль"
+                name="repeatPassword"
+                onChange={handleChange}
+                value={values.repeatPassword}
+              />
+            )}
+
+            <SubmitButton
+              nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`}
+            />
+          </Form>
+        )}
+      </Formik>
     </AuthFormStyled>
   );
 };

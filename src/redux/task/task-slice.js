@@ -1,5 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addTask } from './task-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTask,
+  getSprintsTasks,
+  deleteSprintsTask,
+  patchTaskHours,
+} from "./task-operations";
 
 const initialState = {
   items: [],
@@ -8,7 +13,7 @@ const initialState = {
 };
 
 const tasksSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   extraReducers: {
     [addTask.fulfilled](state, { payload }) {
@@ -16,16 +21,41 @@ const tasksSlice = createSlice({
       state.items.push(payload);
       state.loading = false;
     },
-
-    [addTask.pending](state) {
-      state.loading = true;
-    },
-
     [addTask.rejected](state, { payload }) {
       state.error = payload;
       state.loading = false;
     },
+    [getSprintsTasks.fulfilled](state, { payload }) {
+      if (payload.message === "No tasks found") return initialState;
+      if (payload.length === 0) {
+        return false;
+      }
+      state.items = [...payload];
+    },
+    [deleteSprintsTask.fulfilled](state, { payload }) {
+      state.items = [
+        ...state.items.filter((task) => {
+          const taskId = task._id ?? task.id;
+          return taskId !== payload;
+        }),
+      ];
+    },
+    [patchTaskHours.fulfilled](state, { payload }) {
+      state.items = state.items.map((task) => {
+        if (task._id !== payload.id) {
+          return task;
+        }
+        task.hoursWasted = payload.wastedHours;
+        task.hoursWastedPerDay = task.hoursWastedPerDay.map((itemDate) => {
+          if (itemDate.currentDay === payload.date.currentDay) {
+            return { ...itemDate, ...payload.date };
+          }
+          return itemDate;
+        });
+        return task;
+      });
+    },
   },
 });
 
-export default tasksSlice;
+export default tasksSlice.reducer;

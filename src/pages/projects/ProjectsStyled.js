@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ProjectsStyled = styled.div`
+  width: 100%;
   .headerWrapper {
     display: flex;
     justify-content: space-between;

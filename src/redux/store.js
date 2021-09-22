@@ -15,11 +15,12 @@ import authReducer from "./auth/auth-slice";
 import { error } from "./error/error-reducer";
 import projects from "../redux/projects/projects-slice";
 import sprints from "./sprints/sprints-slice";
+import tasks from "./task/task-slice";
 
 const authPersistConfig = {
   key: "auth",
   storage,
-  whitelist: ["token", "refreshToken", "sid", "isLoggedIn"],
+  whitelist: ["token", "refreshToken", "sid", "isLoggedIn", "user"],
 };
 
 export const store = configureStore({
@@ -28,6 +29,7 @@ export const store = configureStore({
     error,
     projects,
     sprints,
+    tasks,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

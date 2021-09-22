@@ -1,14 +1,9 @@
-import { useSelector } from 'react-redux';
-import { existingMembers } from '../../../redux/addMembers/addMembers-selectors';
-
-const MembersList = () => {
-  const arrayMembers = useSelector(existingMembers);
-
+const MembersList = ({ members }) => {
   return (
     <ul>
-      {arrayMembers?.map(({ id, email }) => (
-        <li key={id}>
-          <p>{email}</p>
+      {members?.map((member) => (
+        <li key={member}>
+          <p className="infoText">{member}</p>
         </li>
       ))}
     </ul>

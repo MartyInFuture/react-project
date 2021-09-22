@@ -11,41 +11,6 @@ import { authSelectors } from "../../redux/auth";
 import CreateProject from "../../Components/projects/createProject/CreateProject";
 import projectOperations from "../../redux/projects/projects-operations";
 
-// const projects = [
-//   {
-//     title: "Project 1",
-//     description: "Project 1 description",
-//     members: ["test@email.com"],
-//     sprints: ["507f1f77bcf86cd799439012"],
-//     _id: "1",
-//     __v: 0,
-//   },
-//   {
-//     title: "Project 2",
-//     description: "Project 2 description",
-//     members: ["test@email.com"],
-//     sprints: ["507f1f77bcf86cd799439012"],
-//     _id: "2",
-//     __v: 0,
-//   },
-//   {
-//     title: "Project 3",
-//     description: "Project 3 description",
-//     members: ["test@email.com"],
-//     sprints: ["507f1f77bcf86cd799439012"],
-//     _id: "3",
-//     __v: 0,
-//   },
-//   {
-//     title: "Project 4",
-//     description: "Project 4 description",
-//     members: ["test@email.com"],
-//     sprints: ["507f1f77bcf86cd799439012"],
-//     _id: "4",
-//     __v: 0,
-//   },
-// ];
-
 const Projects = () => {
   const isAuth = useSelector(authSelectors.getAccessToken);
   const projects = useSelector(projectSelectors.getProjects);
@@ -55,8 +20,8 @@ const Projects = () => {
 
   useEffect(() => {
     token.set(isAuth);
-    isAuth && dispatch(projectOperations.getProjects());
-  }, [dispatch]);
+    !projects?.length && isAuth && dispatch(projectOperations.getProjects());
+  }, [dispatch, isAuth, projects?.length]);
 
   return (
     <ProjectsStyled>
@@ -67,7 +32,7 @@ const Projects = () => {
           <p className="buttonMessage">Створити проект</p>
         </div>
       </div>
-      {projects.length && <ProjectsList projects={projects} />}
+      {projects && <ProjectsList projects={projects} />}
       <CreateProject
         closeModal={closeModalProject}
         setCloseModal={setCloseModalProject}

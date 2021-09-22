@@ -11,7 +11,7 @@ const Modal = ({ closeModal, setCloseModal, children, nameForm = "Name form" }) 
   useEffect(() => {
     window.addEventListener("keydown", handleEscape)
     const body = document.querySelector("body")
-    body.style.overflow = "hidden"
+    if (closeModal) body.style.overflow = "hidden"
     return () => {
       window.removeEventListener("keydown", handleEscape)
       const body = document.querySelector("body")
@@ -43,7 +43,5 @@ const Modal = ({ closeModal, setCloseModal, children, nameForm = "Name form" }) 
     </>
   )
 }
-
-// sdg
 
 export default Modal

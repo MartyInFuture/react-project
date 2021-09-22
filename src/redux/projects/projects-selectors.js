@@ -1,4 +1,4 @@
-const getProjects = (state) => state.projects;
+const getProjects = (state) => state.projects.items;
 
 const projectSelectors = {
   getProjects,

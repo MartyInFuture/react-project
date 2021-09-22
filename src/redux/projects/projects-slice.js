@@ -1,44 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit';
-import projectOperations from './projects-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import projectOperations from "./projects-operations";
 
-console.log(`projectOperations`, projectOperations);
-
-const initialState = [];
-
-// const deletePost = (state, action) => {
-//   // state.filter((item) => item._id !== action.payload)
-//   return [state.filter((item) => item._id !== action.payload)];
-// };
+const initialState = {
+  items: [],
+  isLoading: false,
+};
 
 const projectsSlice = createSlice({
-  name: 'projects',
+  name: "projects",
   initialState,
   reducers: {
-    projectLogOut: () => [],
+    projectLogOut: () => initialState,
   },
   extraReducers: {
-    [projectOperations.getProjects.fulfilled](_, action) {
-      return [...action.payload];
+    [projectOperations.getProjects.fulfilled](state, { payload }) {
+      if (payload.message === "No projects found") return initialState;
+
+      state.items = [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
-      state.push(action.payload);
+      state.items.push(action.payload);
     },
-    [projectOperations.deleteProject.fulfilled](state, action) {
-      return [state.filter((item) => item._id !== action.payload)];
-      // deletePost(state, action);
+    [projectOperations.deleteProject.fulfilled](state, { payload }) {
+      state.items = [
+        ...state.items.filter((item) => {
+          const itemId = item._id ?? item.id;
+          return itemId !== payload;
+        }),
+      ];
     },
-    // [authOperations.logOut.fulfilled](state) {
-    //   state.projects = [];
-    // },
-    // [projectOperations.postMemberProjects.fulfilled](state, action) {
-    //   state.members = [...state.members, ...action.payload];
-    // },
-    // [projectOperations.patchProject.fulfilled](state, action) {
-    //   state = [...state, action.payload];
-    // },
-    // [projectOperations.deleteProject.fulfilled](state, action) {
-    //   state = state.filter(({ _id }) => _id !== action.payload);
-    // },
+    [projectOperations.addMember.fulfilled](state, { payload }) {
+      const currentProject = state.items.filter((item) => {
+        const itemId = item._id ?? item.id;
+        return itemId === payload.id;
+      });
+      const idx = state.items.indexOf(currentProject[0]);
+      state.items[idx].members = [...payload.data.newMembers];
+    },
   },
 });
 
