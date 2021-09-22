@@ -1,10 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   addSprint,
-  changeSprintsTitle,
   deleteSprint,
   getProjectsSprints,
-} from './sprints-operations';
+} from "./sprints-operations";
 
 const initialState = {
   items: [],
@@ -13,7 +12,7 @@ const initialState = {
 };
 
 const sprintsSlice = createSlice({
-  name: 'sprints',
+  name: "sprints",
   initialState,
   extraReducers: {
     [addSprint.fulfilled](state, { payload }) {
@@ -22,17 +21,8 @@ const sprintsSlice = createSlice({
       state.loading = false;
     },
 
-    // [addSprint.pending](state) {
-    //   state.loading = true;
-    // },
-
-    // [addSprint.rejected](state, { payload }) {
-    //   state.error = payload;
-    //   state.loading = false;
-    // },
-
     [getProjectsSprints.fulfilled](state, { payload }) {
-      if (payload.message === 'No sprints found') return initialState;
+      if (payload.message === "No sprints found") return initialState;
       return {
         error: null,
         items: [...payload.sprints],
@@ -47,23 +37,7 @@ const sprintsSlice = createSlice({
           return itemId !== payload;
         }),
       ];
-    }
-  
-    // [getProjectsSprints.pending](state) {
-    //   state.loading = true;
-    // },
-
-    // [getProjectsSprints.rejected](state, { payload }) {
-    //   state.error = payload;
-    //   state.loading = false;
-    // },
-    // [deleteSprint.fulfilled](state, { payload }) {
-    //   state.error = false;
-    //   state.items.filter(({ id }) => id !== payload);
-    // },
-    //   [changeSprintsTitle.fulfilled](state, { payload }) {
-
-    // }
+    },
   },
 });
 

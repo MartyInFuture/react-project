@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import moduleName from '../../image/background/orangr-rigth-group.svg'
 
 export const LoginPageWrapper = styled.div`
   position: relative;

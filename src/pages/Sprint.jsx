@@ -1,12 +1,10 @@
 import Button from "../Components/common/button/Button";
 import Title from "../Components/common/title/Title";
 import SprintList from "../Components/sprints/SprintList/SprintList";
-// import CreateMembers from '../Components/projects/addMembers/CreateMembers';
 import { SprintStyled } from "./SprintStyled";
 import buttonIcons from "../configs/buttonIcons.json";
 import NavContainer from "../Components/common/containers/navContainer/NavContainer";
 import NavMenu from "../Components/navMenu/NavMenu";
-// import CreateMembers from "../Components/projects/addMembers/CreateMembers"
 import CreateMembers from "../Components/projects/addMembers/CreateMember";
 import { useState } from "react";
 import CreateSprint from "../Components/sprints/createSprint/CreateSprint";
@@ -20,30 +18,13 @@ const SprintPage = () => {
         <NavMenu title="спринти" />
       </NavContainer>
       <SprintStyled>
-        {/* <div className="main"> */}
         <article>
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                <form
-                //   onSubmit={closeInputHandler}
-                //   className={
-                //     showInput ? changeTitleFormActive : changeTitleForm
-                //   }
-                >
-                  <input
-                    className="inputChangeTitle"
-                    // value={name}
-                    name="name"
-                    type="text"
-                    // onChange={handleNameChange}
-                  />
-                  {/* <button
-                                    onHandleClick={null}
-                                    
-                                /> */}
+                <form>
+                  <input className="inputChangeTitle" name="name" type="text" />
                 </form>
-                {/* {!showInput && ( */}
                 <>
                   <Button
                     icon={buttonIcons.edit}
@@ -51,11 +32,9 @@ const SprintPage = () => {
                     title="Edit the name"
                     type="button"
                     className="buttonChange"
-                    // onClick={editNameHandle}
                   />
                   <Title />
                 </>
-                {/* )} */}
               </div>
 
               <p>current project description</p>
@@ -87,7 +66,6 @@ const SprintPage = () => {
                   icon={buttonIcons.add}
                   classBtn="add"
                   onHandleClick={() => setOpenModalSprints(true)}
-                  // onClick={() => toggleModal('createSprint')}
                 />
                 <CreateSprint
                   closeModal={openModalSprints}
@@ -95,22 +73,10 @@ const SprintPage = () => {
                 />
               </>
             )}
-            {/* {768 && (
-                    <div className="createSprintWrap">
-                        {768 && (
-                        <Button icon = {buttonIcons.add} classBtn = "add"
-                            title="Create a sprint"
-                            onClick={() => toggleModal('createSprint')}
-                        />
-                        )}
-                        { 1280 && <span>Create a sprint</span>}
-                    </div>
-                    )} */}
           </div>
 
           <SprintList />
         </article>
-        {/* </div> */}
       </SprintStyled>
     </>
   );

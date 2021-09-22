@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-// import { addMember } from "../../../redux/addMembers/addMembers-operations"
-import SubmitButton from "../../common/submitButton/SubmitButton"
-import { WrapperForm } from "./MembersFormStyled"
-import MembersList from "./MembersList"
-import { useParams } from "react-router-dom"
-import projectOperations from "../../../redux/projects/projects-operations"
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SubmitButton from "../../common/submitButton/SubmitButton";
+import { WrapperForm } from "./MembersFormStyled";
+import MembersList from "./MembersList";
+import { useParams } from "react-router-dom";
+import projectOperations from "../../../redux/projects/projects-operations";
 
 const MembersForm = () => {
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
 
-  const { id } = useParams()
+  const { id } = useParams();
 
   const handleChange = (e) => {
-    setEmail(e.currentTarget.value)
-  }
+    setEmail(e.currentTarget.value);
+  };
 
   const members = useSelector((state) => {
     return state.projects.items.filter((project) => {
-      const projectId = project._id ?? project.id
-      return projectId === id
-    })[0].members
-  })
+      const projectId = project._id ?? project.id;
+      return projectId === id;
+    })[0].members;
+  });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onHandleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(projectOperations.addMember({ id, email: { email } }))
-    setEmail("")
-  }
+    e.preventDefault();
+    dispatch(projectOperations.addMember({ id, email: { email } }));
+    setEmail("");
+  };
 
   return (
     <WrapperForm>
@@ -56,7 +55,7 @@ const MembersForm = () => {
         </div>
       </form>
     </WrapperForm>
-  )
-}
+  );
+};
 
-export default MembersForm
+export default MembersForm;

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getError } from '../error/error-handler';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getError } from "../error/error-handler";
 
 export const addSprint = createAsyncThunk(
-  'sprint/addSprint',
+  "sprint/addSprint",
   async ({ projectId, sprintData }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post(`/sprint/${projectId}`, sprintData);
@@ -13,17 +13,16 @@ export const addSprint = createAsyncThunk(
         getError({
           error,
           cb: () => addSprint(),
-          operationType: 'sprint/addSprint',
+          operationType: "sprint/addSprint",
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
 
 export const getProjectsSprints = createAsyncThunk(
-  'sprint/getSprints',
+  "sprint/getSprints",
   async (projectId, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.get(`/sprint/${projectId}`);
@@ -33,17 +32,16 @@ export const getProjectsSprints = createAsyncThunk(
         getError({
           error,
           cb: () => getProjectsSprints(),
-          operationType: 'sprint/getSprints',
+          operationType: "sprint/getSprints",
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
 
 export const changeSprintsTitle = createAsyncThunk(
-  'sprint/changeTitle',
+  "sprint/changeTitle",
   async (sprintId, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.patch(sprintId);
@@ -53,17 +51,16 @@ export const changeSprintsTitle = createAsyncThunk(
         getError({
           error,
           cb: () => changeSprintsTitle(),
-          operationType: 'sprint/changeTitle',
+          operationType: "sprint/changeTitle",
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
 
 export const deleteSprint = createAsyncThunk(
-  'sprint/deleteSprint',
+  "sprint/deleteSprint",
   async (sprintId, { dispatch, rejectWithValue }) => {
     try {
       await axios.delete(`/sprint/${sprintId}`);
@@ -73,11 +70,10 @@ export const deleteSprint = createAsyncThunk(
         getError({
           error,
           cb: () => deleteSprint(),
-          operationType: 'sprint/deleteSprint',
+          operationType: "sprint/deleteSprint",
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );

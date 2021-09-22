@@ -7,7 +7,6 @@ const postProject = createAsyncThunk(
   async (credentials, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post("/project", credentials);
-      console.log("post project", data);
       return data;
     } catch (error) {
       dispatch(
@@ -18,7 +17,6 @@ const postProject = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -38,7 +36,6 @@ const deleteProject = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -58,7 +55,6 @@ const addMember = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -78,7 +74,6 @@ const getProjects = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -86,12 +81,10 @@ const getProjects = createAsyncThunk(
 export const updateProjectTitle = createAsyncThunk(
   "updateProjectTitle/projectId",
   async (data) => {
-    console.log("data", data);
     try {
       await axios.patch(`/project/title/${data.id}`, data.title);
       return;
     } catch (error) {
-      console.log(error);
     }
   }
 );

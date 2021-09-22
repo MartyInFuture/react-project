@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ButtonWrapper = styled.div`
   .btnCommon {
@@ -25,7 +25,6 @@ export const ButtonWrapper = styled.div`
     background-color: #ff6b08;
     box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
   }
-  /* стилі кнопки Add  підходять і для додати графік addchart */
 
   .editDelete {
     width: 20px;
@@ -76,4 +75,4 @@ export const ButtonWrapper = styled.div`
   .icon {
     font-size: inherit;
   }
-`
+`;

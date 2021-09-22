@@ -1,58 +1,53 @@
-import Button from "../../Components/common/button/Button"
-import SprintList from "../../Components/sprints/SprintList/SprintList"
-import { SprintStyled } from "./SprintStyled"
-import buttonIcons from "../../configs/buttonIcons.json"
-import NavContainer from "../../Components/common/containers/navContainer/NavContainer"
-import NavMenu from "../../Components/navMenu/NavMenu"
-import CreateMembers from "../../Components/projects/addMembers/CreateMember"
-import { useState, useEffect } from "react"
-import CreateSprint from "../../Components/sprints/createSprint/CreateSprint"
-import { useDispatch, useSelector } from "react-redux"
-import { token } from "../../redux/auth/auth-operations"
-import { authSelectors } from "../../redux/auth"
-import { getProjectsSprints } from "../../redux/sprints/sprints-operations"
-import projectsSeletors from "../../redux/projects/projects-selectors"
-import { useHistory } from "react-router"
-import sprintSelectors from "../../redux/sprints/sprints-selectors"
-import projectOperations from "../../redux/projects/projects-operations"
-import { useParams } from "react-router-dom"
+import Button from "../../Components/common/button/Button";
+import SprintList from "../../Components/sprints/SprintList/SprintList";
+import { SprintStyled } from "./SprintStyled";
+import buttonIcons from "../../configs/buttonIcons.json";
+import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+import NavMenu from "../../Components/navMenu/NavMenu";
+import CreateMembers from "../../Components/projects/addMembers/CreateMember";
+import { useState, useEffect } from "react";
+import CreateSprint from "../../Components/sprints/createSprint/CreateSprint";
+import { useDispatch, useSelector } from "react-redux";
+import { token } from "../../redux/auth/auth-operations";
+import { authSelectors } from "../../redux/auth";
+import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
+import projectsSeletors from "../../redux/projects/projects-selectors";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectOperations from "../../redux/projects/projects-operations";
+import { useParams } from "react-router-dom";
 
 const SprintPage = () => {
-  const [openModalMembers, setOpenModalMembers] = useState(false)
-  const [openModalSprints, setOpenModalSprints] = useState(false)
-  const isAuth = useSelector(authSelectors.getAccessToken)
-  const sprints = useSelector(sprintSelectors.getSprints)
-  const dispatch = useDispatch()
+  const [openModalMembers, setOpenModalMembers] = useState(false);
+  const [openModalSprints, setOpenModalSprints] = useState(false);
+  const isAuth = useSelector(authSelectors.getAccessToken);
+  const sprints = useSelector(sprintSelectors.getSprints);
+  const dispatch = useDispatch();
 
-  const projects = useSelector(projectsSeletors.getProjects)
-  const [name, setName] = useState("")
+  const projects = useSelector(projectsSeletors.getProjects);
+  const [title, setTitle] = useState("title");
+  const [description, setDescription] = useState("description");
 
-  const history = useHistory()
-  const idProject = history.location.pathname.slice(9)
-  const [title, setTitle] = useState("title")
-  const [description, setDescription] = useState("description")
-
-  const [showInput, setShowInput] = useState(false)
-  const { id } = useParams()
-  const currentProject = projects.find((project) => project._id === id)
+  const [showInput, setShowInput] = useState(false);
+  const { id } = useParams();
+  const currentProject = projects.find((project) => project._id === id);
 
   const editNameHandle = () => {
-    setShowInput(true)
-  }
+    setShowInput(true);
+  };
 
   const onHandleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     switch (name) {
       case "newTitle":
-        setTitle(value)
-        break
+        setTitle(value);
+        break;
       default:
-        break
+        break;
     }
-  }
+  };
 
   const changeTitleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (currentProject.title !== title || title !== "") {
       dispatch(
@@ -62,22 +57,24 @@ const SprintPage = () => {
             title: title,
           },
         })
-      )
+      );
     }
-    setShowInput(false)
-  }
+    setShowInput(false);
+  };
 
   useEffect(() => {
-    token.set(isAuth)
-    isAuth && dispatch(getProjectsSprints(id)) && dispatch(projectOperations.getProjects())
-  }, [dispatch, id])
+    token.set(isAuth);
+    isAuth &&
+      dispatch(getProjectsSprints(id)) &&
+      dispatch(projectOperations.getProjects());
+  }, [dispatch, id, isAuth]);
 
   useEffect(() => {
     if (currentProject) {
-      setTitle(currentProject.title)
-      setDescription(currentProject.description)
+      setTitle(currentProject.title);
+      setDescription(currentProject.description);
     }
-  }, [currentProject])
+  }, [currentProject]);
 
   return (
     <>
@@ -89,31 +86,6 @@ const SprintPage = () => {
           <div className="headerWrap">
             <div className="contentWrap">
               <div className="titleWrap">
-                {/* <form
-                  onSubmit={closeInputHandler}
-                  className={
-                    showInput ? 'changeTitleFormActive' : 'changeTitleForm'
-                  }
-                >
-                  <input
-                    className="inputChangeTitle"
-                    value={name}
-                    name="name"
-                    type="text"
-                    onChange={handleNameChange}
-                  />
-                  <Button
-                    icon={buttonIcons.edit}
-                    classBtn="editDelete"
-                    title="Edit the name"
-                    type="submit"
-                    className="buttonChange"
-
-                    //   />
-                    //   <Title />
-                    // </>
-                  />
-                </form> */}
                 {!showInput && (
                   <>
                     <h2>{title}</h2>
@@ -131,7 +103,9 @@ const SprintPage = () => {
                 {showInput && (
                   <form
                     onSubmit={changeTitleSubmit}
-                    className={showInput ? "changeTitleFormActive" : "changeTitleForm"}
+                    className={
+                      showInput ? "changeTitleFormActive" : "changeTitleForm"
+                    }
                   >
                     <input
                       className="inputChangeTitle"
@@ -155,12 +129,20 @@ const SprintPage = () => {
               <p>{description}</p>
 
               <div className="addWrap">
-                <button className="btnWrap" onClick={() => setOpenModalMembers(true)}>
-                  <span className="material-icons-outlined">{buttonIcons.group_add}</span>
+                <button
+                  className="btnWrap"
+                  onClick={() => setOpenModalMembers(true)}
+                >
+                  <span className="material-icons-outlined">
+                    {buttonIcons.group_add}
+                  </span>
                   <span className="textAddPeople">Додати людей</span>
                 </button>
 
-                <CreateMembers closeModal={openModalMembers} setOpenModal={setOpenModalMembers} />
+                <CreateMembers
+                  closeModal={openModalMembers}
+                  setOpenModal={setOpenModalMembers}
+                />
               </div>
             </div>
             <div className="createSprintWrap">
@@ -171,7 +153,10 @@ const SprintPage = () => {
                   className="createNewSprintFixed"
                   onHandleClick={() => setOpenModalSprints(true)}
                 />
-                <CreateSprint closeModal={openModalSprints} setCloseModal={setOpenModalSprints} />
+                <CreateSprint
+                  closeModal={openModalSprints}
+                  setCloseModal={setOpenModalSprints}
+                />
                 <span className="createSprintSpan">Створити спринт</span>
               </>
             </div>
@@ -180,7 +165,7 @@ const SprintPage = () => {
         </article>
       </SprintStyled>
     </>
-  )
-}
+  );
+};
 
-export default SprintPage
+export default SprintPage;

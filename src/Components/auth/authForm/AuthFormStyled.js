@@ -49,20 +49,7 @@ export const AuthFormStyled = styled.div`
     color: red !important;
     border-bottom: 1px solid red;
   }
-  /* 
-  input {
-    -webkit-text-security: none;
-  }
-  input {
-    -webkit-text-security: circle;
-  }
-  input {
-    -webkit-text-security: square;
-  }
-  input {
-    -webkit-text-security: disc; /* Default */
-  /* } 
-  */
+
   button {
     margin-top: 40px;
     min-width: 260px;

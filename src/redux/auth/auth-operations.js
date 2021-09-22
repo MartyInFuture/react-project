@@ -70,7 +70,6 @@ const refreshToken = createAsyncThunk(
     const sid = state.auth.sid;
 
     if (persistedRefreshToken === null) {
-      console.log("Токена нет, уходим из fetchCurrentUser");
       token.unset();
 
       return rejectWithValue();

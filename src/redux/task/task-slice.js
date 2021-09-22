@@ -33,7 +33,6 @@ const tasksSlice = createSlice({
       state.items = [...payload];
     },
     [deleteSprintsTask.fulfilled](state, { payload }) {
-      console.log("PAYLOAD", payload);
       state.items = [
         ...state.items.filter((task) => {
           const taskId = task._id ?? task.id;
@@ -51,13 +50,10 @@ const tasksSlice = createSlice({
           if (itemDate.currentDay === payload.date.currentDay) {
             return { ...itemDate, ...payload.date };
           }
-          // console.log(itemDate);
-          // console.log(task);
           return itemDate;
         });
         return task;
       });
-      //  state.items;
     },
   },
 });

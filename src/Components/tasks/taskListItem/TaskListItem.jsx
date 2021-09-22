@@ -6,7 +6,6 @@ import {
 } from "../../../redux/task/task-operations";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import moment from "moment";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -34,16 +33,10 @@ const TaskListItem = ({ task, targetDate }) => {
   const deleteTask = (e) => {
     return dispatch(deleteSprintsTask(task._id ?? task.id));
   };
-  console.log(formik);
   const onHandleClikc = (e) => {
-    console.log(task._id ?? task.id);
     setSprintId(task._id ?? task.id);
     setIsOpen(true);
   };
-
-  // const onHandleChange = (e) => {
-  // sethoursWasted(e.target.value);
-  // };
 
   useEffect(() => {
     if (
@@ -57,7 +50,7 @@ const TaskListItem = ({ task, targetDate }) => {
       };
       dispatch(patchTaskHours({ sprintId, taskObj }));
     }
-  }, [formik.values.hoursWasted]);
+  }, [dispatch, formik.values.hoursWasted, sprintId, targetDate]);
 
   useEffect(() => {
     if (task) {
@@ -67,24 +60,13 @@ const TaskListItem = ({ task, targetDate }) => {
         sethoursWasted(item.singleHoursWasted);
       });
     }
-    // setcurrentDayHour();
   }, [task, targetDate]);
-
-  const onHandleSubmit = (e) => {
-    e.preventDefault();
-
-    // console.log(taskObj);
-    // console.log("sprintId", sprintId);
-    // const TaskId = task._id ?? task.id;
-  };
 
   return (
     <TaskListItemWrapper>
       <div className="TitleWrapper">
-        {/* <div> */}
         <h3 className="TaskTitle">{task.title}</h3>
         <div className="TaskTitleAfter"></div>
-        {/* </div> */}
       </div>
       <div className="TaskDescriptionTablet">
         <p className="describtion">
@@ -99,15 +81,12 @@ const TaskListItem = ({ task, targetDate }) => {
           </button>
 
           {isOpen && (
-            // <form onSubmit={onHandleSubmit}>
             <input
               name="hoursWasted"
               type="number"
               onChange={formik.handleChange}
               value={formik.values.hoursWasted}
             />
-            // <button type="submit">Submit</button>
-            // </form>
           )}
         </p>
         <p className="describtion describtionLastChild">
@@ -125,10 +104,7 @@ const TaskListItem = ({ task, targetDate }) => {
       <div className="TaskDescriptionDesktop">
         <span className="describtionHourNumber">{task.hoursPlanned}</span>
         <span className="describtionNumber">{currentDayHour}</span>
-        <span className="describtionHourNumber">
-          {/* {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)} */}
-          {task.hoursWasted}
-        </span>
+        <span className="describtionHourNumber">{task.hoursWasted}</span>
 
         <div className="BtnDeleteDesktop">
           <Button

@@ -1,5 +1,5 @@
-import React from "react"
-import * as yup from "yup"
+import React from "react";
+import * as yup from "yup";
 const validationSchema = yup.object().shape({
   email: yup
     .string()
@@ -14,20 +14,10 @@ const validationSchema = yup.object().shape({
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,}$/,
       "Пароль повинен містити символи латинского алфавіту, прописні та заглавні букви та цифри"
     ),
-})
-// const funcMessage = (errorMessage) => {
-//   return <span className="errorMessage">{errorMessage}</span>;
-// };
-export { validationSchema }
+});
+
+export { validationSchema };
 const ErrorValidation = ({ touched, message }) => {
-  return <>{!touched ? message && <div>{message}</div> : <div>&nbsp;</div>}</>
-}
-export default ErrorValidation
-// const funcMessage = (errorMessage) => {
-//   return <span className="errorMessage">{errorMessage}</span>;
-// };
-// export { funcMessage, validationSchema };
-// const ErrorValidation = ({ touched, message }) => {
-//   return <>{!touched ? message && <div>{message}</div> : <div>&nbsp;</div>}</>;
-// };
-// export default ErrorValidation;
+  return <>{!touched ? message && <div>{message}</div> : <div>&nbsp;</div>}</>;
+};
+export default ErrorValidation;
