@@ -23,64 +23,67 @@ const Chart = ({ title = 'title', open, setOpen }) => {
         const sprintId = sprint._id ?? sprint.id;
         return sprintId === id;
       });
-      const startDate = currentSprint.startDate;
-      const duration = currentSprint.duration;
-      console.log('startDate', startDate);
-      console.log('duration', duration);
-      const labelsArr = [];
-      for (let i = 0; i < duration; i++) {
-        labelsArr.push(moment(startDate).add(i, 'day').format('YYYY-MM-DD'));
+      const labelsArr = [0];
+      for (let i = 0; i < currentSprint.duration; i++) {
+        labelsArr.push(
+          moment(currentSprint.startDate).add(i, 'day').format('YYYY-MM-DD')
+        );
       }
-      console.log(labelsArr);
       setLabels(labelsArr);
     }
   }, [sprints]);
   useEffect(() => {
     if (tasks.length !== 0) {
-      console.log('tasks', tasks);
+      // Planned arr hours
       let tasksTotalTime = 0;
       tasks.forEach((task) => (tasksTotalTime += Number(task.hoursPlanned)));
-      console.log('tasksTotalTime', tasksTotalTime);
       const tasksTotalTimeArr = [Number(tasksTotalTime)];
       const dayAmount = tasks[0].hoursWastedPerDay.length;
-      console.log('dayAmount', dayAmount);
-      const substractor = tasksTotalTime / (dayAmount - 1);
+      const substractor = tasksTotalTime / dayAmount;
       let newSubstractor = substractor;
-      console.log('dayAmount', dayAmount);
-      for (let i = 0; i < dayAmount - 2; i++) {
+      for (let i = 0; i < dayAmount - 1; i++) {
         tasksTotalTimeArr.push(tasksTotalTime - newSubstractor);
         newSubstractor += substractor;
       }
       tasksTotalTimeArr.push(0);
-      console.log('total arr', tasksTotalTimeArr);
       setPlanedHours(tasksTotalTimeArr);
+      // Used arr hours
+      const realHourArr = [tasksTotalTime];
+      for (let i = 0; i < dayAmount; i++) {
+        let realHourItem = 0;
+        for (let j = 0; j < tasks.length; j++) {
+          realHourItem += tasks[j].hoursWastedPerDay[i].singleHoursWasted;
+        }
+        realHourArr.push(realHourArr[realHourArr.length - 1] - realHourItem);
+      }
+      setRealHovers(realHourArr);
     }
   }, [tasks]);
 
   const data = {
     labels: labels,
     datasets: [
-      // {
-      //   label: 'My First dataset',
-      //   fill: false,
-      //   lineTension: 0.1,
-      //   backgroundColor: 'rgba(75,192,192,0.4)',
-      //   borderColor: 'rgba(75,192,192,1)',
-      //   borderCapStyle: 'round',
-      //   borderDash: [],
-      //   borderDashOffset: 0.0,
-      //   borderJoinStyle: 'round',
-      //   pointBorderColor: 'rgba(75,192,192,1)',
-      //   pointBackgroundColor: '#fff',
-      //   pointBorderWidth: 1,
-      //   pointHoverRadius: 5,
-      //   pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      //   pointHoverBorderColor: 'rgba(220,220,220,1)',
-      //   pointHoverBorderWidth: 2,
-      //   pointRadius: 1,
-      //   pointHitRadius: 10,
-      //   data: planedHovers,
-      // },
+      {
+        label: 'My First dataset',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'round',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'round',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: realHovers,
+      },
       {
         label: 'My Second dataset',
         fill: false,
