@@ -7,11 +7,12 @@ import { Formik, Form, Field } from "formik"
 import ErrorValidation, { funcMessage, validationSchema } from "./validationSchema"
 import { toast } from "react-toastify"
 
+
 const initialState = {
-  email: "",
-  password: "",
-  repeatPassword: "",
-}
+  email: '',
+  password: '',
+  repeatPassword: '',
+};
 
 const AuthForm = ({ repeatPassword = true }) => {
   const dispatch = useDispatch()
@@ -26,10 +27,12 @@ const AuthForm = ({ repeatPassword = true }) => {
         toast.error(`Паролі не співпадають, потрібно повторити введеня`)
       }
     } else {
+
       dispatch(authOperations.logIn({ email, password }))
       toast.success(`Вітаємо!`)
+
     }
-  }
+  };
 
   return (
     <AuthFormStyled>
@@ -41,7 +44,7 @@ const AuthForm = ({ repeatPassword = true }) => {
         {({ values, errors, touched, handleSubmit, handleChange }) => (
           <Form onSubmit={handleSubmit} className="inputWrapper">
             <Field
-              className={`inputForm  ${errors.email ? "errorPassword" : null} `}
+              className={`inputForm  ${errors.email ? 'errorPassword' : null} `}
               type="text"
               placeholder="E-mail"
               name="email"
@@ -54,7 +57,9 @@ const AuthForm = ({ repeatPassword = true }) => {
             )} */}
 
             <Field
+
               className={`inputForm  ${errors.password ? "errorPassword" : null} `}
+
               type="text"
               placeholder="Пароль"
               name="password"
@@ -70,7 +75,9 @@ const AuthForm = ({ repeatPassword = true }) => {
             {/* )} */}
             {repeatPassword && (
               <Field
+
                 className={`inputForm  ${errors.password ? "errorPassword" : null} `}
+
                 type="text"
                 placeholder="Повторіть пароль"
                 name="repeatPassword"
@@ -78,12 +85,14 @@ const AuthForm = ({ repeatPassword = true }) => {
                 value={values.repeatPassword}
               />
             )}
+
             <SubmitButton nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`} />
           </Form>
         )}
       </Formik>
-    </AuthFormStyled>
-  )
-}
 
-export default AuthForm
+    </AuthFormStyled>
+  );
+};
+
+export default AuthForm;

@@ -32,8 +32,11 @@ const Projects = () => {
           <p className="buttonMessage">Створити проект</p>
         </div>
       </div>
-      {!!projects?.length && <ProjectsList projects={projects} />}
-      <CreateProject closeModal={closeModalProject} setCloseModal={setCloseModalProject} />
+      {projects && <ProjectsList projects={projects} />}
+      <CreateProject
+        closeModal={closeModalProject}
+        setCloseModal={setCloseModalProject}
+      />
     </ProjectsStyled>
   )
 }
