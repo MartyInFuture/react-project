@@ -1,15 +1,10 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const SprintListItemStyled = styled.div`
   .LinkWrapper {
     position: relative;
     height: 255px;
     padding: 20px 20px 20px;
-
-    :hover,
-    :focus {
-      box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
-    }
     /* width: 100%; */
 
     @media screen and (min-width: 1280px) {
@@ -18,6 +13,7 @@ export const SprintListItemStyled = styled.div`
     }
 
     a {
+      text-decoration: none;
       color: inherit;
       height: 100%;
     }
@@ -80,4 +76,4 @@ export const SprintListItemStyled = styled.div`
     height: 20px;
     bottom: 5px;
   }
-`
+`;

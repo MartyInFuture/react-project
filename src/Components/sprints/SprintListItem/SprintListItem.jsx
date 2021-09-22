@@ -1,17 +1,27 @@
-/* eslint-disable no-undef */
 import Button from '../../common/button/Button';
 import buttonIcons from '../../../configs/buttonIcons.json';
 import { Link } from 'react-router-dom';
 import { SprintListItemStyled } from './SprintListItemStyled';
-import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { deleteSprint } from '../../../redux/sprints/sprints-operations';
+import { useParams } from "react-router-dom"
+
 const SprintListItem = ({ sprint }) => {
+  
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(
+      deleteSprint(sprint.id ?? sprint._id),
+    );
+  };
+ 
   return (
     <SprintListItemStyled>
       <div className="LinkWrapper">
         <Link to={`/project/${id}/sprint/${sprint._id ?? sprint.id}`}>
           <div className="itemWrap">
-            <h3>{sprint.name}</h3>
+            <h3>{sprint.title}</h3>
 
             <ul>
               <li>
@@ -35,7 +45,7 @@ const SprintListItem = ({ sprint }) => {
           title="Edit the name"
           type="button"
           className="deleteBtn"
-          // onClick={handleDelete}
+          onHandleClick={handleClick}
         ></Button>
       </div>
     </SprintListItemStyled>

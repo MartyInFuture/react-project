@@ -83,10 +83,25 @@ const getProjects = createAsyncThunk(
   }
 );
 
+export const updateProjectTitle = createAsyncThunk(
+  "updateProjectTitle/projectId",
+  async (data) => {
+    console.log("data", data);
+    try {
+      await axios.patch(`/project/title/${data.id}`, data.title);
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+
 const projectOperations = {
   postProject,
   getProjects,
   deleteProject,
   addMember,
+  updateProjectTitle,
 };
 export default projectOperations;

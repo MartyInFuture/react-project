@@ -1,6 +1,7 @@
+
 import { useState } from "react";
 import { AuthFormStyled } from "./AuthFormStyled";
-import { authOperations } from "../../../redux/auth";
+import { authOperations, authSelectors } from '../../../redux/auth';
 import { useDispatch } from "react-redux";
 import SubmitButton from "../../common/submitButton/SubmitButton";
 import { Formik, Form, Field } from "formik";
@@ -8,7 +9,7 @@ import ErrorValidation, {
   funcMessage,
   validationSchema,
 } from "./validationSchema";
-
+import { toast } from 'react-toastify';
 const initialState = {
   email: "",
   password: "",
@@ -25,10 +26,13 @@ const AuthForm = ({ repeatPassword = true }) => {
       if (repeatPassword === password) {
         dispatch(authOperations.register({ email, password }));
       } else {
-        console.log(`Паролі не співпадають, потрібно повторити введеня`);
+        toast.error(`Паролі не співпадають, потрібно повторити введеня`);
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
+
+      toast.success(`Вітаємо!`);
+
     }
   };
 
@@ -42,7 +46,7 @@ const AuthForm = ({ repeatPassword = true }) => {
         {({ values, errors, touched, handleSubmit, handleChange }) => (
           <Form onSubmit={handleSubmit} className="inputWrapper">
             <Field
-              className={`inputForm  ${errors.email ? "errorPassword" : null} `}
+              className={`inputForm  ${errors.email ? 'errorPassword' : null} `}
               type="text"
               placeholder="E-mail"
               name="email"
@@ -58,7 +62,7 @@ const AuthForm = ({ repeatPassword = true }) => {
 
             <Field
               className={`inputForm  ${
-                errors.password ? "errorPassword" : null
+                errors.password ? 'errorPassword' : null
               } `}
               type="text"
               placeholder="Пароль"
@@ -78,7 +82,7 @@ const AuthForm = ({ repeatPassword = true }) => {
             {repeatPassword && (
               <Field
                 className={`inputForm  ${
-                  errors.password ? "errorPassword" : null
+                  errors.password ? 'errorPassword' : null
                 } `}
                 type="text"
                 placeholder="Повторіть пароль"
@@ -87,8 +91,9 @@ const AuthForm = ({ repeatPassword = true }) => {
                 value={values.repeatPassword}
               />
             )}
+
             <SubmitButton
-              nameBtn={`${!repeatPassword ? "Увійти" : "Зареєструватись"}`}
+              nameBtn={`${!repeatPassword ? 'Увійти' : 'Зареєструватись'}`}
             />
           </Form>
         )}
