@@ -40,6 +40,15 @@ const sprintsSlice = createSlice({
       };
     },
 
+    [deleteSprint.fulfilled](state, { payload }) {
+      state.items = [
+        ...state.items.filter((item) => {
+          const itemId = item._id ?? item.id;
+          return itemId !== payload;
+        }),
+      ];
+    }
+  
     // [getProjectsSprints.pending](state) {
     //   state.loading = true;
     // },

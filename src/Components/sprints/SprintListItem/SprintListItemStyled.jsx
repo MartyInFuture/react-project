@@ -15,6 +15,7 @@ export const SprintListItemStyled = styled.div`
   }
 
   a {
+    text-decoration: none;
     color: inherit;
     height: 100%;
   }
