@@ -3,12 +3,13 @@ import Button from '../../common/button/Button';
 import buttonIcons from '../../../configs/buttonIcons.json';
 import { Link } from 'react-router-dom';
 import { SprintListItemStyled } from './SprintListItemStyled';
-
+import { useParams } from 'react-router';
 const SprintListItem = ({ sprint }) => {
+  const { id } = useParams();
   return (
     <SprintListItemStyled>
       <div className="LinkWrapper">
-        <Link to={`/sprint/${sprint._id ?? sprint.id}`}>
+        <Link to={`/project/${id}/sprint/${sprint._id ?? sprint.id}`}>
           <div className="itemWrap">
             <h3>{sprint.name}</h3>
 

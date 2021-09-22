@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { addTask, getSprintsTasks } from './task-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { addTask, getSprintsTasks, deleteSprintsTask } from "./task-operations";
 
 const initialState = {
   items: [],
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const tasksSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   extraReducers: {
     [addTask.fulfilled](state, { payload }) {
@@ -21,11 +21,16 @@ const tasksSlice = createSlice({
       state.loading = false;
     },
     [getSprintsTasks.fulfilled](state, { payload }) {
-      if (payload.message === 'No tasks found') return initialState;
+      if (payload.message === "No tasks found") return initialState;
       if (payload.length === 0) {
         return false;
       }
       state.items = [...payload];
+    },
+    [deleteSprintsTask.fulfilled](state, { payload }) {
+      state.items = state.items.filter(
+        (task) => task._id ?? task.id !== payload
+      );
     },
   },
 });

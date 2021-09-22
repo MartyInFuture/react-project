@@ -1,11 +1,19 @@
-import Button from '../../common/button/Button';
-import { TaskListItemWrapper } from './TaskListItemStyled';
+import Button from "../../common/button/Button";
+import { TaskListItemWrapper } from "./TaskListItemStyled";
+import { deleteSprintsTask } from "../../../redux/task/task-operations";
+import { useDispatch } from "react-redux";
 
 const TaskListItem = ({ task }) => {
-  const deleteTask = () => {
-    console.log('deleteTask()');
+  const dispatch = useDispatch();
+  const deleteTask = (e) => {
+    console.log("TaskId", task._id);
+    console.log();
+
+    return dispatch(deleteSprintsTask(task._id));
   };
 
+  const AllHours = 0;
+  task.hoursWastedPerDay.map((item) => item.singleHoursWasted + AllHours);
   return (
     <TaskListItemWrapper>
       <div className="TitleWrapper">
@@ -25,12 +33,14 @@ const TaskListItem = ({ task }) => {
         </p>
         <p className="describtion describtionLastChild">
           <span className="describtionHour">Витрачено годин</span>
-          <span className="describtionHourNumber">
-            {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)}
-          </span>
+          <span className="describtionHourNumber">{AllHours}</span>
         </p>
         <div className="BtnDelete">
-          <Button icon="delete" classBtn="editDelete" />
+          <Button
+            icon="delete"
+            classBtn="editDelete"
+            onHandleClick={deleteTask}
+          />
         </div>
       </div>
       <div className="TaskDescriptionDesktop">
@@ -41,7 +51,11 @@ const TaskListItem = ({ task }) => {
         </span>
 
         <div className="BtnDeleteDesktop">
-          <Button icon="delete" classBtn="editDelete" />
+          <Button
+            icon="delete"
+            classBtn="editDelete"
+            onHandleClick={deleteTask}
+          />
         </div>
       </div>
     </TaskListItemWrapper>

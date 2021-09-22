@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import projectOperations from './projects-operations';
 
-console.log(`projectOperations`, projectOperations);
-
 const initialState = [];
 
 // const deletePost = (state, action) => {
@@ -25,14 +23,16 @@ const projectsSlice = createSlice({
       state.push(action.payload);
     },
     [projectOperations.deleteProject.fulfilled](state, { payload }) {
-      console.log('projectid must', payload);
       return [...state.filter((item) => item._id ?? item.id !== payload)];
     },
     [projectOperations.addMember.fulfilled](state, { payload }) {
-      const currentProject = state.filter(
-        (item) => item._id ?? item.id === payload.id
-      );
+      console.log(state);
+      const currentProject = state.filter((item) => {
+        return item._id ?? item.id === payload.id;
+      });
+
       const idx = state.indexOf(currentProject[0]);
+
       state[idx].members = [...payload.data.newMembers];
     },
     // [authOperations.logOut.fulfilled](state) {

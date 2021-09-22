@@ -1,27 +1,30 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { addSprint } from "../../../redux/sprints/sprints-operations";
-import SubmitButton from "../../common/submitButton/SubmitButton";
-import { WrapperForm } from "./CreateSprintFormStyled";
-import { useHistory } from "react-router";
-import moment from "moment";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { addSprint } from '../../../redux/sprints/sprints-operations';
+import SubmitButton from '../../common/submitButton/SubmitButton';
+import { WrapperForm } from './CreateSprintFormStyled';
+import { useHistory } from 'react-router';
+import moment from 'moment';
+import { useLocation } from 'react-router';
 
 const CreateSprintForm = ({ setOpenModal }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const history = useHistory();
-  const projectId = history.location.pathname.slice(9);
-  const [duration, setDuration] = useState("");
+  // const projectId = history.location.pathname.slice(9);
+  const [duration, setDuration] = useState('');
   const [isActivelastDate, setIsActiveLastDate] = useState(true);
+  const location = useLocation();
+  const projectId = location.pathname.split('/')[2];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
-      case "duration":
+      case 'duration':
         setDuration(value);
         break;
       default:
@@ -33,7 +36,7 @@ const CreateSprintForm = ({ setOpenModal }) => {
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
-    const formatDate = moment(startDate).format("YYYY-M-D");
+    const formatDate = moment(startDate).format('YYYY-M-D');
     dispatch(
       addSprint({
         projectId,
@@ -45,7 +48,7 @@ const CreateSprintForm = ({ setOpenModal }) => {
       })
     );
     setOpenModal(false);
-    setName("");
+    setName('');
   };
   const changeActiveDate = (e) => {
     e.preventDefault();

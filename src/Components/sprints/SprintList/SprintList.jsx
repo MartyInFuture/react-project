@@ -13,7 +13,7 @@ const SprintList = ({ sprints }) => {
         <ul className="listWrapper">
           {sprints &&
             sprints.map((sprint) => (
-              <li key={sprint.id} className="listItem">
+              <li key={sprint.id ?? sprint._id} className="listItem">
                 <SprintListItem sprint={sprint} />
               </li>
             ))}

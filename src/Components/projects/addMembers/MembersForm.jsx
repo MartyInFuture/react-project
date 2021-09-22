@@ -17,11 +17,13 @@ const MembersForm = ({ setOpenModal }) => {
   };
 
   const members = useSelector((state) => {
-    return state.projects.filter((project) => project._id === id)[0].members;
+    return state.projects.filter(
+      (project) => project._id === id || project.id === id
+    )[0].members;
   });
-  useEffect(() => {
-    console.log('hello');
-  }, [members]);
+  // useEffect(() => {
+  //   console.log('hello');
+  // }, [members]);
 
   const dispatch = useDispatch();
 
