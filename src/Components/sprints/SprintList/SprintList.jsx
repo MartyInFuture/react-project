@@ -1,23 +1,23 @@
-/* eslint-disable no-undef */
-// import { useSelector } from 'react-redux';
-
 import SprintListItem from '../SprintListItem/SprintListItem';
 import { SprintListStyled } from './SprintListStyled';
 
 const SprintList = ({ sprints }) => {
+
   return (
     <>
       <SprintListStyled>
-        <p className="listWrapper">Create first sprint</p>
-
-        <ul className="listWrapper">
-          {sprints &&
-            sprints.map((sprint) => (
-              <li key={sprint.id ?? sprint._id} className="listItem">
-                <SprintListItem sprint={sprint} />
-              </li>
-            ))}
-        </ul>
+        {sprints.length === 0 ? (
+          <p className="listWrapper">Create first sprint</p>
+        ) : (
+          <ul className="listWrapper">
+            {sprints &&
+              sprints.map((sprint) => (
+                <li key={sprint.id ?? sprint._id} className="listItem">
+                  <SprintListItem sprint={sprint} />
+                </li>
+              ))}
+          </ul>
+        )}
       </SprintListStyled>
     </>
   );

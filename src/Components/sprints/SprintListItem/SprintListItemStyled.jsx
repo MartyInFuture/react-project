@@ -1,14 +1,47 @@
 import styled from "styled-components"
 
 export const SprintListItemStyled = styled.div`
-  .LinkWrapper {
-    position: relative;
-    height: 255px;
-    padding: 20px 20px 20px;
 
-    :hover,
-    :focus {
-      box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+.LinkWrapper {
+  position: relative;
+  height: 255px;
+  padding: 20px 20px 20px;
+  /* width: 100%; */
+  
+
+  @media screen and (min-width: 1280px) {
+    padding: 20px 30px 30px;
+    height: 224px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+}
+
+.itemWrap {
+  h3 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    display: flex;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 30px;
+      font-size: 18px;
     }
     /* width: 100%; */
 
