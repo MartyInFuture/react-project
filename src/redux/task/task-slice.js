@@ -28,9 +28,13 @@ const tasksSlice = createSlice({
       state.items = [...payload];
     },
     [deleteSprintsTask.fulfilled](state, { payload }) {
-      state.items = state.items.filter(
-        (task) => task._id ?? task.id !== payload
-      );
+      console.log("PAYLOAD", payload);
+      state.items = [
+        ...state.items.filter((task) => {
+          const taskId = task._id ?? task.id;
+          return taskId !== payload;
+        }),
+      ];
     },
   },
 });

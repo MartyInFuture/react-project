@@ -17,9 +17,10 @@ const MembersForm = ({ setOpenModal }) => {
   };
 
   const members = useSelector((state) => {
-    return state.projects.filter(
-      (project) => project._id === id || project.id === id
-    )[0].members;
+    return state.projects.items.filter((project) => {
+      const projectId = project._id ?? project.id;
+      return projectId === id;
+    })[0].members;
   });
   // useEffect(() => {
   //   console.log('hello');

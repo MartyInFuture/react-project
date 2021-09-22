@@ -14,8 +14,10 @@ export const HeaderStyled = styled.div`
   }
   .logo {
     height: 30px;
+    width:100px;
     @media (min-width: 768px) {
-      height: 40px;
+      width: 140px;
+      height: 42px;
     }
   }
 `;

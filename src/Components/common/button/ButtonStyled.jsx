@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const ButtonWrapper = styled.div`
   .btnCommon {
@@ -67,6 +67,5 @@ export const ButtonWrapper = styled.div`
 
   .icon {
     font-size: inherit;
-    color: inherit;
   }
-`
+`;
