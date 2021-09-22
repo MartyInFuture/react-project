@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addTask, getSprintsTasks, deleteSprintsTask } from "./task-operations";
+import {
+  addTask,
+  getSprintsTasks,
+  deleteSprintsTask,
+  patchTaskHours,
+} from "./task-operations";
 
 const initialState = {
   items: [],
@@ -35,6 +40,24 @@ const tasksSlice = createSlice({
           return taskId !== payload;
         }),
       ];
+    },
+    [patchTaskHours.fulfilled](state, { payload }) {
+      state.items = state.items.map((task) => {
+        if (task._id !== payload.id) {
+          return task;
+        }
+        task.hoursWasted = payload.wastedHours;
+        task.hoursWastedPerDay = task.hoursWastedPerDay.map((itemDate) => {
+          if (itemDate.currentDay === payload.date.currentDay) {
+            return { ...itemDate, ...payload.date };
+          }
+          // console.log(itemDate);
+          // console.log(task);
+          return itemDate;
+        });
+        return task;
+      });
+      //  state.items;
     },
   },
 });
