@@ -1,13 +1,12 @@
-import SprintListItem from '../SprintListItem/SprintListItem';
-import { SprintListStyled } from './SprintListStyled';
+import SprintListItem from "../SprintListItem/SprintListItem"
+import { SprintListStyled } from "./SprintListStyled"
 
 const SprintList = ({ sprints }) => {
-
   return (
     <>
       <SprintListStyled>
         {sprints.length === 0 ? (
-          <p className="listWrapper">Create first sprint</p>
+          <p className="listWrapper">Створіть ваш перший спринт</p>
         ) : (
           <ul className="listWrapper">
             {sprints &&
@@ -20,7 +19,7 @@ const SprintList = ({ sprints }) => {
         )}
       </SprintListStyled>
     </>
-  );
-};
+  )
+}
 
-export default SprintList;
+export default SprintList
