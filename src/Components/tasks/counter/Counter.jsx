@@ -10,10 +10,12 @@ const Counter = ({ data }) => {
   const [year, setYear] = useState(0);
 
   useEffect(() => {
-    setDay(Number(data.startDate.slice(8)));
-    setMonth(Number(data.startDate.slice(5, -3)));
-    setYear(Number(data.startDate.slice(0, -6)));
-  }, []);
+    console.log("data", data);
+    // data.map((item) => item.hoursWastedPerDay.map((day) => console.log(day)));
+    // setDay(Number(data.startDate.slice(8)));
+    // setMonth(Number(data.startDate.slice(5, -3)));
+    // setYear(Number(data.startDate.slice(0, -6)));
+  }, [data]);
 
   const increment = () => {
     if (counter !== 7) {
@@ -53,9 +55,9 @@ const Counter = ({ data }) => {
       </div>
 
       <p className="counterDate">
-        {counter === 1 && day} {counter > 1 && day + (counter - 1)}.
-        {month < 10 && <span>0</span>}
-        {month}.{year}
+        {/* {counter === 1 && day} {counter > 1 && day + (counter - 1)}. */}
+        {/* {month < 10 && <span>0</span>} */}
+        {/* {month}.{year} */}
       </p>
     </CounterWrapper>
   );

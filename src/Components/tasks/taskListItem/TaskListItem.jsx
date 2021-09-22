@@ -6,10 +6,7 @@ import { useDispatch } from "react-redux";
 const TaskListItem = ({ task }) => {
   const dispatch = useDispatch();
   const deleteTask = (e) => {
-    console.log("TaskId", task._id);
-    console.log();
-
-    return dispatch(deleteSprintsTask(task._id));
+    return dispatch(deleteSprintsTask(task._id ?? task.id));
   };
 
   const AllHours = 0;
@@ -47,7 +44,8 @@ const TaskListItem = ({ task }) => {
         <span className="describtionHourNumber">{task.hoursPlanned}</span>
         <span className="describtionNumber">{task.hoursWasted}</span>
         <span className="describtionHourNumber">
-          {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)}
+          {/* {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)} */}
+          {AllHours}
         </span>
 
         <div className="BtnDeleteDesktop">

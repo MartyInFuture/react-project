@@ -11,6 +11,7 @@ import MainContainer from "./common/containers/mainContainer/Container";
 import GlobalStyle from "../style/GlobalStyle";
 import WrapperContainer from "./common/containers/WrapperContainer/WrapperContainer";
 import { resetErrorAction } from "../redux/error/error-action";
+import LoaderSpinner from "./loader/Loader";
 
 const Register = lazy(() => import("../pages/register/Register"));
 const Login = lazy(() => import("../pages/login/Login"));
@@ -42,7 +43,7 @@ const App = () => {
           <MainContainer>
             <WrapperContainer>
               <Switch>
-                <Suspense fallback={""}>
+                <Suspense fallback={<LoaderSpinner />}>
                   <PublicRoute path="/register" exact restricted>
                     <Register />
                   </PublicRoute>
