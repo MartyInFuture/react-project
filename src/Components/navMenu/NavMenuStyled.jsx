@@ -10,8 +10,12 @@ export const Wrapper = styled.div`
     text-align: center;
   }
   .button__wrapper {
+    @media (max-width: 767px) {
+      display: none;
+    }
     margin-top: 50px;
   }
+
   .arrow {
     display: inline-block;
     transform: rotate(180deg);
@@ -28,10 +32,13 @@ export const Wrapper = styled.div`
   }
   .button-title {
     margin-left: 21px;
-    max-width: 115px;
+
     font-family: Montserrat;
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.04em;
+    @media (min-width: 768px) {
+      max-width: 115px;
+    }
   }
 `;
