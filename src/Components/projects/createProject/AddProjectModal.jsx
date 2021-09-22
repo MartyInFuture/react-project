@@ -5,7 +5,7 @@ import SubmitButton from '../../common/submitButton/SubmitButton';
 import { WrapperForm } from './AddProjectModalStyled';
 import projectsOperations from '../../../redux/projects/projects-operations';
 
-const AddProjectModal = () => {
+const AddProjectModal = ({ setCloseModal }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const dispatch = useDispatch();
@@ -22,8 +22,9 @@ const AddProjectModal = () => {
     e.preventDefault();
     console.log({ title, description });
     dispatch(projectsOperations.postProject({ title, description }));
-    // setTitle("")
-    // setDescription("")
+    setTitle('');
+    setDescription('');
+    setCloseModal();
   };
 
   return (
