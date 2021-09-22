@@ -1,26 +1,25 @@
 import styled from "styled-components"
 
 export const ButtonSubmitWrapper = styled.div`
-.btnSubCommon {
-    background-color: #FF6B08;
+  .btnSubCommon {
+    background-color: #ff6b08;
     border: none;
-    box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
-    border-radius: 25px;   
+
+    border-radius: 25px;
     text-align: center;
     color: white;
     font-size: 18px;
     line-height: 22px;
     height: 44px;
     padding-left: 44px;
-    padding-right: 44px
-}
+    padding-right: 44px;
 
-
-/* .cancel {
-    background-color: white;
-    color: rgba(24, 28, 39, 0.6);;
-    text-decoration-line: underline;
-    box-shadow: none;
-    
-} */
+    transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:focus,
+    &:hover {
+      outline: none;
+      box-shadow: 0px 10px 15px rgb(255, 115, 21);
+      background-color: #ff6b08f0;
+    }
+  }
 `
