@@ -1,15 +1,15 @@
-import Title from "../../Components/common/title/Title";
-import Button from "../../Components/common/button/Button";
-import { ProjectsStyled } from "./ProjectsStyled";
-import ProjectsList from "../../Components/projects/projectsList/ProjectsList";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import Title from '../../Components/common/title/Title';
+import Button from '../../Components/common/button/Button';
+import { ProjectsStyled } from './ProjectsStyled';
+import ProjectsList from '../../Components/projects/projectsList/ProjectsList';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
-import projectSelectors from "../../redux/projects/projects-selectors";
-import { token } from "../../redux/auth/auth-operations";
-import { authSelectors } from "../../redux/auth";
-import CreateProject from "../../Components/projects/createProject/CreateProject";
-import projectOperations from "../../redux/projects/projects-operations";
+import projectSelectors from '../../redux/projects/projects-selectors';
+import { token } from '../../redux/auth/auth-operations';
+import { authSelectors } from '../../redux/auth';
+import CreateProject from '../../Components/projects/createProject/CreateProject';
+import projectOperations from '../../redux/projects/projects-operations';
 
 const Projects = () => {
   const isAuth = useSelector(authSelectors.getAccessToken);
@@ -32,7 +32,7 @@ const Projects = () => {
           <p className="buttonMessage">Створити проект</p>
         </div>
       </div>
-      {!!projects.length && <ProjectsList projects={projects} />}
+      {projects && <ProjectsList projects={projects} />}
       <CreateProject
         closeModal={closeModalProject}
         setCloseModal={setCloseModalProject}
