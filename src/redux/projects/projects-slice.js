@@ -15,9 +15,12 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    projectLogOut: () => [],
+    projectLogOut: () => initialState,
   },
   extraReducers: {
+    // [projectOperations.getProjects.pending](_, { payload }) {
+    //   return initialState;
+    // },
     [projectOperations.getProjects.fulfilled](state, { payload }) {
       if (payload.message === 'No projects found') return initialState;
       state.items = [...payload];
