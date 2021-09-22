@@ -22,11 +22,13 @@ const SprintPage = () => {
   const isAuth = useSelector(authSelectors.getAccessToken);
   const sprints = useSelector(sprintSelectors.getSprints);
   const dispatch = useDispatch();
+  
+  
+  const [name, setName] = useState('');
 
   const projects = useSelector(projectsSeletors.getProjects);
   const [title, setTitle] = useState("title");
   const [description, setDescription] = useState("description");
-
   const [showInput, setShowInput] = useState(false);
   const { id } = useParams();
   const currentProject = projects.find((project) => project._id === id);
