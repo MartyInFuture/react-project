@@ -7,7 +7,7 @@ import Title from "../../Components/common/title/Title";
 import Counter from "../../Components/tasks/counter/Counter";
 import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
 import { TasksStyled } from "./TasksStyled";
-import "material-icons/iconfont/material-icons.css";
+// import 'material-icons/iconfont/material-icons.css';
 import NavMenu from "../../Components/navMenu/NavMenu";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
 import CreateTask from "../../Components/tasks/createTask/CreateTask";
@@ -18,17 +18,22 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import projectOperations from "../../redux/projects/projects-operations";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import taskSelectors from "../../redux/task/task-selectors";
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
   const [sprintName, setSprintName] = useState("");
-
-  const isAuth = useSelector(authSelectors.getAccessToken);
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
   const [targetDate, settargetDate] = useState("");
   const [sprint, setSprint] = useState(null);
+
+  const [tasksCounter, setTasksCounter] = useState(0);
+
+  const isAuth = useSelector(authSelectors.getAccessToken);
+  const sprintsArr = useSelector(taskSelectors.getTasks);
   const sprints = useSelector(sprintSelectors.getSprints);
+
   const location = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -46,11 +51,16 @@ const Tasks = () => {
 
   useEffect(() => {
     if (Sprint.length !== 0) {
-      const SprintName = Sprint[0].title;
       setSprint(Sprint[0]);
-      setSprintName(SprintName);
+      setSprintName(Sprint[0].title);
     }
   }, [Sprint, sprints]);
+
+  useEffect(() => {
+    if (sprintsArr.length !== 0) {
+      setTasksCounter(sprintsArr.length);
+    }
+  }, [sprintsArr]);
 
   const projectId = location.pathname.split("/")[2];
   const filterChange = (e) => {
@@ -84,7 +94,6 @@ const Tasks = () => {
                 />
               </div>
             </div>
-
             <div>
               <div className="TaskWrapper">
                 <div className="SprintTitleBtnEditWrapper">
@@ -99,9 +108,7 @@ const Tasks = () => {
                 <div className="btnCreateTask ">
                   <Button />
                 </div>
-
                 <div className="btnCreateTaskTablet ">
-                  {/* Копка для создания спринта Планшет */}
                   <div className="btnCreateSprintTitle openModalTask btnEdit">
                     <Button onHandleClick={() => setCloseModalTask(true)} />
                   </div>
@@ -131,15 +138,23 @@ const Tasks = () => {
               </div>
               <div className="discrbtionHoursContainerAfter"></div>
               <div className="btnEditTitleAfter"></div>
-
               <div>
-                {/* Кнопки для мобилки */}
-                <div className="btnAddchartTitle">
-                  <Button icon="addchart" onHandleClick={() => setOpen(true)} />
-                </div>
-                <div className="btnAddchartTitleTablet">
-                  <Button icon="addchart" onHandleClick={() => setOpen(true)} />
-                </div>
+                {tasksCounter > 2 && (
+                  <>
+                    <div className="btnAddchartTitle">
+                      <Button
+                        icon="addchart"
+                        onHandleClick={() => setOpen(true)}
+                      />
+                    </div>
+                    <div className="btnAddchartTitleTablet">
+                      <Button
+                        icon="addchart"
+                        onHandleClick={() => setOpen(true)}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
