@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AuthFormStyled } from "./AuthFormStyled";
 import { authOperations } from "../../../redux/auth";
@@ -9,18 +8,14 @@ import ErrorValidation, {
   funcMessage,
   validationSchema,
 } from "./validationSchema";
-import SubmitButton from "../../common/submitButton/SubmitButton"
-import LoaderSpinner from "../../loader/Loader"
-
 
 const initialState = {
   email: "",
   password: "",
   repeatPassword: "",
-}
+};
 
 const AuthForm = ({ repeatPassword = true }) => {
-
   const dispatch = useDispatch();
 
   const onHandleSubmit = ({ email, password, repeatPassword }) => {
@@ -34,12 +29,10 @@ const AuthForm = ({ repeatPassword = true }) => {
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
-
     }
-  }
+  };
 
   return (
-
     <AuthFormStyled>
       <Formik
         initialValues={initialState}
@@ -100,9 +93,8 @@ const AuthForm = ({ repeatPassword = true }) => {
           </Form>
         )}
       </Formik>
-      {loading && <LoaderSpinner />}
     </AuthFormStyled>
-  )
-}
+  );
+};
 
-export default AuthForm
+export default AuthForm;
