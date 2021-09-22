@@ -5,7 +5,6 @@ import SubmitButton from "../../common/submitButton/SubmitButton";
 import { Formik, Form, Field } from "formik";
 import { validationSchema } from "./validationSchema";
 import { toast } from "react-toastify";
-
 const initialState = {
   email: "",
   password: "",
@@ -24,6 +23,7 @@ const AuthForm = ({ repeatPassword = true }) => {
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
+
       toast.success(`Вітаємо!`);
     }
   };

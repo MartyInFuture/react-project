@@ -26,6 +26,7 @@ const SprintPage = () => {
   const projects = useSelector(projectsSeletors.getProjects);
   const [title, setTitle] = useState("title");
   const [description, setDescription] = useState("description");
+
   const [showInput, setShowInput] = useState(false);
   const { id } = useParams();
   const currentProject = projects.find((project) => project._id === id);
@@ -47,6 +48,7 @@ const SprintPage = () => {
 
   const changeTitleSubmit = (e) => {
     e.preventDefault();
+
     if (currentProject.title !== title || title !== "") {
       dispatch(
         projectOperations.updateProjectTitle({
@@ -134,7 +136,7 @@ const SprintPage = () => {
                   <span className="material-icons-outlined">
                     {buttonIcons.group_add}
                   </span>
-                  <span className="textAddPeople">Add people</span>
+                  <span className="textAddPeople">Додати людей</span>
                 </button>
 
                 <CreateMembers
@@ -155,7 +157,7 @@ const SprintPage = () => {
                   closeModal={openModalSprints}
                   setCloseModal={setOpenModalSprints}
                 />
-                <span className="createSprintSpan">Create a sprint</span>
+                <span className="createSprintSpan">Створити спринт</span>
               </>
             </div>
           </div>

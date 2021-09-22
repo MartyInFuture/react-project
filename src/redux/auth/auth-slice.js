@@ -34,6 +34,12 @@ const authSlice = createSlice({
       state.isLoggedIn = false
       state.sid = null
     },
+    [authOperations.refreshToken.pending](state, action) {
+      state.isFetchingCurrentUser = true;
+    },
+    [authOperations.refreshToken.rejected](state, action) {
+      state.isFetchingCurrentUser = false;
+    },
     [authOperations.refreshToken.fulfilled](state, action) {
       state.token = action.payload.newAccessToken
       state.refreshToken = action.payload.newRefreshToken

@@ -15,6 +15,7 @@ const projectsSlice = createSlice({
   extraReducers: {
     [projectOperations.getProjects.fulfilled](state, { payload }) {
       if (payload.message === "No projects found") return initialState;
+
       state.items = [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {

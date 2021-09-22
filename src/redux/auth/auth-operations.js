@@ -83,7 +83,7 @@ const refreshToken = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      dispatch(logOut());
+      throw error;
     }
   }
 );

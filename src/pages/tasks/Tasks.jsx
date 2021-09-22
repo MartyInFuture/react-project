@@ -28,6 +28,8 @@ const Tasks = () => {
   const sprintsArr = useSelector(taskSelectors.getSprint);
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
+  const [targetDate, settargetDate] = useState("");
+  const [sprint, setSprint] = useState(null);
   const sprints = useSelector(sprintSelectors.getSprints);
   const location = useLocation();
   const { id } = useParams();
@@ -47,6 +49,8 @@ const Tasks = () => {
   useEffect(() => {
     if (Sprint.length !== 0) {
       const SprintName = Sprint[0].title;
+      setSprint(Sprint[0]);
+      console.log(Sprint[0]._id ?? Sprint[0].id, id);
       setSprintName(SprintName);
     }
   }, [Sprint, sprints]);
@@ -57,6 +61,8 @@ const Tasks = () => {
     const Filter = text.toLowerCase();
     setfilterText(Filter);
   };
+
+  console.log("TARGETDATECOUNTERTASKS", targetDate);
 
   return (
     <>
@@ -72,7 +78,7 @@ const Tasks = () => {
         <div className="TaskInterfaceContainer">
           <div>
             <div className="counterSearchContainer">
-              <Counter data={sprintsArr} />
+              <Counter data={sprint} settargetDate={settargetDate} />
               <div className="inputBox">
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
@@ -145,7 +151,7 @@ const Tasks = () => {
         </div>
         <ContentContainer>
           <div className="TaskListMaimContainner">
-            <TaskList filter={filterText} />
+            <TaskList filter={filterText} targetDate={targetDate} />
           </div>
         </ContentContainer>
       </TasksStyled>

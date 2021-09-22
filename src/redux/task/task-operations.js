@@ -50,3 +50,22 @@ export const deleteSprintsTask = createAsyncThunk(
     } catch (error) {}
   }
 );
+
+export const patchTaskHours = createAsyncThunk(
+  "task/patchTaskHours",
+  async (data, { getState }) => {
+    try {
+      const response = await axios.patch(
+        `/task/${data.sprintId}`,
+        data.taskObj
+      );
+
+      const responseObj = {
+        date: response.data.day,
+        wastedHours: response.data.newWastedHours,
+        id: data.sprintId,
+      };
+      return responseObj;
+    } catch (error) {}
+  }
+);
