@@ -1,21 +1,18 @@
-import Button from '../../common/button/Button';
-import buttonIcons from '../../../configs/buttonIcons.json';
-import { Link } from 'react-router-dom';
-import { SprintListItemStyled } from './SprintListItemStyled';
-import { useDispatch } from 'react-redux';
-import { deleteSprint } from '../../../redux/sprints/sprints-operations';
+import Button from "../../common/button/Button"
+import buttonIcons from "../../../configs/buttonIcons.json"
+import { Link } from "react-router-dom"
+import { SprintListItemStyled } from "./SprintListItemStyled"
+import { useDispatch } from "react-redux"
+import { deleteSprint } from "../../../redux/sprints/sprints-operations"
 import { useParams } from "react-router-dom"
 
 const SprintListItem = ({ sprint }) => {
-  
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const { id } = useParams()
+  const dispatch = useDispatch()
   const handleClick = () => {
-    dispatch(
-      deleteSprint(sprint.id ?? sprint._id),
-    );
-  };
- 
+    dispatch(deleteSprint(sprint.id ?? sprint._id))
+  }
+
   return (
     <SprintListItemStyled>
       <div className="LinkWrapper">
@@ -25,15 +22,15 @@ const SprintListItem = ({ sprint }) => {
 
             <ul>
               <li>
-                <span>Start date</span>
+                <span>Дата початку</span>
                 <span>{sprint.startDate}</span>
               </li>
               <li>
-                <span>Expire date</span>
+                <span>Дата закінчення</span>
                 <span>{sprint.endDate}</span>
               </li>
               <li>
-                <span>Duration</span>
+                <span>Тривалість</span>
                 <span>{sprint.duration}</span>
               </li>
             </ul>
@@ -49,7 +46,7 @@ const SprintListItem = ({ sprint }) => {
         ></Button>
       </div>
     </SprintListItemStyled>
-  );
-};
+  )
+}
 
-export default SprintListItem;
+export default SprintListItem
