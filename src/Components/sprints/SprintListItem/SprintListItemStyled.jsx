@@ -1,10 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SprintListItemStyled = styled.div`
   .LinkWrapper {
     position: relative;
     height: 255px;
     padding: 20px 20px 20px;
+
+    @media screen and (max-width: 767px) {
+      width: 280px;
+      height: 170px;
+    }
 
     @media screen and (min-width: 1280px) {
       padding: 20px 30px 30px;
