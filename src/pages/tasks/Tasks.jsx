@@ -107,7 +107,7 @@ const Tasks = () => {
                   </div>
                 </div>
                 <div className="btnCreateTask ">
-                  <Button />
+                  <Button onHandleClick={() => setCloseModalTask(true)} />
                 </div>
 
                 <div className="btnCreateTaskTablet ">

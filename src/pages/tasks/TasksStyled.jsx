@@ -56,8 +56,12 @@ export const TasksStyled = styled.div`
     padding-left: 30px;
     border: none;
     border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+    background-color: transparent;
   }
 
+  .inputSearch {
+    outline: none;
+  }
   .iconSearchTablet {
     display: none;
     font-size: 20px;
@@ -266,8 +270,12 @@ export const TasksStyled = styled.div`
       height: 40px;
       border: none;
       border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+      background-color: transparent;
     }
 
+    .inputSearchDesktop {
+      outline: none;
+    }
     .discrbtionHours {
       width: 100px;
     }

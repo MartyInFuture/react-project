@@ -22,28 +22,30 @@ const schema = yup.object().shape({
 
 const TaskListItem = ({ task, targetDate }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDesktop, setIsOpenDesktop] = useState(false);
   const [hoursWasted, sethoursWasted] = useState(0);
   const [sprintId, setSprintId] = useState(null);
+  const [currentDayHour, setcurrentDayHour] = useState(0);
   const formik = useFormik({
-    initialValues: { hoursWasted: hoursWasted },
+    initialValues: { hoursWasted: 0 },
     validationSchema: schema,
   });
   const dispatch = useDispatch();
-  const [currentDayHour, setcurrentDayHour] = useState(0);
 
   const deleteTask = (e) => {
     return dispatch(deleteSprintsTask(task._id ?? task.id));
   };
-  console.log(formik);
-  const onHandleClikc = (e) => {
+
+  const onHandleClikc = async (e) => {
     console.log(task._id ?? task.id);
     setSprintId(task._id ?? task.id);
-    setIsOpen(true);
+    await setIsOpen(true);
+    focusInput();
   };
 
-  // const onHandleChange = (e) => {
-  // sethoursWasted(e.target.value);
-  // };
+  const focusInput = () => {
+    return document.getElementById("inputNumber").focus();
+  };
 
   useEffect(() => {
     if (
@@ -62,20 +64,37 @@ const TaskListItem = ({ task, targetDate }) => {
   useEffect(() => {
     if (task) {
       task.hoursWastedPerDay.filter((item) => {
-        if (item.currentDay === targetDate)
+        if (item.currentDay === targetDate) {
           setcurrentDayHour(item.singleHoursWasted);
-        sethoursWasted(item.singleHoursWasted);
+          sethoursWasted(item.singleHoursWasted);
+          // setcurrentDayHour(0);
+        }
       });
     }
-    // setcurrentDayHour();
   }, [task, targetDate]);
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
+  };
 
-    // console.log(taskObj);
-    // console.log("sprintId", sprintId);
-    // const TaskId = task._id ?? task.id;
+  const onBlur = () => {
+    setIsOpen(false);
+    // console.log("Отрабатывает");
+  };
+
+  const onHandleClickDesktop = async (e) => {
+    console.log(task._id ?? task.id);
+    setSprintId(task._id ?? task.id);
+    await setIsOpenDesktop(true);
+    focusInputDesktop();
+  };
+
+  const focusInputDesktop = () => {
+    return document.getElementById("inputNumberDesktop").focus();
+  };
+
+  const onBlurDesktop = () => {
+    setIsOpenDesktop(false);
   };
 
   return (
@@ -93,18 +112,22 @@ const TaskListItem = ({ task, targetDate }) => {
         </p>
         <p className="describtion">
           <span className="describtionHour">Витрачено год / день</span>
-          <span className="describtionNumber">{currentDayHour}</span>
-          <button type="button" onClick={onHandleClikc}>
-            Исправить
-          </button>
+          {!isOpen && (
+            <span className="describtionNumber" onClick={onHandleClikc}>
+              {currentDayHour}
+            </span>
+          )}
 
           {isOpen && (
             // <form onSubmit={onHandleSubmit}>
             <input
+              id="inputNumber"
               name="hoursWasted"
               type="number"
               onChange={formik.handleChange}
               value={formik.values.hoursWasted}
+              className="inputNumber"
+              onBlur={onBlur}
             />
             // <button type="submit">Submit</button>
             // </form>
@@ -124,7 +147,22 @@ const TaskListItem = ({ task, targetDate }) => {
       </div>
       <div className="TaskDescriptionDesktop">
         <span className="describtionHourNumber">{task.hoursPlanned}</span>
-        <span className="describtionNumber">{currentDayHour}</span>
+        {!isOpenDesktop && (
+          <span className="describtionNumber" onClick={onHandleClickDesktop}>
+            {currentDayHour}
+          </span>
+        )}
+        {isOpenDesktop && (
+          <input
+            id="inputNumberDesktop"
+            name="hoursWasted"
+            type="number"
+            onChange={formik.handleChange}
+            value={formik.values.hoursWasted}
+            className="inputNumberDesktop"
+            onBlur={onBlurDesktop}
+          />
+        )}
         <span className="describtionHourNumber">
           {/* {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)} */}
           {task.hoursWasted}

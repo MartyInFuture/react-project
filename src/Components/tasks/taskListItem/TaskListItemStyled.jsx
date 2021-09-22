@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const TaskListItemWrapper = styled.div`
   width: 280px;
@@ -81,9 +81,32 @@ export const TaskListItemWrapper = styled.div`
     border: 1px solid rgba(24, 28, 39, 0.2);
   }
 
+  .inputNumber {
+    width: 60px;
+    height: 16px;
+    font-size: 14px;
+    line-height: 1.2;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    padding-left: 51px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+  }
+
+  .inputNumber {
+    outline: none;
+  }
+
   /* ================================================================================================== */
 
   @media screen and (max-width: 1279px) {
+    .inputNumber {
+      height: 32px;
+      font-size: 18px;
+      line-height: 1.2px;
+      padding-left: 48px;
+    }
     .TaskDescriptionTablet {
       /* display: block !important; */
       display: block;
@@ -177,5 +200,19 @@ export const TaskListItemWrapper = styled.div`
     .TaskTitleAfter {
       margin-bottom: 0px;
     }
+
+    .inputNumberDesktop {
+      width: 60px;
+      border: none;
+      border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+      padding: 0;
+      padding-left: 30px;
+      font-size: 18px;
+      line-height: 1.2px;
+    }
+
+    .inputNumberDesktop {
+      outline: none;
+    }
   }
-`
+`;
