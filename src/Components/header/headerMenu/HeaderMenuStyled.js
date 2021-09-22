@@ -7,6 +7,16 @@ export const HeaderMenuStyled = styled.div`
   font-size: 14px;
   margin-left: auto;
 
+  .logOutText {
+    display: none;
+    @media (min-width: 768px) {
+      display: inline;
+      font-size: 14px;
+      line-height: 17px;
+
+      color: rgba(24, 28, 39, 0.6);
+    }
+  }
   .userEmail {
     margin-right: 10px;
     font-weight: 600;

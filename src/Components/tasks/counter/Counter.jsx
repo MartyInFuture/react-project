@@ -1,21 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CounterWrapper } from "./CounterStyled";
-import moment from "moment";
 
 const Counter = ({ data }) => {
-  //   console.log(moment().format("L"));
   const [counter, setcounter] = useState(1);
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
-
-  useEffect(() => {
-    console.log("data", data);
-    // data.map((item) => item.hoursWastedPerDay.map((day) => console.log(day)));
-    // setDay(Number(data.startDate.slice(8)));
-    // setMonth(Number(data.startDate.slice(5, -3)));
-    // setYear(Number(data.startDate.slice(0, -6)));
-  }, [data]);
 
   const increment = () => {
     if (counter !== 7) {
@@ -54,11 +41,7 @@ const Counter = ({ data }) => {
         </button>
       </div>
 
-      <p className="counterDate">
-        {/* {counter === 1 && day} {counter > 1 && day + (counter - 1)}. */}
-        {/* {month < 10 && <span>0</span>} */}
-        {/* {month}.{year} */}
-      </p>
+      <p className="counterDate"></p>
     </CounterWrapper>
   );
 };

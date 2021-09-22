@@ -1,10 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Overlay = styled.div`
   position: fixed;
   top: 60px;
   left: 0;
-  /* transform: translate(-50%, -0); */
   width: 100vw;
   height: calc(100vh - 60px);
   display: flex;
@@ -79,4 +78,4 @@ export const Overlay = styled.div`
       color: #585858;
     }
   }
-`
+`;

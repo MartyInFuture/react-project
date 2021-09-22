@@ -14,10 +14,8 @@ const TaskListItem = ({ task }) => {
   return (
     <TaskListItemWrapper>
       <div className="TitleWrapper">
-        {/* <div> */}
         <h3 className="TaskTitle">{task.title}</h3>
         <div className="TaskTitleAfter"></div>
-        {/* </div> */}
       </div>
       <div className="TaskDescriptionTablet">
         <p className="describtion">
@@ -43,10 +41,7 @@ const TaskListItem = ({ task }) => {
       <div className="TaskDescriptionDesktop">
         <span className="describtionHourNumber">{task.hoursPlanned}</span>
         <span className="describtionNumber">{task.hoursWasted}</span>
-        <span className="describtionHourNumber">
-          {/* {task.hoursWastedPerDay.map((item) => item.singleHoursWasted)} */}
-          {AllHours}
-        </span>
+        <span className="describtionHourNumber">{AllHours}</span>
 
         <div className="BtnDeleteDesktop">
           <Button

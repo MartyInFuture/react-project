@@ -1,21 +1,20 @@
-import { ChartStyled } from './ChartStyled';
-import Button from '../common/button/Button';
-import buttonIcons from '../../configs/buttonIcons.json';
-import { Line } from 'react-chartjs-2';
-import { useSelector } from 'react-redux';
-import taskSelectors from '../../redux/task/task-selectors';
-import sprintSelectors from '../../redux/sprints/sprints-selectors';
-import { useParams } from 'react-router';
-import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { ChartStyled } from "./ChartStyled";
+import Button from "../common/button/Button";
+import buttonIcons from "../../configs/buttonIcons.json";
+import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import taskSelectors from "../../redux/task/task-selectors";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
-const Chart = ({ title = 'title', open, setOpen }) => {
+const Chart = ({ title = "title", open, setOpen }) => {
   const [labels, setLabels] = useState([]);
   const sprints = useSelector(sprintSelectors.getSprints);
   const tasks = useSelector(taskSelectors.getTasks);
   const { id } = useParams();
   const [planedHours, setPlanedHours] = useState([]);
-  const [realHovers, setRealHovers] = useState([]);
 
   useEffect(() => {
     if (sprints.length !== 0) {
@@ -25,34 +24,28 @@ const Chart = ({ title = 'title', open, setOpen }) => {
       });
       const startDate = currentSprint.startDate;
       const duration = currentSprint.duration;
-      console.log('startDate', startDate);
-      console.log('duration', duration);
       const labelsArr = [];
       for (let i = 0; i < duration; i++) {
-        labelsArr.push(moment(startDate).add(i, 'day').format('YYYY-MM-DD'));
+        labelsArr.push(moment(startDate).add(i, "day").format("YYYY-MM-DD"));
       }
-      console.log(labelsArr);
       setLabels(labelsArr);
     }
-  }, [sprints]);
+  }, [id, sprints]);
   useEffect(() => {
     if (tasks.length !== 0) {
-      console.log('tasks', tasks);
       let tasksTotalTime = 0;
       tasks.forEach((task) => (tasksTotalTime += Number(task.hoursPlanned)));
-      console.log('tasksTotalTime', tasksTotalTime);
+
       const tasksTotalTimeArr = [Number(tasksTotalTime)];
       const dayAmount = tasks[0].hoursWastedPerDay.length;
-      console.log('dayAmount', dayAmount);
+
       const substractor = tasksTotalTime / (dayAmount - 1);
       let newSubstractor = substractor;
-      console.log('dayAmount', dayAmount);
       for (let i = 0; i < dayAmount - 2; i++) {
         tasksTotalTimeArr.push(tasksTotalTime - newSubstractor);
         newSubstractor += substractor;
       }
       tasksTotalTimeArr.push(0);
-      console.log('total arr', tasksTotalTimeArr);
       setPlanedHours(tasksTotalTimeArr);
     }
   }, [tasks]);
@@ -60,43 +53,22 @@ const Chart = ({ title = 'title', open, setOpen }) => {
   const data = {
     labels: labels,
     datasets: [
-      // {
-      //   label: 'My First dataset',
-      //   fill: false,
-      //   lineTension: 0.1,
-      //   backgroundColor: 'rgba(75,192,192,0.4)',
-      //   borderColor: 'rgba(75,192,192,1)',
-      //   borderCapStyle: 'round',
-      //   borderDash: [],
-      //   borderDashOffset: 0.0,
-      //   borderJoinStyle: 'round',
-      //   pointBorderColor: 'rgba(75,192,192,1)',
-      //   pointBackgroundColor: '#fff',
-      //   pointBorderWidth: 1,
-      //   pointHoverRadius: 5,
-      //   pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      //   pointHoverBorderColor: 'rgba(220,220,220,1)',
-      //   pointHoverBorderWidth: 2,
-      //   pointRadius: 1,
-      //   pointHitRadius: 10,
-      //   data: planedHovers,
-      // },
       {
-        label: 'My Second dataset',
+        label: "My Second dataset",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(150, 0, 0)',
-        borderColor: 'red',
-        borderCapStyle: 'round',
+        backgroundColor: "rgba(150, 0, 0)",
+        borderColor: "red",
+        borderCapStyle: "round",
         borderDash: [],
         borderDashOffset: 0.0,
-        borderJoinStyle: 'round',
-        pointBorderColor: 'red',
-        pointBackgroundColor: '#fff',
+        borderJoinStyle: "round",
+        pointBorderColor: "red",
+        pointBackgroundColor: "#fff",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'red',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBackgroundColor: "red",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,

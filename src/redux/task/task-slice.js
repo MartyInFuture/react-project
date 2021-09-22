@@ -28,7 +28,6 @@ const tasksSlice = createSlice({
       state.items = [...payload];
     },
     [deleteSprintsTask.fulfilled](state, { payload }) {
-      console.log("PAYLOAD", payload);
       state.items = [
         ...state.items.filter((task) => {
           const taskId = task._id ?? task.id;

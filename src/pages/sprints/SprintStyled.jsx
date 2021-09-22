@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 export const SprintStyled = styled.div`
 
 article {
@@ -48,7 +48,6 @@ article {
           font-size: 26px;
           font-weight: 500;
           letter-spacing: 0.04em;
-          // добавить троеточие в конце длинных названий
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -254,4 +253,4 @@ article {
   }
 
 
-`
+`;

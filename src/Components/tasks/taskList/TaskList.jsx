@@ -15,12 +15,11 @@ const TaskList = ({ filter }) => {
 
   useEffect(() => {
     dispatch(getSprintsTasks(id));
-  }, [id]);
+  }, [dispatch, id]);
   useEffect(() => {
     const res = tasks.filter((task) => task.title?.includes(filter));
     setFiltredTasks(res);
-    // console.log('filtered arr', filtredTasks);
-  }, [filter]);
+  }, [filter, tasks]);
 
   return (
     <TasklistStyled>

@@ -70,7 +70,6 @@ const refreshToken = createAsyncThunk(
     const sid = state.auth.sid;
 
     if (persistedRefreshToken === null) {
-      console.log("Токена нет, уходим из fetchCurrentUser");
       token.unset();
 
       return rejectWithValue();
@@ -84,12 +83,7 @@ const refreshToken = createAsyncThunk(
       }
       return data;
     } catch (error) {
-      console.log("refreshError");
       dispatch(logOut());
-      // return rejectWithValue(error.message);
-      // нужно дипатчить экшин Логаут для выхода
-
-      // return;
     }
   }
 );

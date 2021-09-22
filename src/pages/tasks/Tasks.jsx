@@ -10,7 +10,6 @@ import { TasksStyled } from "./TasksStyled";
 import "material-icons/iconfont/material-icons.css";
 import NavMenu from "../../Components/navMenu/NavMenu";
 import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
-import CreateProject from "../../Components/projects/createProject/CreateProject";
 import CreateTask from "../../Components/tasks/createTask/CreateTask";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -19,7 +18,6 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import projectOperations from "../../redux/projects/projects-operations";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
-import projectSelectors from "../../redux/projects/projects-selectors";
 import taskSelectors from "../../redux/task/task-selectors";
 
 const Tasks = () => {
@@ -38,24 +36,21 @@ const Tasks = () => {
   const Sprint = sprints.filter(
     (sprint) => sprint._id === id || sprint.id === id
   );
-  // console.log(Sprint);
 
   useEffect(() => {
     token.set(isAuth);
     dispatch(projectOperations.getProjects());
-    // console.log("Location obj", location.pathname.split("/"));/
     const projectId = location.pathname.split("/")[2];
     isAuth && dispatch(getProjectsSprints(projectId));
-  }, [dispatch, id]);
+  }, [dispatch, id, isAuth, location.pathname]);
 
   useEffect(() => {
     if (Sprint.length !== 0) {
       const SprintName = Sprint[0].title;
       setSprintName(SprintName);
     }
-  }, [sprints]);
+  }, [Sprint, sprints]);
 
-  // console.log("Location obj", location.pathname.split("/"));
   const projectId = location.pathname.split("/")[2];
   const filterChange = (e) => {
     const text = e.target.value;
