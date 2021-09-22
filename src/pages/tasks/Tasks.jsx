@@ -1,32 +1,33 @@
-import Chart from '../../Components/chart/Chart';
-import { useLocation } from 'react-router';
-import { useState, useEffect } from 'react';
-import Button from '../../Components/common/button/Button';
-import TaskList from '../../Components/tasks/taskList/TaskList';
-import Title from '../../Components/common/title/Title';
-import Counter from '../../Components/tasks/counter/Counter';
-import ContentContainer from '../../Components/common/containers/contentContainer/ContentContainer';
-import { TasksStyled } from './TasksStyled';
-import 'material-icons/iconfont/material-icons.css';
-import NavMenu from '../../Components/navMenu/NavMenu';
-import NavContainer from '../../Components/common/containers/navContainer/NavContainer';
-import CreateProject from '../../Components/projects/createProject/CreateProject';
-import CreateTask from '../../Components/tasks/createTask/CreateTask';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { token } from '../../redux/auth/auth-operations';
-import { authSelectors } from '../../redux/auth';
-import { getProjectsSprints } from '../../redux/sprints/sprints-operations';
-import projectOperations from '../../redux/projects/projects-operations';
-import sprintSelectors from '../../redux/sprints/sprints-selectors';
-import projectSelectors from '../../redux/projects/projects-selectors';
+import Chart from "../../Components/chart/Chart";
+import { useLocation } from "react-router";
+import { useState, useEffect } from "react";
+import Button from "../../Components/common/button/Button";
+import TaskList from "../../Components/tasks/taskList/TaskList";
+import Title from "../../Components/common/title/Title";
+import Counter from "../../Components/tasks/counter/Counter";
+import ContentContainer from "../../Components/common/containers/contentContainer/ContentContainer";
+import { TasksStyled } from "./TasksStyled";
+import "material-icons/iconfont/material-icons.css";
+import NavMenu from "../../Components/navMenu/NavMenu";
+import NavContainer from "../../Components/common/containers/navContainer/NavContainer";
+import CreateProject from "../../Components/projects/createProject/CreateProject";
+import CreateTask from "../../Components/tasks/createTask/CreateTask";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { token } from "../../redux/auth/auth-operations";
+import { authSelectors } from "../../redux/auth";
+import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
+import projectOperations from "../../redux/projects/projects-operations";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import projectSelectors from "../../redux/projects/projects-selectors";
+import taskSelectors from "../../redux/task/task-selectors";
 
 const Tasks = () => {
-  const [filterText, setfilterText] = useState('');
-  const [sprintName, setSprintName] = useState('');
+  const [filterText, setfilterText] = useState("");
+  const [sprintName, setSprintName] = useState("");
 
   const isAuth = useSelector(authSelectors.getAccessToken);
-
+  const sprintsArr = useSelector(taskSelectors.getSprint);
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
   const sprints = useSelector(sprintSelectors.getSprints);
@@ -37,13 +38,13 @@ const Tasks = () => {
   const Sprint = sprints.filter(
     (sprint) => sprint._id === id || sprint.id === id
   );
-  console.log(Sprint);
+  // console.log(Sprint);
 
   useEffect(() => {
     token.set(isAuth);
     dispatch(projectOperations.getProjects());
-    console.log('Location obj', location.pathname.split('/'));
-    const projectId = location.pathname.split('/')[2];
+    // console.log("Location obj", location.pathname.split("/"));/
+    const projectId = location.pathname.split("/")[2];
     isAuth && dispatch(getProjectsSprints(projectId));
   }, [dispatch, id]);
 
@@ -54,8 +55,8 @@ const Tasks = () => {
     }
   }, [sprints]);
 
-  console.log('Location obj', location.pathname.split('/'));
-  const projectId = location.pathname.split('/')[2];
+  // console.log("Location obj", location.pathname.split("/"));
+  const projectId = location.pathname.split("/")[2];
   const filterChange = (e) => {
     const text = e.target.value;
     const Filter = text.toLowerCase();
@@ -76,6 +77,7 @@ const Tasks = () => {
         <div className="TaskInterfaceContainer">
           <div>
             <div className="counterSearchContainer">
+              <Counter data={sprintsArr} />
               <div className="inputBox">
                 <span className="material-icons iconSearch">search</span>
                 <span className="material-icons iconSearchTablet">search</span>
