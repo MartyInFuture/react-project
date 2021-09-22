@@ -18,14 +18,12 @@ import { authSelectors } from "../../redux/auth";
 import { getProjectsSprints } from "../../redux/sprints/sprints-operations";
 import projectOperations from "../../redux/projects/projects-operations";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
-import taskSelectors from "../../redux/task/task-selectors";
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
   const [sprintName, setSprintName] = useState("");
 
   const isAuth = useSelector(authSelectors.getAccessToken);
-  const sprintsArr = useSelector(taskSelectors.getSprint);
   const [open, setOpen] = useState(false);
   const [closeModalTask, setCloseModalTask] = useState(false);
   const [targetDate, settargetDate] = useState("");
@@ -50,7 +48,6 @@ const Tasks = () => {
     if (Sprint.length !== 0) {
       const SprintName = Sprint[0].title;
       setSprint(Sprint[0]);
-      console.log(Sprint[0]._id ?? Sprint[0].id, id);
       setSprintName(SprintName);
     }
   }, [Sprint, sprints]);
@@ -61,8 +58,6 @@ const Tasks = () => {
     const Filter = text.toLowerCase();
     setfilterText(Filter);
   };
-
-  console.log("TARGETDATECOUNTERTASKS", targetDate);
 
   return (
     <>

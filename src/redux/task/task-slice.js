@@ -50,13 +50,10 @@ const tasksSlice = createSlice({
           if (itemDate.currentDay === payload.date.currentDay) {
             return { ...itemDate, ...payload.date };
           }
-          // console.log(itemDate);
-          // console.log(task);
           return itemDate;
         });
         return task;
       });
-      //  state.items;
     },
   },
 });
