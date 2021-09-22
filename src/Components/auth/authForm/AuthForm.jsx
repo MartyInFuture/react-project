@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { AuthFormStyled } from './AuthFormStyled';
+
+import { useState } from "react";
+import { AuthFormStyled } from "./AuthFormStyled";
 import { authOperations, authSelectors } from '../../../redux/auth';
-import { useDispatch } from 'react-redux';
-import SubmitButton from '../../common/submitButton/SubmitButton';
-import { Formik, Form, Field } from 'formik';
+import { useDispatch } from "react-redux";
+import SubmitButton from "../../common/submitButton/SubmitButton";
+import { Formik, Form, Field } from "formik";
 import ErrorValidation, {
   funcMessage,
   validationSchema,
-} from './validationSchema';
+} from "./validationSchema";
 import { toast } from 'react-toastify';
-
 const initialState = {
-  email: '',
-  password: '',
-  repeatPassword: '',
+  email: "",
+  password: "",
+  repeatPassword: "",
 };
 
 const AuthForm = ({ repeatPassword = true }) => {
@@ -30,7 +30,9 @@ const AuthForm = ({ repeatPassword = true }) => {
       }
     } else {
       dispatch(authOperations.logIn({ email, password }));
+
       toast.success(`Вітаємо!`);
+
     }
   };
 

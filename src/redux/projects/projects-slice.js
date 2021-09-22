@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import projectOperations from './projects-operations';
+import { createSlice } from "@reduxjs/toolkit";
+import projectOperations from "./projects-operations";
 
 const initialState = {
   items: [],
@@ -12,7 +12,7 @@ const initialState = {
 // };
 
 const projectsSlice = createSlice({
-  name: 'projects',
+  name: "projects",
   initialState,
   reducers: {
     projectLogOut: () => initialState,
@@ -22,7 +22,9 @@ const projectsSlice = createSlice({
     //   return initialState;
     // },
     [projectOperations.getProjects.fulfilled](state, { payload }) {
+
       if (payload.message === 'No projects found') return initialState;
+
       state.items = [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
