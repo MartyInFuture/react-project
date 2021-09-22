@@ -59,6 +59,11 @@ export const Overlay = styled.div`
     letter-spacing: 0.04em;
     text-decoration: underline;
     text-decoration-skip-ink: none;
+
+    &:focus,
+    &:hover {
+      color: #585858;
+    }
   }
 
   .closeBtn {
@@ -68,5 +73,10 @@ export const Overlay = styled.div`
     position: absolute;
     top: 8px;
     right: 8px;
+
+    &:focus,
+    &:hover {
+      color: #585858;
+    }
   }
 `

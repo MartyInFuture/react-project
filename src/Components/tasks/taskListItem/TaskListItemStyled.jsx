@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const TaskListItemWrapper = styled.div`
   width: 280px;
@@ -13,6 +13,11 @@ export const TaskListItemWrapper = styled.div`
 
   margin-bottom: 10px;
   position: relative;
+
+  :hover,
+  :focus {
+    box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  }
 
   .TaskTitle {
     font-weight: 500;
@@ -173,4 +178,4 @@ export const TaskListItemWrapper = styled.div`
       margin-bottom: 0px;
     }
   }
-`;
+`
