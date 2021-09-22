@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import projectOperations from './projects-operations';
 
-const initialState = [];
+const initialState = {
+  items: [],
+  isLoading: false,
+};
 
 // const deletePost = (state, action) => {
 //   // state.filter((item) => item._id !== action.payload)
@@ -15,25 +18,30 @@ const projectsSlice = createSlice({
     projectLogOut: () => [],
   },
   extraReducers: {
-    [projectOperations.getProjects.fulfilled](_, { payload }) {
+    [projectOperations.getProjects.fulfilled](state, { payload }) {
       if (payload.message === 'No projects found') return [];
-      return [...payload];
+      state.items = [...payload];
     },
     [projectOperations.postProject.fulfilled](state, action) {
-      state.push(action.payload);
+      state.items.push(action.payload);
     },
     [projectOperations.deleteProject.fulfilled](state, { payload }) {
-      return [...state.filter((item) => item._id ?? item.id !== payload)];
+      console.log(payload);
+      state.items = [
+        ...state.items.filter((item) => {
+          const itemId = item._id ?? item.id;
+          return itemId !== payload;
+        }),
+      ];
     },
     [projectOperations.addMember.fulfilled](state, { payload }) {
       console.log(state);
-      const currentProject = state.filter((item) => {
-        return item._id ?? item.id === payload.id;
+      const currentProject = state.items.filter((item) => {
+        const itemId = item._id ?? item.id;
+        return itemId === payload.id;
       });
-
-      const idx = state.indexOf(currentProject[0]);
-
-      state[idx].members = [...payload.data.newMembers];
+      const idx = state.items.indexOf(currentProject[0]);
+      state.items[idx].members = [...payload.data.newMembers];
     },
     // [authOperations.logOut.fulfilled](state) {
     //   state.projects = [];

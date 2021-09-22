@@ -15,8 +15,8 @@ const ProjectItem = ({ project, background }) => {
   return (
     <ProjectItemStyled>
       <Link
-        to={`/project/${project._id}`}
-        className={`${background()} projectLink`}
+        to={`/project/${project._id ?? project.id}`}
+        className={`${background} projectLink`}
       >
         <h3 className="projectTitle">{project.title}</h3>
         <div className="projectTextWrapper">
@@ -28,6 +28,7 @@ const ProjectItem = ({ project, background }) => {
           classBtn="deleteProject"
           icon={buttonIcons.delete}
           onHandleClick={deleteProject}
+          background={background}
         />
       </div>
     </ProjectItemStyled>
