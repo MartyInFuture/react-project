@@ -35,5 +35,6 @@ export const HeaderMenuStyled = styled.div`
   }
   .icon {
     font-size: 16px;
+    color: rgba(24, 28, 39, 0.6);
   }
 `;
