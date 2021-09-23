@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ChartStyled = styled.div`
-  position: absolute;
+  position: fixed;
   top: 60px;
 
   height: calc(100vh - 60px);
@@ -12,6 +12,7 @@ export const ChartStyled = styled.div`
   background-color: rgba(24, 28, 39, 0.25);
   z-index: 500;
   @media (max-width: 767px) {
+    position: absolute;
     height: 100vh;
     left: 10;
 
