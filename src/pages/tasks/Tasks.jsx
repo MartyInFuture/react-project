@@ -17,6 +17,7 @@ import { token } from '../../redux/auth/auth-operations';
 import { authSelectors } from '../../redux/auth';
 import { getProjectsSprints } from '../../redux/sprints/sprints-operations';
 import projectOperations from '../../redux/projects/projects-operations';
+import projectSelectors from '../../redux/projects/projects-selectors';
 import sprintSelectors from '../../redux/sprints/sprints-selectors';
 import taskSelectors from '../../redux/task/task-selectors';
 import { Redirect } from 'react-router';
@@ -37,6 +38,7 @@ const Tasks = () => {
   const isAuth = useSelector(authSelectors.getAccessToken);
   const sprintsArr = useSelector(taskSelectors.getTasks);
   const sprints = useSelector(sprintSelectors.getSprints);
+  const projects = useSelector(projectSelectors.getProjects);
 
   const location = useLocation();
   const { id } = useParams();
@@ -45,6 +47,19 @@ const Tasks = () => {
   const Sprint = sprints.filter(
     (sprint) => sprint._id === id || sprint.id === id
   );
+  useEffect(() => {
+    if (projects.length !== 0) {
+      const project = projects.find((item) => {
+        const itemId = item.id ?? item._id;
+        const projectId = location.pathname.split('/')[2];
+        return itemId === projectId;
+      });
+      if (project === undefined) {
+        setRedirect(true);
+        toast.warning('Ви не є учасником цього проекту!');
+      }
+    }
+  }, [projects]);
 
   useEffect(() => {
     token.set(isAuth);
