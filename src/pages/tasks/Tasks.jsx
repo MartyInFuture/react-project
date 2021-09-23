@@ -21,6 +21,7 @@ import projectOperations from "../../redux/projects/projects-operations";
 import sprintSelectors from "../../redux/sprints/sprints-selectors";
 import projectSelectors from "../../redux/projects/projects-selectors";
 import taskSelectors from "../../redux/task/task-selectors";
+import { patchTitleSprint } from "../../redux/task/task-operations";
 
 const Tasks = () => {
   const [filterText, setfilterText] = useState("");
@@ -36,11 +37,42 @@ const Tasks = () => {
   const location = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [showInput, setShowInput] = useState(false);
+  const [title, setTitle] = useState("");
+
+  // const currentSprint = sprints.find((project) => project._id === id);
+
+  const editNameHandle = async () => {
+    await setShowInput(true);
+    document.querySelector("#inputChangeTitle").focus();
+  };
+
+  const changeTitleSubmit = (e) => {
+    e.preventDefault();
+
+    if (sprintName !== title || title !== "") {
+      dispatch(
+        patchTitleSprint({
+          id,
+          title: {
+            title,
+          },
+        })
+      );
+    }
+    setShowInput(false);
+  };
+
+  // const onHandleBlurChangeTitle = () => {};
+
+  const onHandleChange = (e) => {
+    const { value } = e.target;
+    setTitle(value);
+  };
 
   const Sprint = sprints.filter(
     (sprint) => sprint._id === id || sprint.id === id
   );
-  // console.log(Sprint);
 
   useEffect(() => {
     token.set(isAuth);
@@ -54,10 +86,15 @@ const Tasks = () => {
     if (Sprint.length !== 0) {
       const SprintName = Sprint[0].title;
       setSprint(Sprint[0]);
-      console.log(Sprint[0]._id ?? Sprint[0].id, id);
       setSprintName(SprintName);
     }
   }, [sprints]);
+
+  useEffect(() => {
+    if (sprintName) {
+      setTitle(sprintName);
+    }
+  }, [sprintName]);
 
   // console.log("Location obj", location.pathname.split("/"));
   const projectId = location.pathname.split("/")[2];
@@ -66,8 +103,6 @@ const Tasks = () => {
     const Filter = text.toLowerCase();
     setfilterText(Filter);
   };
-
-  console.log("TARGETDATECOUNTERTASKS", targetDate);
 
   return (
     <>
@@ -97,27 +132,60 @@ const Tasks = () => {
 
             <div>
               <div className="TaskWrapper">
-                <div className="SprintTitleBtnEditWrapper">
-                  <div className="TaskTitleWrapper">
-                    <Title title={sprintName} />
+                {!showInput && (
+                  <div className="SprintTitleBtnEditWrapper">
+                    <div className="TaskTitleWrapper">
+                      <Title title={sprintName} />
+                    </div>
+                    <div className="TaskTitleWrapper"></div>
+                    <div className="btnEditTitle">
+                      <Button
+                        icon="edit"
+                        classBtn="editDelete"
+                        onHandleClick={editNameHandle}
+                      />
+                    </div>
                   </div>
-                  <div className="TaskTitleWrapper"></div>
-                  <div className="btnEditTitle">
-                    <Button icon="edit" classBtn="editDelete" />
-                  </div>
-                </div>
+                )}
+                {showInput && (
+                  <form
+                    onSubmit={changeTitleSubmit}
+                    className={
+                      showInput ? "changeTitleFormActive" : "changeTitleForm"
+                    }
+                  >
+                    <input
+                      className="inputChangeTitle"
+                      value={title}
+                      name="newTitle"
+                      type="text"
+                      onChange={onHandleChange}
+                      id="inputChangeTitle"
+                      // onBlur={onHandleBlurChangeTitle}
+                    />
+                    <Button
+                      // icon={buttonIcons.edit}
+                      icon="edit"
+                      classBtn="editDelete"
+                      title="Edit the title"
+                      type="submit"
+                      className="buttonChange"
+                      onHandleClick={changeTitleSubmit}
+                    />
+                  </form>
+                )}
                 <div className="btnCreateTask ">
                   <Button onHandleClick={() => setCloseModalTask(true)} />
                 </div>
 
                 <div className="btnCreateTaskTablet ">
-                  {/* Копка для создания спринта Планшет */}
                   <div className="btnCreateSprintTitle openModalTask btnEdit">
                     <Button onHandleClick={() => setCloseModalTask(true)} />
                   </div>
                   <p className="AddTaskParagraph">Створити задачу</p>
                 </div>
               </div>
+
               <div className="discrbtionHoursContainer">
                 <p className="discrbtionHours">Заплановано годин</p>
                 <p className="discrbtionHours">Витрачено год / день</p>

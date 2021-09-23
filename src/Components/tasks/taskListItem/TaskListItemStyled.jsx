@@ -101,12 +101,6 @@ export const TaskListItemWrapper = styled.div`
   /* ================================================================================================== */
 
   @media screen and (max-width: 1279px) {
-    .inputNumber {
-      height: 32px;
-      font-size: 18px;
-      line-height: 1.2px;
-      padding-left: 48px;
-    }
     .TaskDescriptionTablet {
       /* display: block !important; */
       display: block;
@@ -156,6 +150,13 @@ export const TaskListItemWrapper = styled.div`
 
       display: flex;
       align-items: flex-end;
+    }
+
+    .inputNumber {
+      height: 32px;
+      font-size: 18px;
+      line-height: 1.2px;
+      padding-left: 48px;
     }
   }
 

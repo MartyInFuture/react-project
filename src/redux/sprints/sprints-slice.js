@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { patchTitleSprint } from "../task/task-operations";
 import {
   addSprint,
   changeSprintsTitle,
   deleteSprint,
   getProjectsSprints,
-} from './sprints-operations';
+} from "./sprints-operations";
 
 const initialState = {
   items: [],
@@ -13,7 +14,7 @@ const initialState = {
 };
 
 const sprintsSlice = createSlice({
-  name: 'sprints',
+  name: "sprints",
   initialState,
   extraReducers: {
     [addSprint.fulfilled](state, { payload }) {
@@ -32,7 +33,7 @@ const sprintsSlice = createSlice({
     // },
 
     [getProjectsSprints.fulfilled](state, { payload }) {
-      if (payload.message === 'No sprints found') return initialState;
+      if (payload.message === "No sprints found") return initialState;
       return {
         error: null,
         items: [...payload.sprints],
@@ -47,8 +48,8 @@ const sprintsSlice = createSlice({
           return itemId !== payload;
         }),
       ];
-    }
-  
+    },
+
     // [getProjectsSprints.pending](state) {
     //   state.loading = true;
     // },
@@ -64,6 +65,15 @@ const sprintsSlice = createSlice({
     //   [changeSprintsTitle.fulfilled](state, { payload }) {
 
     // }
+    [patchTitleSprint.fulfilled](state, { payload }) {
+      console.log("PAYLOAD TITLE", payload);
+      state.sprints.items = state.sprints.items.map((sprint) => {
+        if (sprint._id ?? sprint.id === payload.id) {
+          sprint.title = payload.title.newTitle;
+        }
+        return sprint;
+      });
+    },
   },
 });
 

@@ -46,12 +46,12 @@ export const getSprintsTasks = createAsyncThunk(
 
 export const deleteSprintsTask = createAsyncThunk(
   "task/deleteTask",
-  async (taskId) => {
+  async (taskId, { rejectWithValue }) => {
     try {
       await axios.delete(`/task/${taskId}`);
       return taskId;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -72,14 +72,14 @@ export const updateTaskTime = (state, obj) => {
 
 export const patchTaskHours = createAsyncThunk(
   "task/patchTaskHours",
-  async (data, { getState }) => {
+  async (data, { getState, rejectWithValue }) => {
     const state = getState();
     try {
       const response = await axios.patch(
         `/task/${data.sprintId}`,
         data.taskObj
       );
-      console.log("response", response);
+      // console.log("response", response);
 
       const responseObj = {
         date: response.data.day,
@@ -90,7 +90,29 @@ export const patchTaskHours = createAsyncThunk(
       console.log("responseObj", responseObj);
       return responseObj;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const patchTitleSprint = createAsyncThunk(
+  "task/patchTitleSprint",
+  async (Data, { rejectWithValue }) => {
+    // console.log(data);
+    try {
+      const { data } = await axios.patch(
+        `/sprint/title/${Data.id}`,
+        Data.title
+      );
+      // console.log("response", data);
+      const response = {
+        id: Data.id,
+        title: data,
+      };
+
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );

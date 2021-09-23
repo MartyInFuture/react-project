@@ -4,6 +4,7 @@ import {
   getSprintsTasks,
   deleteSprintsTask,
   patchTaskHours,
+  patchTitleSprint,
 } from "./task-operations";
 
 const initialState = {
