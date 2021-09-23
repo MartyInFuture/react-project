@@ -44,12 +44,10 @@ const Tasks = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const Sprint = sprints.filter(
-    (sprint) => {
-      const sprintId = sprint._id ?? sprint.id;
-      return sprintId === id;
-    }
-  );
+  const Sprint = sprints.filter((sprint) => {
+    const sprintId = sprint._id ?? sprint.id;
+    return sprintId === id;
+  });
   useEffect(() => {
     if (projects.length !== 0) {
       const project = projects.find((item) => {
@@ -95,6 +93,8 @@ const Tasks = () => {
   useEffect(() => {
     if (sprintsArr.length !== 0) {
       setTasksCounter(sprintsArr.length);
+    } else {
+      setTasksCounter(0);
     }
   }, [sprintsArr]);
 
