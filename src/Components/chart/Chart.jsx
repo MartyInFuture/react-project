@@ -61,6 +61,20 @@ const Chart = ({ title = 'title', open, setOpen, draw = true }) => {
       setRealHovers(realHourArr);
     }
   }, [tasks]);
+  const onOverlayClick = ({ target, currentTarget }) => {
+    target === currentTarget && setOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener('keydown', handleEscape);
+    const body = document.querySelector('body');
+    if (open) body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+      const body = document.querySelector('body');
+      body.style.overflow = 'auto';
+    };
+  });
+  const handleEscape = (e) => e.code === 'Escape' && setOpen(false);
 
   const data = {
     labels: labels,
@@ -112,7 +126,7 @@ const Chart = ({ title = 'title', open, setOpen, draw = true }) => {
   return (
     <>
       {open && (
-        <ChartStyled>
+        <ChartStyled onClick={onOverlayClick}>
           <div className="modal">
             <h3>{title}</h3>
             <div className="buttonWrapper">
