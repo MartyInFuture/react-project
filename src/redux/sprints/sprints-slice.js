@@ -66,8 +66,7 @@ const sprintsSlice = createSlice({
 
     // }
     [patchTitleSprint.fulfilled](state, { payload }) {
-      console.log("PAYLOAD TITLE", payload);
-      state.sprints.items = state.sprints.items.map((sprint) => {
+      state.items = state.items.map((sprint) => {
         if (sprint._id ?? sprint.id === payload.id) {
           sprint.title = payload.title.newTitle;
         }

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import projectOperations from "./projects-operations";
+import projectOperations, { updateProjectTitle } from "./projects-operations";
 
 const initialState = {
   items: [],
@@ -22,8 +22,7 @@ const projectsSlice = createSlice({
     //   return initialState;
     // },
     [projectOperations.getProjects.fulfilled](state, { payload }) {
-
-      if (payload.message === 'No projects found') return initialState;
+      if (payload.message === "No projects found") return initialState;
 
       state.items = [...payload];
     },
@@ -60,6 +59,14 @@ const projectsSlice = createSlice({
     // [projectOperations.deleteProject.fulfilled](state, action) {
     //   state = state.filter(({ _id }) => _id !== action.payload);
     // },
+    [updateProjectTitle.fulfilled](state, { payload }) {
+      state.items = state.items.map((project) => {
+        if (project._id ?? project.id === payload.id) {
+          project.title = payload.title.newTitle;
+        }
+        return project;
+      });
+    },
   },
 });
 
