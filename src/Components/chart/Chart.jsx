@@ -9,7 +9,7 @@ import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 
-const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
+const Chart = ({ title = 'title', open, setOpen, draw = true }) => {
   const [labels, setLabels] = useState([]);
   const sprints = useSelector(sprintSelectors.getSprints);
   const tasks = useSelector(taskSelectors.getTasks);
@@ -33,7 +33,7 @@ const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
         setLabels(labelsArr);
       }
     }
-  }, [id, sprints]);
+  }, [id, sprints, draw]);
   useEffect(() => {
     if (tasks.length !== 0) {
       // Planned arr hours
