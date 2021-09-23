@@ -45,7 +45,10 @@ const Tasks = () => {
   const dispatch = useDispatch();
 
   const Sprint = sprints.filter(
-    (sprint) => sprint._id === id || sprint.id === id
+    (sprint) => {
+      const sprintId = sprint._id ?? sprint.id;
+      return sprintId === id;
+    }
   );
   useEffect(() => {
     if (projects.length !== 0) {
