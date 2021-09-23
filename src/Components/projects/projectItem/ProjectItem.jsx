@@ -1,9 +1,9 @@
-import { ProjectItemStyled } from './ProjectItemStyled';
-import Button from '../../common/button/Button';
-import { Link } from 'react-router-dom';
-import buttonIcons from '../../../configs/buttonIcons.json';
-import { useDispatch } from 'react-redux';
-import projectOperations from '../../../redux/projects/projects-operations';
+import { ProjectItemStyled } from "./ProjectItemStyled";
+import Button from "../../common/button/Button";
+import { Link } from "react-router-dom";
+import buttonIcons from "../../../configs/buttonIcons.json";
+import { useDispatch } from "react-redux";
+import projectOperations from "../../../redux/projects/projects-operations";
 
 const ProjectItem = ({ project, background }) => {
   const dispatch = useDispatch();
@@ -13,10 +13,10 @@ const ProjectItem = ({ project, background }) => {
   };
 
   return (
-    <ProjectItemStyled>
+    <ProjectItemStyled className={`${background}`}>
       <Link
         to={`/project/${project._id ?? project.id}`}
-        className={`${background} projectLink`}
+        className={` projectLink`}
       >
         <h3 className="projectTitle">{project.title}</h3>
         <div className="projectTextWrapper">

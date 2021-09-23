@@ -7,7 +7,6 @@ const SubmitButton = ({
   return (
     <ButtonSubmitWrapper>
       <button type="submit" className="btnSubCommon">
-        {" "}
         {nameBtn}
       </button>
     </ButtonSubmitWrapper>

@@ -6,11 +6,6 @@ const initialState = {
   isLoading: false,
 };
 
-// const deletePost = (state, action) => {
-//   // state.filter((item) => item._id !== action.payload)
-//   return [state.filter((item) => item._id !== action.payload)];
-// };
-
 const projectsSlice = createSlice({
   name: "projects",
   initialState,
@@ -18,9 +13,6 @@ const projectsSlice = createSlice({
     projectLogOut: () => initialState,
   },
   extraReducers: {
-    // [projectOperations.getProjects.pending](_, { payload }) {
-    //   return initialState;
-    // },
     [projectOperations.getProjects.fulfilled](state, { payload }) {
       if (payload.message === "No projects found") return initialState;
 
@@ -30,7 +22,6 @@ const projectsSlice = createSlice({
       state.items.push(action.payload);
     },
     [projectOperations.deleteProject.fulfilled](state, { payload }) {
-      console.log(payload);
       state.items = [
         ...state.items.filter((item) => {
           const itemId = item._id ?? item.id;
@@ -39,7 +30,6 @@ const projectsSlice = createSlice({
       ];
     },
     [projectOperations.addMember.fulfilled](state, { payload }) {
-      console.log(state);
       const currentProject = state.items.filter((item) => {
         const itemId = item._id ?? item.id;
         return itemId === payload.id;

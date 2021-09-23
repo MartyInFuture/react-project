@@ -4,7 +4,6 @@ import {
   getSprintsTasks,
   deleteSprintsTask,
   patchTaskHours,
-  patchTitleSprint,
 } from "./task-operations";
 
 const initialState = {
@@ -34,7 +33,6 @@ const tasksSlice = createSlice({
       state.items = [...payload];
     },
     [deleteSprintsTask.fulfilled](state, { payload }) {
-      console.log("PAYLOAD", payload);
       state.items = [
         ...state.items.filter((task) => {
           const taskId = task._id ?? task.id;
@@ -44,21 +42,22 @@ const tasksSlice = createSlice({
     },
     [patchTaskHours.fulfilled](state, { payload }) {
       state.items = state.items.map((task) => {
-        if (task._id !== payload.id) {
+        const taskId = task._id ?? task.id;
+        if (taskId !== payload.id) {
           return task;
         }
         task.hoursWasted = payload.wastedHours;
-        task.hoursWastedPerDay = task.hoursWastedPerDay.map((itemDate) => {
-          if (itemDate.currentDay === payload.date.currentDay) {
-            return { ...itemDate, ...payload.date };
+        task.hoursWastedPerDay = task?.hoursWastedPerDay.map((itemDate) => {
+          console.log(itemDate);
+          if (itemDate.currentDay) {
+            if (itemDate.currentDay === payload.date.currentDay) {
+              return { ...itemDate, ...payload.date };
+            }
+            return itemDate;
           }
-          // console.log(itemDate);
-          // console.log(task);
-          return itemDate;
         });
         return task;
       });
-      //  state.items;
     },
   },
 });

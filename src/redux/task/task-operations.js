@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { getError } from "../error/error-handler";
 
 export const addTask = createAsyncThunk(
@@ -18,7 +17,6 @@ export const addTask = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -39,7 +37,6 @@ export const getSprintsTasks = createAsyncThunk(
         })
       );
       return rejectWithValue(error.message);
-      // throw error;
     }
   }
 );
@@ -56,20 +53,6 @@ export const deleteSprintsTask = createAsyncThunk(
   }
 );
 
-export const updateTaskTime = (state, obj) => {
-  // const task = ;
-  // const date = task
-  // return itemDate;
-  // console.log(itemDate, obj.data);
-  // console.log();
-  // itemDate.singleHoursWasted = obj.data.singleHoursWasted;
-  // console.log();
-  // });
-  // console.log("date", date);
-  // console.log("task", task);
-  // return task.hoursWastedPerDay;
-};
-
 export const patchTaskHours = createAsyncThunk(
   "task/patchTaskHours",
   async (data, { getState, rejectWithValue }) => {
@@ -79,15 +62,12 @@ export const patchTaskHours = createAsyncThunk(
         `/task/${data.sprintId}`,
         data.taskObj
       );
-      // console.log("response", response);
 
       const responseObj = {
         date: response.data.day,
         wastedHours: response.data.newWastedHours,
         id: data.sprintId,
       };
-      // updateTaskTime(state, responseObj);
-      console.log("responseObj", responseObj);
       return responseObj;
     } catch (error) {
       return rejectWithValue(error.message);

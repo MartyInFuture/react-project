@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ChartStyled = styled.div`
-  position: fixed;
+  position: absolute;
   top: 60px;
-  left: 0;
-  width: 100vw;
+
   height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
@@ -12,11 +11,22 @@ export const ChartStyled = styled.div`
   align-items: center;
   background-color: rgba(24, 28, 39, 0.25);
   z-index: 500;
+  @media (max-width: 767px) {
+    height: 100vh;
+    left: 10;
+
+    canvas {
+      position: absolute;
+      overflow: auto;
+      width: 859px;
+    }
+  }
 
   @media (min-width: 768px) {
     top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
-    /* justify-content: center; */
   }
 
   .modal {
@@ -25,7 +35,7 @@ export const ChartStyled = styled.div`
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
-    width: 100%;
+    width: 859px;
     height: 100%;
     background-color: #fff;
     filter: drop-shadow(0px 6px 26px rgba(0, 5, 97, 0.1));

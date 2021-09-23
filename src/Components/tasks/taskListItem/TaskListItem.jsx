@@ -6,7 +6,6 @@ import {
 } from "../../../redux/task/task-operations";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import moment from "moment";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -37,7 +36,6 @@ const TaskListItem = ({ task, targetDate }) => {
   };
 
   const onHandleClikc = async (e) => {
-    console.log(task._id ?? task.id);
     setSprintId(task._id ?? task.id);
     await setIsOpen(true);
     focusInput();
@@ -59,7 +57,7 @@ const TaskListItem = ({ task, targetDate }) => {
       };
       dispatch(patchTaskHours({ sprintId, taskObj }));
     }
-  }, [formik.values.hoursWasted]);
+  }, [dispatch, formik.values.hoursWasted, sprintId, targetDate]);
 
   useEffect(() => {
     if (task) {
@@ -100,10 +98,8 @@ const TaskListItem = ({ task, targetDate }) => {
   return (
     <TaskListItemWrapper>
       <div className="TitleWrapper">
-        {/* <div> */}
         <h3 className="TaskTitle">{task.title}</h3>
         <div className="TaskTitleAfter"></div>
-        {/* </div> */}
       </div>
       <div className="TaskDescriptionTablet">
         <p className="describtion">
@@ -119,7 +115,6 @@ const TaskListItem = ({ task, targetDate }) => {
           )}
 
           {isOpen && (
-            // <form onSubmit={onHandleSubmit}>
             <input
               id="inputNumber"
               name="hoursWasted"
@@ -129,8 +124,6 @@ const TaskListItem = ({ task, targetDate }) => {
               className="inputNumber"
               onBlur={onBlur}
             />
-            // <button type="submit">Submit</button>
-            // </form>
           )}
         </p>
         <p className="describtion describtionLastChild">

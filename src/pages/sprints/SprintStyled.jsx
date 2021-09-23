@@ -1,8 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
 export const SprintStyled = styled.div`
-
+width: 100%;
 article {
-
+  
   @media screen and (max-width: 414px) {
     padding: 30px 20px 30px 20px;
     margin-left: auto;
@@ -30,7 +30,7 @@ article {
 
     .contentWrap {
       @media screen and (min-width: 768px) {
-        width: 452px;
+        width: 472px;
       }
 
       @media screen and (min-width: 1280px) {
@@ -113,6 +113,7 @@ article {
           border-bottom: 1px solid #181c27;
           cursor: pointer;
           font-weight: 500;
+          margin-left: 10px;
         }
       }
     }
@@ -126,7 +127,6 @@ article {
       
     }
 
-    // div
     .createSprintWrap {
       @media screen and (min-width: 768px) and (max-width: 1279px) {
         position: absolute;
@@ -254,4 +254,4 @@ article {
   }
 
 
-`
+`;

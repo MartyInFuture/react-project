@@ -12,10 +12,11 @@ import { token } from '../../redux/auth/auth-operations';
 import { authSelectors } from '../../redux/auth';
 import { getProjectsSprints } from '../../redux/sprints/sprints-operations';
 import projectsSeletors from '../../redux/projects/projects-selectors';
-import { useHistory } from 'react-router';
 import sprintSelectors from '../../redux/sprints/sprints-selectors';
 import projectOperations from '../../redux/projects/projects-operations';
 import { useParams } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { toast } from 'react-toastify';
 
 const SprintPage = () => {
   const [openModalMembers, setOpenModalMembers] = useState(false);
@@ -25,16 +26,14 @@ const SprintPage = () => {
   const dispatch = useDispatch();
 
   const projects = useSelector(projectsSeletors.getProjects);
-  const [name, setName] = useState('');
-
-  const history = useHistory();
-  const idProject = history.location.pathname.slice(9);
   const [title, setTitle] = useState('title');
   const [description, setDescription] = useState('description');
-
   const [showInput, setShowInput] = useState(false);
   const { id } = useParams();
-  const currentProject = projects.find((project) => project._id === id);
+  const currentProject = projects.find(
+    (project) => project._id ?? project.id === id
+  );
+  const [redirect, setRedirect] = useState(false);
 
   const editNameHandle = () => {
     setShowInput(true);
@@ -50,6 +49,18 @@ const SprintPage = () => {
         break;
     }
   };
+  useEffect(() => {
+    if (projects.length !== 0) {
+      const project = projects.find((item) => {
+        const itemId = item.id ?? item._id;
+        return itemId === id;
+      });
+      if (project === undefined) {
+        setRedirect(true);
+        toast.warning('Ви не є учасником цього проекту!');
+      }
+    }
+  }, [projects]);
 
   const changeTitleSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +83,7 @@ const SprintPage = () => {
     isAuth &&
       dispatch(getProjectsSprints(id)) &&
       dispatch(projectOperations.getProjects());
-  }, [dispatch, id]);
+  }, [dispatch, id, isAuth]);
 
   useEffect(() => {
     if (currentProject) {
@@ -83,117 +94,100 @@ const SprintPage = () => {
 
   return (
     <>
-      <NavContainer>
-        <NavMenu title="проекти" list={projects} path="project" />
-      </NavContainer>
-      <SprintStyled>
-        <article>
-          <div className="headerWrap">
-            <div className="contentWrap">
-              <div className="titleWrap">
-                {/* <form
-                  onSubmit={closeInputHandler}
-                  className={
-                    showInput ? 'changeTitleFormActive' : 'changeTitleForm'
-                  }
-                >
-                  <input
-                    className="inputChangeTitle"
-                    value={name}
-                    name="name"
-                    type="text"
-                    onChange={handleNameChange}
-                  />
-                  <Button
-                    icon={buttonIcons.edit}
-                    classBtn="editDelete"
-                    title="Edit the name"
-                    type="submit"
-                    className="buttonChange"
+      {redirect ? (
+        <Redirect to="/" />
+      ) : (
+        <>
+          <NavContainer>
+            <NavMenu title="проекти" list={projects} path="project" />
+          </NavContainer>
+          <SprintStyled>
+            <article>
+              <div className="headerWrap">
+                <div className="contentWrap">
+                  <div className="titleWrap">
+                    {!showInput && (
+                      <>
+                        <h2>{title}</h2>
 
-                    //   />
-                    //   <Title />
-                    // </>
-                  />
-                </form> */}
-                {!showInput && (
+                        <Button
+                          title="Edit the name"
+                          icon={buttonIcons.edit}
+                          classBtn="editDelete"
+                          type="button"
+                          className="buttonChange"
+                          onHandleClick={editNameHandle}
+                        />
+                      </>
+                    )}
+                    {showInput && (
+                      <form
+                        onSubmit={changeTitleSubmit}
+                        className={
+                          showInput
+                            ? 'changeTitleFormActive'
+                            : 'changeTitleForm'
+                        }
+                      >
+                        <input
+                          className="inputChangeTitle"
+                          value={title}
+                          name="newTitle"
+                          type="text"
+                          onChange={onHandleChange}
+                        />
+                        <Button
+                          icon={buttonIcons.edit}
+                          classBtn="editDelete"
+                          title="Edit the title"
+                          type="submit"
+                          className="buttonChange"
+                          onHandleClick={changeTitleSubmit}
+                        />
+                      </form>
+                    )}
+                  </div>
+
+                  <p>{description}</p>
+
+                  <div className="addWrap">
+                    <button
+                      className="btnWrap"
+                      onClick={() => setOpenModalMembers(true)}
+                    >
+                      <span className="material-icons-outlined">
+                        {buttonIcons.group_add}
+                      </span>
+                      <span className="textAddPeople">Додати людей</span>
+                    </button>
+
+                    <CreateMembers
+                      closeModal={openModalMembers}
+                      setOpenModal={setOpenModalMembers}
+                    />
+                  </div>
+                </div>
+                <div className="createSprintWrap">
                   <>
-                    <h2>{title}</h2>
-
                     <Button
-                      title="Edit the name"
-                      icon={buttonIcons.edit}
-                      classBtn="editDelete"
-                      type="button"
-                      className="buttonChange"
-                      onHandleClick={editNameHandle}
+                      icon={buttonIcons.add}
+                      classBtn="add"
+                      className="createNewSprintFixed"
+                      onHandleClick={() => setOpenModalSprints(true)}
                     />
+                    <CreateSprint
+                      closeModal={openModalSprints}
+                      setCloseModal={setOpenModalSprints}
+                    />
+                    <span className="createSprintSpan">Створити спринт</span>
                   </>
-                )}
-                {showInput && (
-                  <form
-                    onSubmit={changeTitleSubmit}
-                    className={
-                      showInput ? 'changeTitleFormActive' : 'changeTitleForm'
-                    }
-                  >
-                    <input
-                      className="inputChangeTitle"
-                      value={title}
-                      name="newTitle"
-                      type="text"
-                      onChange={onHandleChange}
-                    />
-                    <Button
-                      icon={buttonIcons.edit}
-                      classBtn="editDelete"
-                      title="Edit the title"
-                      type="submit"
-                      className="buttonChange"
-                      onHandleClick={changeTitleSubmit}
-                    />
-                  </form>
-                )}
+                </div>
               </div>
-
-              <p>{description}</p>
-
-              <div className="addWrap">
-                <button
-                  className="btnWrap"
-                  onClick={() => setOpenModalMembers(true)}
-                >
-                  <span className="material-icons-outlined">
-                    {buttonIcons.group_add}
-                  </span>
-                  <span className="textAddPeople">Add people</span>
-                </button>
-
-                <CreateMembers
-                  closeModal={openModalMembers}
-                  setOpenModal={setOpenModalMembers}
-                />
-              </div>
-            </div>
-            <div className="createSprintWrap">
-              <>
-                <Button
-                  icon={buttonIcons.add}
-                  classBtn="add"
-                  className="createNewSprintFixed"
-                  onHandleClick={() => setOpenModalSprints(true)}
-                />
-                <CreateSprint
-                  closeModal={openModalSprints}
-                  setCloseModal={setOpenModalSprints}
-                />
-                <span className="createSprintSpan">Create a sprint</span>
-              </>
-            </div>
-          </div>
-          <SprintList sprints={sprints} />
-        </article>
-      </SprintStyled>
+              <SprintList sprints={sprints} />
+            </article>
+          </SprintStyled>
+        </>
+      )}
     </>
   );
 };

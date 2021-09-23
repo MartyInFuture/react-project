@@ -39,17 +39,6 @@ export const TaskListItemWrapper = styled.div`
     margin-bottom: 30px;
   }
 
-  /* .describtion:last-child {
-        background: #000;
-    } */
-
-  /* .describtion:last-child {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-         margin-bottom: 50px;
-    } */
-
   .describtionHour {
     font-size: 10px;
     line-height: 1.2;
@@ -75,7 +64,6 @@ export const TaskListItemWrapper = styled.div`
   }
 
   .TaskTitleAfter {
-    /* width: 240px; */
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid rgba(24, 28, 39, 0.2);
@@ -102,21 +90,17 @@ export const TaskListItemWrapper = styled.div`
 
   @media screen and (max-width: 1279px) {
     .TaskDescriptionTablet {
-      /* display: block !important; */
       display: block;
 
       width: 100%;
     }
 
     .TaskDescriptionDesktop {
-      /* display: none !important; */
       display: none;
     }
 
     .TitleWrapper {
-      /* width: 100% !important; */
       width: 100%;
-      /* margin-right: 0px !important; */
       margin-right: 0px;
     }
   }
@@ -127,9 +111,6 @@ export const TaskListItemWrapper = styled.div`
     :nth-child(2n + 1) {
       margin-right: 20px;
     }
-
-    /* .TaskTitleAfter {
-    } */
 
     .describtionHour {
       font-size: 14px;
@@ -169,8 +150,6 @@ export const TaskListItemWrapper = styled.div`
       margin-right: 0px;
     }
     margin-bottom: 10px;
-    /* margin-right: 0px; */
-    /* background-color: black; */
 
     .TaskDescriptionTablet {
       display: none;
@@ -184,8 +163,6 @@ export const TaskListItemWrapper = styled.div`
 
     .TitleWrapper {
       margin-right: 30px;
-      /* display: flex;
-        align-items: center; */
     }
 
     .describtionHourNumber {

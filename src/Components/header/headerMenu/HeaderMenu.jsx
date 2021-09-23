@@ -16,7 +16,7 @@ const HeaderMenu = ({ userEmail = "marty", icon = "logout" }) => {
       <p className="userEmail">{userEmail}</p>
       <button className="logOutButton" onClick={onHandleLogOut}>
         <span className="material-icons icon">{icon}</span>
-        <span className="logOutText"></span>
+        <span className="logOutText">Log Out</span>
       </button>
     </HeaderMenuStyled>
   );
