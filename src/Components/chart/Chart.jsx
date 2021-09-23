@@ -1,15 +1,15 @@
-import { ChartStyled } from "./ChartStyled";
-import Button from "../common/button/Button";
-import buttonIcons from "../../configs/buttonIcons.json";
-import { Line } from "react-chartjs-2";
-import { useSelector } from "react-redux";
-import taskSelectors from "../../redux/task/task-selectors";
-import sprintSelectors from "../../redux/sprints/sprints-selectors";
-import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-import moment from "moment";
+import { ChartStyled } from './ChartStyled';
+import Button from '../common/button/Button';
+import buttonIcons from '../../configs/buttonIcons.json';
+import { Line } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
+import taskSelectors from '../../redux/task/task-selectors';
+import sprintSelectors from '../../redux/sprints/sprints-selectors';
+import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+import moment from 'moment';
 
-const Chart = ({ title = "title", open, setOpen }) => {
+const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
   const [labels, setLabels] = useState([]);
   const sprints = useSelector(sprintSelectors.getSprints);
   const tasks = useSelector(taskSelectors.getTasks);
@@ -18,18 +18,20 @@ const Chart = ({ title = "title", open, setOpen }) => {
   const [realHovers, setRealHovers] = useState([]);
 
   useEffect(() => {
-    if (sprints.length !== 0) {
-      const currentSprint = sprints.find((sprint) => {
-        const sprintId = sprint._id ?? sprint.id;
-        return sprintId === id;
-      });
-      const labelsArr = [0];
-      for (let i = 0; i < currentSprint.duration; i++) {
-        labelsArr.push(
-          moment(currentSprint.startDate).add(i, "day").format("YYYY-MM-DD")
-        );
+    if (draw) {
+      if (sprints.length !== 0) {
+        const currentSprint = sprints.find((sprint) => {
+          const sprintId = sprint._id ?? sprint.id;
+          return sprintId === id;
+        });
+        const labelsArr = [0];
+        for (let i = 0; i < currentSprint.duration; i++) {
+          labelsArr.push(
+            moment(currentSprint.startDate).add(i, 'day').format('YYYY-MM-DD')
+          );
+        }
+        setLabels(labelsArr);
       }
-      setLabels(labelsArr);
     }
   }, [id, sprints]);
   useEffect(() => {
@@ -64,42 +66,42 @@ const Chart = ({ title = "title", open, setOpen }) => {
     labels: labels,
     datasets: [
       {
-        label: "My First dataset",
+        label: 'My First dataset',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
-        borderCapStyle: "round",
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderCapStyle: 'round',
         borderDash: [],
         borderDashOffset: 0.0,
-        borderJoinStyle: "round",
-        pointBorderColor: "rgba(75,192,192,1)",
-        pointBackgroundColor: "#fff",
+        borderJoinStyle: 'round',
+        pointBorderColor: 'rgba(75,192,192,1)',
+        pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
         data: realHovers,
       },
       {
-        label: "My Second dataset",
+        label: 'My Second dataset',
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "rgba(150, 0, 0)",
-        borderColor: "red",
-        borderCapStyle: "round",
+        backgroundColor: 'rgba(150, 0, 0)',
+        borderColor: 'red',
+        borderCapStyle: 'round',
         borderDash: [],
         borderDashOffset: 0.0,
-        borderJoinStyle: "round",
-        pointBorderColor: "red",
-        pointBackgroundColor: "#fff",
+        borderJoinStyle: 'round',
+        pointBorderColor: 'red',
+        pointBackgroundColor: '#fff',
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "red",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBackgroundColor: 'red',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
