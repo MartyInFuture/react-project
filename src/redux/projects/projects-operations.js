@@ -80,15 +80,22 @@ const getProjects = createAsyncThunk(
 
 export const updateProjectTitle = createAsyncThunk(
   "updateProjectTitle/projectId",
-  async (data) => {
+  async (Data, { rejectWithValue }) => {
     try {
-      await axios.patch(`/project/title/${data.id}`, data.title);
-      return;
+      const { data } = await axios.patch(
+        `/project/title/${Data.id}`,
+        Data.title
+      );
+      const response = {
+        id: Data.id,
+        title: data,
+      };
+      return response;
     } catch (error) {
+      return rejectWithValue(error.message);
     }
   }
 );
-
 
 const projectOperations = {
   postProject,

@@ -37,8 +37,6 @@ const App = () => {
           return toast.error(`Користувач з таким логіном вже існує`);
         case 403:
           return toast.error(`Користувача з вказаним email не існує`);
-        case 404:
-          return toast.error(`Введені некоректні дані користувача`);
         default:
           return;
       }

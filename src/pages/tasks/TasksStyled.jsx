@@ -6,14 +6,61 @@ export const TasksStyled = styled.div`
     display: flex;
     align-items: center;
   } */
+  .inputChangeTitle {
+    /* display: inline-block; */
+    border: none;
+    outline: none;
+    box-shadow: 2px 4px 8px rgba(0, 5, 97, 0.1);
+    border-radius: 5px;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 44px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 5px;
+    max-width: 240px;
+
+    @media screen and (max-width: 413px) {
+      width: 120px;
+      height: 32px;
+      font-family: Montserrat;
+      font-size: 26px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 32px;
+      letter-spacing: 0.04em;
+      text-align: left;
+    }
+    @media screen and (min-width: 768px) {
+      margin-right: 20px;
+      max-width: 260px;
+      height: 44px;
+    }
+    @media screen and (min-width: 1280px) {
+      margin-right: 40px;
+      max-width: 260px;
+      height: 44px;
+    }
+  }
+
   @media (min-width: 768px) {
     border-right: 1px solid rgba(24, 28, 39, 0.1);
   }
+
   .TaskWrapper {
     display: flex;
+    /* flex-wrap: nowrap; */
     /* margin-bottom: 10px; */
   }
 
+  .changeTitleFormActive {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
   .SprintTitleBtnEditWrapper {
     display: flex;
   }
@@ -56,8 +103,12 @@ export const TasksStyled = styled.div`
     padding-left: 30px;
     border: none;
     border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+    background-color: transparent;
   }
 
+  .inputSearch {
+    outline: none;
+  }
   .iconSearchTablet {
     display: none;
     font-size: 20px;
@@ -248,8 +299,12 @@ export const TasksStyled = styled.div`
       height: 40px;
       border: none;
       border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+      background-color: transparent;
     }
 
+    .inputSearchDesktop {
+      outline: none;
+    }
     .discrbtionHours {
       width: 100px;
     }

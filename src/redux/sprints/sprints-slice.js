@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { patchTitleSprint } from "../task/task-operations";
 import {
   addSprint,
   deleteSprint,
@@ -37,6 +38,15 @@ const sprintsSlice = createSlice({
           return itemId !== payload;
         }),
       ];
+    },
+
+    [patchTitleSprint.fulfilled](state, { payload }) {
+      state.items = state.items.map((sprint) => {
+        if (sprint._id ?? sprint.id === payload.id) {
+          sprint.title = payload.title.newTitle;
+        }
+        return sprint;
+      });
     },
   },
 });

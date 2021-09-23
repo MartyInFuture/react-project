@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   addTask,
   getSprintsTasks,
   deleteSprintsTask,
   patchTaskHours,
-} from './task-operations';
+} from "./task-operations";
 
 const initialState = {
   items: [],
@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const tasksSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   extraReducers: {
     [addTask.fulfilled](state, { payload }) {
@@ -26,7 +26,7 @@ const tasksSlice = createSlice({
       state.loading = false;
     },
     [getSprintsTasks.fulfilled](state, { payload }) {
-      if (payload.message === 'No tasks found') return initialState;
+      if (payload.message === "No tasks found") return initialState;
       if (payload.length === 0) {
         return false;
       }
@@ -47,11 +47,14 @@ const tasksSlice = createSlice({
           return task;
         }
         task.hoursWasted = payload.wastedHours;
-        task.hoursWastedPerDay = task.hoursWastedPerDay.map((itemDate) => {
-          if (itemDate.currentDay === payload.date.currentDay) {
-            return { ...itemDate, ...payload.date };
+        task.hoursWastedPerDay = task?.hoursWastedPerDay.map((itemDate) => {
+          console.log(itemDate);
+          if (itemDate.currentDay) {
+            if (itemDate.currentDay === payload.date.currentDay) {
+              return { ...itemDate, ...payload.date };
+            }
+            return itemDate;
           }
-          return itemDate;
         });
         return task;
       });

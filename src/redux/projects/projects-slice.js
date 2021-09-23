@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import projectOperations from "./projects-operations";
+import projectOperations, { updateProjectTitle } from "./projects-operations";
 
 const initialState = {
   items: [],
@@ -36,6 +36,26 @@ const projectsSlice = createSlice({
       });
       const idx = state.items.indexOf(currentProject[0]);
       state.items[idx].members = [...payload.data.newMembers];
+    },
+    // [authOperations.logOut.fulfilled](state) {
+    //   state.projects = [];
+    // },
+    // [projectOperations.postMemberProjects.fulfilled](state, action) {
+    //   state.members = [...state.members, ...action.payload];
+    // },
+    // [projectOperations.patchProject.fulfilled](state, action) {
+    //   state = [...state, action.payload];
+    // },
+    // [projectOperations.deleteProject.fulfilled](state, action) {
+    //   state = state.filter(({ _id }) => _id !== action.payload);
+    // },
+    [updateProjectTitle.fulfilled](state, { payload }) {
+      state.items = state.items.map((project) => {
+        if (project._id ?? project.id === payload.id) {
+          project.title = payload.title.newTitle;
+        }
+        return project;
+      });
     },
   },
 });
