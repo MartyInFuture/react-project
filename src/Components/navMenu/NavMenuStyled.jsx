@@ -13,7 +13,8 @@ export const Wrapper = styled.div`
     @media (max-width: 767px) {
       display: none;
     }
-    margin-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 50px;
   }
 
   .arrow {

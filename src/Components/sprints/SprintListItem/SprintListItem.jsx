@@ -1,17 +1,22 @@
-import Button from "../../common/button/Button"
-import buttonIcons from "../../../configs/buttonIcons.json"
-import { Link } from "react-router-dom"
-import { SprintListItemStyled } from "./SprintListItemStyled"
-import { useDispatch } from "react-redux"
-import { deleteSprint } from "../../../redux/sprints/sprints-operations"
-import { useParams } from "react-router-dom"
+import Button from "../../common/button/Button";
+import buttonIcons from "../../../configs/buttonIcons.json";
+import { Link } from "react-router-dom";
+import { SprintListItemStyled } from "./SprintListItemStyled";
+import { useDispatch } from "react-redux";
+import { deleteSprint } from "../../../redux/sprints/sprints-operations";
+import { useParams } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/uk";
 
 const SprintListItem = ({ sprint }) => {
-  const { id } = useParams()
-  const dispatch = useDispatch()
+  moment.locale("uk");
+  const startFormatDate = moment(sprint.startDate).format("D MMM");
+  const endFormatDate = moment(sprint.endDate).format("D MMM");
+  const { id } = useParams();
+  const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(deleteSprint(sprint.id ?? sprint._id))
-  }
+    dispatch(deleteSprint(sprint.id ?? sprint._id));
+  };
 
   return (
     <SprintListItemStyled>
@@ -22,12 +27,12 @@ const SprintListItem = ({ sprint }) => {
 
             <ul>
               <li>
-                <span>Дата початку</span>
-                <span>{sprint.startDate}</span>
+                <span className="date">Дата початку</span>
+                <span>{startFormatDate}</span>
               </li>
               <li>
-                <span>Дата закінчення</span>
-                <span>{sprint.endDate}</span>
+                <span className="date">Дата закінчення</span>
+                <span>{endFormatDate}</span>
               </li>
               <li>
                 <span>Тривалість</span>
@@ -45,9 +50,8 @@ const SprintListItem = ({ sprint }) => {
           onHandleClick={handleClick}
         ></Button>
       </div>
-
     </SprintListItemStyled>
-  )
-}
+  );
+};
 
-export default SprintListItem
+export default SprintListItem;

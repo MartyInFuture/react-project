@@ -1,11 +1,14 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SprintListItemStyled = styled.div`
   .LinkWrapper {
     position: relative;
     height: 255px;
     padding: 20px 20px 20px;
-
+    .date {
+      display: inline-block;
+      max-width: 80px;
+    }
     @media screen and (max-width: 767px) {
       width: 280px;
       height: 170px;

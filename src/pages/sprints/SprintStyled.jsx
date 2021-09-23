@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 export const SprintStyled = styled.div`
 width: 100%;
 article {
@@ -113,6 +113,7 @@ article {
           border-bottom: 1px solid #181c27;
           cursor: pointer;
           font-weight: 500;
+          margin-left: 10px;
         }
       }
     }
