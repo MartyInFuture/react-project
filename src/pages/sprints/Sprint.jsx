@@ -30,7 +30,9 @@ const SprintPage = () => {
   const [description, setDescription] = useState('description');
   const [showInput, setShowInput] = useState(false);
   const { id } = useParams();
-  const currentProject = projects.find((project) => project._id === id);
+  const currentProject = projects.find(
+    (project) => project._id ?? project.id === id
+  );
   const [redirect, setRedirect] = useState(false);
 
   const editNameHandle = () => {
