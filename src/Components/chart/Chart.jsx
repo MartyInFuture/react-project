@@ -1,15 +1,15 @@
-import { ChartStyled } from './ChartStyled';
-import Button from '../common/button/Button';
-import buttonIcons from '../../configs/buttonIcons.json';
-import { Line } from 'react-chartjs-2';
-import { useSelector } from 'react-redux';
-import taskSelectors from '../../redux/task/task-selectors';
-import sprintSelectors from '../../redux/sprints/sprints-selectors';
-import { useParams } from 'react-router';
-import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { ChartStyled } from "./ChartStyled";
+import Button from "../common/button/Button";
+import buttonIcons from "../../configs/buttonIcons.json";
+import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
+import taskSelectors from "../../redux/task/task-selectors";
+import sprintSelectors from "../../redux/sprints/sprints-selectors";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import moment from "moment";
 
-const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
+const Chart = ({ title = "title", open, setOpen, draw = false }) => {
   const [labels, setLabels] = useState([]);
   const sprints = useSelector(sprintSelectors.getSprints);
   const tasks = useSelector(taskSelectors.getTasks);
@@ -27,7 +27,7 @@ const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
         const labelsArr = [0];
         for (let i = 0; i < currentSprint.duration; i++) {
           labelsArr.push(
-            moment(currentSprint.startDate).add(i, 'day').format('YYYY-MM-DD')
+            moment(currentSprint.startDate).add(i, "day").format("YYYY-MM-DD")
           );
         }
         setLabels(labelsArr);
@@ -61,47 +61,61 @@ const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
       setRealHovers(realHourArr);
     }
   }, [tasks]);
+  const onOverlayClick = ({ target, currentTarget }) => {
+    target === currentTarget && setOpen(false);
+  };
+  useEffect(() => {
+    window.addEventListener("keydown", handleEscape);
+    const body = document.querySelector("body");
+    if (open) body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
+    };
+  });
+  const handleEscape = (e) => e.code === "Escape" && setOpen(false);
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: 'My First dataset',
+        label: "My First dataset",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderCapStyle: 'round',
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderCapStyle: "round",
         borderDash: [],
         borderDashOffset: 0.0,
-        borderJoinStyle: 'round',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
+        borderJoinStyle: "round",
+        pointBorderColor: "rgba(75,192,192,1)",
+        pointBackgroundColor: "#fff",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
         data: realHovers,
       },
       {
-        label: 'My Second dataset',
+        label: "My Second dataset",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: 'rgba(150, 0, 0)',
-        borderColor: 'red',
-        borderCapStyle: 'round',
+        backgroundColor: "rgba(150, 0, 0)",
+        borderColor: "red",
+        borderCapStyle: "round",
         borderDash: [],
         borderDashOffset: 0.0,
-        borderJoinStyle: 'round',
-        pointBorderColor: 'red',
-        pointBackgroundColor: '#fff',
+        borderJoinStyle: "round",
+        pointBorderColor: "red",
+        pointBackgroundColor: "#fff",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'red',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBackgroundColor: "red",
+        pointHoverBorderColor: "rgba(220,220,220,1)",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
@@ -112,7 +126,7 @@ const Chart = ({ title = 'title', open, setOpen, draw = false }) => {
   return (
     <>
       {open && (
-        <ChartStyled>
+        <ChartStyled onClick={onOverlayClick}>
           <div className="modal">
             <h3>{title}</h3>
             <div className="buttonWrapper">
